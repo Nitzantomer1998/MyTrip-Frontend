@@ -1,7 +1,7 @@
 {
-  "name": "front-end",
+  "name": "pmc",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000",
+  "proxy": "http://localhost:3001",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -16,9 +16,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint src/*.jsx",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/*.js --color"
   },
   "eslintConfig": {
     "extends": [
@@ -41,9 +41,6 @@
   "devDependencies": {
     "eslint": "^8.37.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.32.2",
-    "prettier": "^2.8.7"
+    "eslint-plugin-react": "^7.32.2"
   }
 }

@@ -1,9 +1,9 @@
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import { Navbar } from './components/Navbar/Navbar';
-import { Home } from './pages/Home/Home';
-import { Login } from './pages/Login/Login';
-import { Register } from './pages/Register/Register';
+import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import { Navbar } from "./components/Navbar/Navbar";
+import { Home } from "./pages/Home/Home";
+import { Login } from "./pages/Login/Login";
+import { Register } from "./pages/Register/Register";
 
 function App() {
   return (
