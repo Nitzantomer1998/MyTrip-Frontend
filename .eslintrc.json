@@ -20,6 +20,6 @@
     "object-curly-spacing": "off",
     "comma-dangle": "off",
     "linebreak-style": "off",
-    "max-len": 500
+    "max-len": ["warn", { "code": 500 }]
   }
 }
