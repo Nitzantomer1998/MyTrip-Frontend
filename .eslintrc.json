@@ -16,6 +16,8 @@
     "quotes": "off",
     "arrow-parens": "off",
     "padded-blocks": "off",
-    "indent": "off"
+    "indent": "off",
+    "react/react-in-jsx-scope": "off",
+    "require-jsdoc": "off"
   }
 }

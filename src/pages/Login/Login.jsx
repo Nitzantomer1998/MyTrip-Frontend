@@ -11,7 +11,7 @@ export const Login = (props) => {
         e.preventDefault();
 
         const data = { email, password };
-        const response = await fetch('/api/sign-in', {
+        const response = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
@@ -19,7 +19,7 @@ export const Login = (props) => {
 
         const result = await response.json();
         if (result.valid) {
-            alert('Invalid user');
+            navigate('../AfterLogin');
         } else {
             alert('Invalid user');
         }
@@ -56,7 +56,7 @@ export const Login = (props) => {
                 className="link-btn"
                 onClick={() => navigate('../Register')}
             >
-                Don't Have An Account? Sign-Up
+                Dont Have An Account? Sign-Up
             </button>
         </div>
     );

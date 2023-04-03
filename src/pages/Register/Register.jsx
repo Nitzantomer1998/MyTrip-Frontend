@@ -3,7 +3,7 @@ import './Register.css';
 import React, { useState } from 'react';
 
 export const Register = (props) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -12,7 +12,7 @@ export const Register = (props) => {
         e.preventDefault();
 
         const data = { email, password, name };
-        const response = await fetch('/api/sign-up', {
+        const response = await fetch('/api/register', {
             method: 'POST',
             header: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
