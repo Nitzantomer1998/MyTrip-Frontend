@@ -18,6 +18,7 @@
     "padded-blocks": "off",
     "indent": "off",
     "react/react-in-jsx-scope": "off",
-    "require-jsdoc": "off"
+    "require-jsdoc": "off",
+    "comma-dangle": "off"
   }
 }
