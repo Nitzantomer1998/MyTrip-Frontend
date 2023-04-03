@@ -24,7 +24,6 @@ jobs:
      - run: 
         name: Run email validation test
           command: 
-            console.log('hello');
             # import the email-validation module
             const emailValidation = require('../Login/Login.jsx');
             
