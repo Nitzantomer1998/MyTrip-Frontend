@@ -11,36 +11,18 @@ jobs:
     executor:
       name: node/default
     steps:
-     - checkout
-     - run:
-        name: install dependencies - NPM packages
-        command: npm install
-     - run:
-        name : run tests
-        command: npm install
-     - run:
-        name: Run linter
-        command: npm run lint
-     - run: 
-        name: Run email validation test
-          command: 
-            # import the email-validation module
-            const emailValidation = require('../Login/Login.jsx');
-            
-            # run the isValidEmail function
-            const email = 'test@example.com';
-            const isValid = emailValidation.isValidEmail(email);
-            
-            # output the result
-            if (isValid) {
-              echo 'Email is valid';
-              console.log('Email is valid');
-            } else {
-              console.log('Email is invalid');
-              echo 'Email is invalid';
-            } 
+      - checkout
+      - run:
+          name: install dependencies - NPM packages
+          command: npm install
+      - run:
+          name: run tests
+          command: npm install
+      - run:
+          name: Run linter
+          command: npm run lint
 
 workflows:
   example-workflow:
     jobs:
-     - cicd-job
+      - cicd-job
