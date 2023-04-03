@@ -11,18 +11,18 @@ jobs:
     executor:
       name: node/default
     steps:
-     - checkout
-     - run:
-        name: install dependencies - NPM packages
-        command: npm install
-     - run:
-        name : run tests
-        command: npm install
-     - run:
-        name: Run linter
-        command: npm run lint
+      - checkout
+      - run:
+          name: install dependencies - NPM packages
+          command: npm install
+      - run:
+          name: run tests
+          command: npm install
+      - run:
+          name: Run linter
+          command: npm run lint
 
 workflows:
   example-workflow:
     jobs:
-     - cicd-job
+      - cicd-job
