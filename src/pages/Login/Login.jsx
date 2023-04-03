@@ -44,7 +44,6 @@ export const Login = () => {
         e.preventDefault();
 
         if (validateForm()) {
-            console.log('Form submitted:', { email, password });
             navigate('../AfterLogin');
         }
     };
