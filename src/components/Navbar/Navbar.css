@@ -46,7 +46,7 @@
     background-color: #555;
 }
 
-.nav a.active {
+.nav li.active a {
     font-weight: bold;
     color: #fff;
     background-color: #007bff;

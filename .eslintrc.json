@@ -19,6 +19,7 @@
     "indent": "off",
     "react/react-in-jsx-scope": "off",
     "require-jsdoc": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "max-len": "off"
   }
 }
