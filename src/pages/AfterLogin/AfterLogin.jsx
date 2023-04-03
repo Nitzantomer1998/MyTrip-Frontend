@@ -4,4 +4,4 @@ export const AfterLogin = () => {
             <h2>You have logged in successfuly</h2>
         </div>
     );
-}
+};
