@@ -1,7 +1,5 @@
 import { expect } from "chai";
 
-import { expect } from "chai";
-
 describe("Arrays", () => {
   describe("sort", () => {
     it("Sort not sorted names array", () => {
