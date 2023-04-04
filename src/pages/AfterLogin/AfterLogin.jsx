@@ -1,7 +1,7 @@
 export const AfterLogin = () => {
     return (
         <div>
-            <h2>You have logged in successfuly</h2>
+            <h2>You have successfully logged in</h2>
         </div>
     );
 };
