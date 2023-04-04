@@ -19,7 +19,7 @@ export const Register = (props) => {
             newErrors.name = 'Name is required';
             valid = false;
         } else if (!nameRegex.test(name)) {
-            newErrors.name = 'Name must contain only letters';
+            newErrors.name = 'Name contain only Letters';
             valid = false;
         }
 
@@ -31,14 +31,14 @@ export const Register = (props) => {
             valid = false;
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/;
 
         if (!password.trim()) {
             newErrors.password = 'Password is required';
             valid = false;
         } else if (!passwordRegex.test(password)) {
             newErrors.password =
-                'Password must have at least 8 characters, 1 uppercase, 1 lowercase, 1 number, and 1 symbol';
+                'Password is too weak';
             valid = false;
         }
 
@@ -90,7 +90,6 @@ export const Register = (props) => {
                     name="password"
                 />
                 <span className="error-message">{errors.password}</span>
-
                 <button type="submit">Register</button>
             </form>
 
