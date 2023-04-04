@@ -25,7 +25,7 @@ export const Login = () => {
         }
 
         const passwordRegex =
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/;
 
         if (!password.trim()) {
             newErrors.password = 'Password is required';
@@ -83,10 +83,11 @@ export const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     type="password"
-                    placeholder="********"
+                    placeholder="****"
                     id="password"
                     name="password"
                 />
+
                 <button type="submit">Login</button>
             </form>
 

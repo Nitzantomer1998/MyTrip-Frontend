@@ -8,7 +8,7 @@ export const Navbar = () => {
     return (
         <nav className="nav">
             <Link to="/" className="site-title">SiteName</Link>
-            <ul>ּ
+            <ul>
                 <li className={location.pathname === '/login' ? 'active' : ''}>
                     <Link to="/login">Login</Link>
                 </li>

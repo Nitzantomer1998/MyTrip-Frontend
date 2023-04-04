@@ -16,6 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint src/*.jsx --color",
+    "test": "mocha tests/*.spec.js --color",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -56,5 +57,5 @@
   "bugs": {
     "url": "https://github.com/Nitzantomer1998/PM-Frontend/issues"
   },
-  "homepage": "https://github.com/Nitzantomer1998/PM-Frontend"
+  "homepage": "project-management-5r3r.onrender.com"
 }
