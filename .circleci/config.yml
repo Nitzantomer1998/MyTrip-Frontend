@@ -26,5 +26,6 @@ jobs:
           command: curl "https://api.render.com/deploy/srv-cglcae8rddleudrb2ju0?key=h1yshQzqiOU"
 
 workflows:
-  example-workflows:
-    jobs: - cicd-job
+  workflow-example:
+    jobs:
+      - cicd-job
