@@ -4,7 +4,8 @@
   "description": "Fullstack training",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src/*.jsx --color",
+    "test": "mocha testss/*.spec.js --color"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,9 @@
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
     "chai": "^4.3.7",
+    "eslint": "^8.37.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.32.2",
     "mocha": "^10.2.0"
   }
 }
