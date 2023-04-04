@@ -48,7 +48,7 @@ export const Register = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-// Wrong Navigattion
+        // Wrong Navigattion
         if (validateForm()) {
             navigate('../AfterRegister');
         }

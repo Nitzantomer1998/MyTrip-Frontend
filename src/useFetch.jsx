@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export const useFetch = (url) => {
     const [data, setData] = useState(null);
@@ -8,12 +8,11 @@ export const useFetch = (url) => {
     useEffect(() => {
         const abortCont = AbortController;
         fetch(url, { signal: abortCont.signal })
-            .then(res => {
+            .then((res) => {
                 if (!res.ok) {
-                    throw Error("could not fetch the data for that resource");
+                    throw Error('could not fetch the data for that resource');
                 }
                 return res.json();
-
             })
             .then((data) => {
                 setData(data);
