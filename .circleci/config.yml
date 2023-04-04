@@ -7,7 +7,7 @@ orbs:
   node: circleci/node@4.7
 
 jobs:
-  CI/CD:
+  cicd-job:
     executor:
       name: node/default
     steps:
@@ -26,5 +26,5 @@ jobs:
           command: curl "https://api.render.com/deploy/srv-cglcae8rddleudrb2ju0?key=h1yshQzqiOU"
 
 workflows:
-  CI/CD:
-    jobs: - CI/CD
+  example-workflows:
+    jobs: - cicd-job
