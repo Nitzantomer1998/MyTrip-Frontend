@@ -7,22 +7,50 @@ export const Register = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const [errors, setErrors] = useState({ name: '', email: '', password: '' });
+
+    const validateForm = () => {
+        let valid = true;
+        const newErrors = { name: '', email: '', password: '' };
+
+        const nameRegex = /^[A-Za-z]+$/;
+
+        if (!name.trim()) {
+            newErrors.name = 'Name is required';
+            valid = false;
+        } else if (!nameRegex.test(name)) {
+            newErrors.name = 'Name must contain only letters';
+            valid = false;
+        }
+
+        if (!email.trim()) {
+            newErrors.email = 'Email is required';
+            valid = false;
+        } else if (!email.includes('@') || !email.includes('.')) {
+            newErrors.email = 'Invalid email format';
+            valid = false;
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!password.trim()) {
+            newErrors.password = 'Password is required';
+            valid = false;
+        } else if (!passwordRegex.test(password)) {
+            newErrors.password =
+                'Password must have at least 8 characters, 1 uppercase, 1 lowercase, 1 number, and 1 symbol';
+            valid = false;
+        }
+
+        setErrors(newErrors);
+        return valid;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const data = { email, password, name };
-        const response = await fetch('/api/register', {
-            method: 'POST',
-            header: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-        });
-
-        const result = await response.json();
-        if (result.valid) {
-            alert('Good');
-        } else {
-            alert('Invalid user');
+// Wrong Navigattion
+        if (validateForm()) {
+            navigate('../AfterRegister');
         }
     };
 
@@ -39,6 +67,7 @@ export const Register = (props) => {
                     id="name"
                     name="name"
                 />
+                <span className="error-message">{errors.name}</span>
 
                 <label htmlFor="email">Email</label>
                 <input
@@ -49,6 +78,7 @@ export const Register = (props) => {
                     id="email"
                     name="email"
                 />
+                <span className="error-message">{errors.email}</span>
 
                 <label htmlFor="password">Password</label>
                 <input
@@ -59,6 +89,8 @@ export const Register = (props) => {
                     id="password"
                     name="password"
                 />
+                <span className="error-message">{errors.password}</span>
+
                 <button type="submit">Register</button>
             </form>
 

@@ -11,7 +11,6 @@ export const Login = () => {
     const validateForm = () => {
         let valid = true;
         const newErrors = { email: '', password: '' };
-
         if (!email.trim()) {
             newErrors.email = 'Email is required';
             valid = false;
@@ -23,10 +22,8 @@ export const Login = () => {
             newErrors.email = 'Email must contain .';
             valid = false;
         }
-
         const passwordRegex =
-            /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/;
-
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/;
         if (!password.trim()) {
             newErrors.password = 'Password is required';
             valid = false;
@@ -35,7 +32,6 @@ export const Login = () => {
                 'Password must have at least 8 characters, 1 uppercase,1 lowercase, 1 number, and 1 symbol';
             valid = false;
         }
-
         setErrors(newErrors);
         return valid;
     };
@@ -66,8 +62,7 @@ export const Login = () => {
     return (
         <div className="auth-form-container">
             <h2>Login</h2>
-
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className="login-form no-zoom" onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input
                     value={email}
@@ -77,20 +72,19 @@ export const Login = () => {
                     id="email"
                     name="email"
                 />
-
+                <span className="error-message">{errors.email}</span>
                 <label htmlFor="password">Password</label>
                 <input
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     type="password"
-                    placeholder="****"
+                    placeholder="********"
                     id="password"
                     name="password"
                 />
-
+                <span className="error-message">{errors.password}</span>
                 <button type="submit">Login</button>
             </form>
-
             <button
                 className="link-btn"
                 onClick={() => navigate('../Register')}
@@ -100,3 +94,4 @@ export const Login = () => {
         </div>
     );
 };
+
