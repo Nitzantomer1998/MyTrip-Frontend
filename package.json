@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Nitzantomer1998/PM-Frontend/issues"
   },
-  "homepage": "https://github.com/Nitzantomer1998/PM-Frontend#readme"
+  "homepage": "https://github.com/Nitzantomer1998/PM-Frontend#readme",
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
 }
