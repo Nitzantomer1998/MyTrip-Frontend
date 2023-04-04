@@ -1,18 +1,24 @@
 name: Continuous Integration
-
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
+    runs-on: self-hosted
     steps:
-      - name: Install dependencies
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies - NPM packages
         run: npm install
 
       - name: Run tests
-        run: npm test
+        run: npm run test
 
-      - name: Lint code
+      - name: Run linter
         run: npm run lint
 
-      - name: Deploy service
+      - name: Deploy to production
         run: curl "https://api.render.com/deploy/srv-cglcae8rddleudrb2ju0?key=h1yshQzqiOU"
