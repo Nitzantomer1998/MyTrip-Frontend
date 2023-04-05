@@ -14,8 +14,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 To get started with the frontend, you need to : 
-* clone this project
-* install depedencies (npm install)
+* clone the repository to your local machine
+* install depedencies with this command : npm install
 * run the project with this command : npm run start
 * Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
