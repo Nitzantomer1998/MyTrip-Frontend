@@ -13,7 +13,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-To get started with the frontend, we need to : 
+To get started with the frontend, you need to : 
 * clone this project
 * install depedencies (npm install)
 * run the project with this command : npm run start
