@@ -102,3 +102,10 @@ The tree below displays the main files and folders structure.
 ├── .package.json //Includes all dependencies and devDependepncies
 ├── README.md
 ```
+## Authors
+
+* Gad Nadjar
+* Nitzan Tomer
+* Zaccharie Attias
+* Guy Shabtay
+* Rudy Haddad
