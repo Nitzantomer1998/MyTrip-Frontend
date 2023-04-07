@@ -2,7 +2,7 @@ import './Login.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const Login = () => {
+function Login() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -95,3 +95,4 @@ export const Login = () => {
     );
 };
 
+export default Login;

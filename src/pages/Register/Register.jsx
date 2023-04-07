@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import React, { useState } from 'react';
 
-export const Register = (props) => {
+function Register() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -102,3 +102,5 @@ export const Register = (props) => {
         </div>
     );
 };
+
+export default Register;
