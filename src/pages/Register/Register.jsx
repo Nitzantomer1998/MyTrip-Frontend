@@ -95,7 +95,7 @@ function Register() {
 
             <button
                 className="link-btn"
-                onClick={() => navigate('../Login')}
+                onClick={() => navigate('../user/login')}
             >
                 Already Have An Account? Sign-In
             </button>

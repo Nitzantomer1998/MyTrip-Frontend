@@ -10,11 +10,11 @@ function Navbar() {
             <Link to="/" className="site-title">SiteName</Link>
             <ul>
                 <li className={location.pathname === '/login' ? 'active' : ''}>
-                    <Link to="/login">Login</Link>
+                    <Link to="/user/login">Login</Link>
                 </li>
 
                 <li className={location.pathname === '/register' ? 'active' : ''}>
-                    <Link to="/register">Register</Link>
+                    <Link to="/user/register">Register</Link>
                 </li>
             </ul>
         </nav>
