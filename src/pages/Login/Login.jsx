@@ -37,17 +37,23 @@ function Login() {
         e.preventDefault();
 
         if (validateForm()) {
-            const formData = new FormData();
-            formData.append('email', email);
-            formData.append('password', password);
-            const response = await fetch('https://project-management-be-kwwz.onrender.com/user/login', {
-                method: 'POST',
-                body: formData,
-            });
-            if (response.ok) {
-                navigate('../AfterLogin');
-            } else {
-                console.error('Login failed:', response.status);
+            try {
+                const response = await fetch('https://project-management-be-kwwz.onrender.com/user/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    navigate('../AfterLogin');
+                } else {
+                    const error = await response.json();
+                    setErrors({ email: error.message });
+                }
+            } catch (error) {
+                console.error(error);
             }
         }
     };
