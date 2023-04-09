@@ -6,22 +6,11 @@ function Register() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [errors, setErrors] = useState({ name: '', email: '', password: '' });
+    const [errors, setErrors] = useState({ email: '', password: '' });
 
     const validateForm = () => {
         let valid = true;
-        const newErrors = { name: '', email: '', password: '' };
-
-        const nameRegex = /^[A-Za-z]+$/;
-
-        if (!name.trim()) {
-            newErrors.name = 'Name is required';
-            valid = false;
-        } else if (!nameRegex.test(name)) {
-            newErrors.name = 'Name contain only Letters';
-            valid = false;
-        }
+        const newErrors = { email: '', password: '' };
 
         if (!email.trim()) {
             newErrors.email = 'Email is required';
@@ -31,14 +20,11 @@ function Register() {
             valid = false;
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/;
-
         if (!password.trim()) {
             newErrors.password = 'Password is required';
             valid = false;
-        } else if (!passwordRegex.test(password)) {
-            newErrors.password =
-                'Password is too weak';
+        } else if (password.length < 8) {
+            newErrors.password = 'Password must be at least 8 characters';
             valid = false;
         }
 
@@ -48,9 +34,25 @@ function Register() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Wrong Navigattion
         if (validateForm()) {
-            navigate('../AfterRegister');
+            try {
+                const response = await fetch('https://project-management-be-kwwz.onrender.com/user/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    navigate('../AfterRegister');
+                } else {
+                    const error = await response.json();
+                    setErrors({ email: error.message });
+                }
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
@@ -58,17 +60,6 @@ function Register() {
         <div className="auth-form-container">
             <h2>Register</h2>
             <form className="register-form" onSubmit={handleSubmit}>
-                <label htmlFor="name">Name</label>
-                <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    type="text"
-                    placeholder="name"
-                    id="name"
-                    name="name"
-                />
-                <span className="error-message">{errors.name}</span>
-
                 <label htmlFor="email">Email</label>
                 <input
                     value={email}

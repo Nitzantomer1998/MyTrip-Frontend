@@ -22,14 +22,11 @@ function Login() {
             newErrors.email = 'Email must contain .';
             valid = false;
         }
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,100}$/;
-
         if (!password.trim()) {
             newErrors.password = 'Password is required';
             valid = false;
-        } else if (!passwordRegex.test(password)) {
-            newErrors.password =
-                'Password is too weak';
+        } else if (password.length < 8) {
+            newErrors.password = 'Password must be at least 8 characters long';
             valid = false;
         }
         setErrors(newErrors);
@@ -40,24 +37,20 @@ function Login() {
         e.preventDefault();
 
         if (validateForm()) {
-            navigate('../AfterLogin');
+            const formData = new FormData();
+            formData.append('email', email);
+            formData.append('password', password);
+            const response = await fetch('https://project-management-be-kwwz.onrender.com/user/login', {
+                method: 'POST',
+                body: formData,
+            });
+            if (response.ok) {
+                navigate('../AfterLogin');
+            } else {
+                console.error('Login failed:', response.status);
+            }
         }
     };
-
-    //     const data = { email, password };
-    //     const response = await fetch('/api/login', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(data),
-    //     });
-
-    //     const result = await response.json();
-    //     if (result.valid) {
-    //         navigate('../AfterLogin');
-    //     } else {
-    //         alert('Invalid user');
-    //     }
-    // };
 
     return (
         <div className="auth-form-container">
