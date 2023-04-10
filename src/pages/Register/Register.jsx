@@ -1,6 +1,7 @@
 import './Register.css';
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import { validateLoginForm } from '../../validation/userValidation.jsx';
 
 function Register() {
   const navigate = useNavigate();
@@ -8,33 +9,12 @@ function Register() {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({ email: '', password: '' });
 
-  const validateForm = () => {
-    let valid = true;
-    const newErrors = { email: '', password: '' };
-
-    if (!email.trim()) {
-      newErrors.email = 'Email is required';
-      valid = false;
-    } else if (!email.includes('@') || !email.includes('.')) {
-      newErrors.email = 'Invalid email format';
-      valid = false;
-    }
-
-    if (!password.trim()) {
-      newErrors.password = 'Password is required';
-      valid = false;
-    } else if (password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
-      valid = false;
-    }
-
-    setErrors(newErrors);
-    return valid;
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
+
+    const isFormValid = validateLoginForm({ email, password }, setErrors);
+
+    if (isFormValid) {
       try {
         const response = await fetch(
           'https://project-management-be-kwwz.onrender.com/user/register',
@@ -43,7 +23,7 @@ function Register() {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email: email, password: password }),
+            body: JSON.stringify({ email, password }),
           }
         );
 
