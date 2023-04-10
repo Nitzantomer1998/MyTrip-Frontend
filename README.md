@@ -6,20 +6,21 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Technologies
 
-* Visual Studio Code
-* React
-* HTML
-* CSS3
-* Mocha
-* Chai
+- Visual Studio Code
+- React
+- HTML
+- CSS3
+- Mocha
+- Chai
 
 ## Available Scripts
 
-To get started with the frontend, you need to : 
-* clone the repository to your local machine
-* install depedencies with this command : npm install
-* run the project with this command : npm run start
-* Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To get started with the frontend, you need to :
+
+- clone the repository to your local machine
+- install depedencies with this command : npm install
+- run the project with this command : npm run start
+- Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 In the project directory, you can run:
 
@@ -45,7 +46,6 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 
 ## Learn More
 
@@ -77,35 +77,35 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
-
-### Project Structure 
+### Project Structure
 
 The tree below displays the main files and folders structure.
-```textile                               
-├── .Circleci    // folder for the CI process 
-    ├── config.yml                                    
+
+```textile
+├── .Circleci    // folder for the CI process
+    ├── config.yml
 ├── model   // contains model class files that include the properties of the objects
     ├── user //User functionality
 ├── public
     ├── index // react app
 ├── views // contains HTML files for the application
-├── src 
+├── src
     ├── index // For the server
-    ├── components  // the components that handle user interaction 
+    ├── components  // the components that handle user interaction
     ├── pages  // management of the page
-├── test 
-├── .eslintrc.json  //configuration file 
+├── test
+├── .eslintrc.json  //configuration file
 ├── .gitignore     //Contains the files we don't want to track in git
-├── .nodemon.json  //contains the environmental variables 
+├── .nodemon.json  //contains the environmental variables
 ├── .package-lock.json //For version management of our project
 ├── .package.json //Includes all dependencies and devDependepncies
 ├── README.md
 ```
+
 ## Authors
 
-* Gad Nadjar
-* Nitzan Tomer
-* Zaccharie Attias
-* Guy Shabtay
-* Rudy Haddad
+- Nitzan Tomer
+- Gad Nadjar
+- Zaccharie Attias
+- Guy Shabtay
+- Rudy Haddad

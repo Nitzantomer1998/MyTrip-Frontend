@@ -25,6 +25,7 @@
     "padded-blocks": "off",
     "react/react-in-jsx-scope": "off",
     "max-len": ["warn", { "code": 500 }],
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "react/prop-types": 0
   }
 }
