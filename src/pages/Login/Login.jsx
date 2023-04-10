@@ -5,12 +5,13 @@ import { validateLoginForm } from '../../validation/userValidation.jsx';
 
 function Login() {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({ email: '', password: '' });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     const isFormValid = validateLoginForm({ email, password }, setErrors);
 
@@ -46,7 +47,7 @@ function Login() {
         <label htmlFor='email'>Email</label>
         <input
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
           type='email'
           placeholder='Youremail@gmail.com'
           id='email'
@@ -56,7 +57,7 @@ function Login() {
         <label htmlFor='password'>Password</label>
         <input
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
           type='password'
           placeholder='********'
           id='password'
@@ -65,7 +66,7 @@ function Login() {
         <span className='error-message'>{errors.password}</span>
         <button type='submit'>Login</button>
       </form>
-      <button className='link-btn' onClick={() => navigate('../user/register')}>
+      <button className='link-btn' onClick={() => navigate('../register')}>
         Dont Have An Account? Sign-Up
       </button>
     </div>

@@ -1,16 +1,17 @@
 import './Register.css';
-import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { validateLoginForm } from '../../validation/userValidation.jsx';
 
 function Register() {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({ email: '', password: '' });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     const isFormValid = validateLoginForm({ email, password }, setErrors);
 
@@ -67,7 +68,7 @@ function Register() {
         <button type='submit'>Register</button>
       </form>
 
-      <button className='link-btn' onClick={() => navigate('../user/login')}>
+      <button className='link-btn' onClick={() => navigate('../login')}>
         Already Have An Account? Sign-In
       </button>
     </div>
