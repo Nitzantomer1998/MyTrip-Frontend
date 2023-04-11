@@ -1,7 +1,7 @@
 import './Register.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { validateLoginForm } from '../../validation/userValidation.jsx';
+import { validateLoginForm } from '../../validation/userValidation.js';
 
 function Register() {
   const navigate = useNavigate();
