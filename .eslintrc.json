@@ -16,16 +16,13 @@
     }
   },
   "rules": {
-    "linebreak-style": "off",
-    "object-curly-spacing": "off",
+    "object-curly-spacing": ["error", "always"],
+    "require-jsdoc": "off",
     "indent": "off",
     "comma-dangle": "off",
-    "require-jsdoc": "off",
-    "arrow-parens": "off",
-    "padded-blocks": "off",
-    "react/react-in-jsx-scope": "off",
-    "max-len": ["warn", { "code": 500 }],
     "no-unused-vars": "off",
-    "react/prop-types": 0
+    "react/react-in-jsx-scope": "off",
+    "max-len": "off",
+    "operator-linebreak": "off"
   }
 }
