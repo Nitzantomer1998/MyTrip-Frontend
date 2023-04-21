@@ -31,4 +31,4 @@ function validateSignInForm(formData) {
   return newErrors;
 }
 
-export { validateSignUpForm, validateSignUpForm };
+export { validateSignUpForm, validateSignInForm };
