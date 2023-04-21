@@ -16,7 +16,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "linter": "eslint src/*.js --color",
-    "test": "mocha tests/*.spec.js --color",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
