@@ -19,6 +19,7 @@ function validateSignUpForm(formData) {
 
 function validateSignInForm(formData) {
   const { email, password } = formData;
+  const newErrors = {};
 
   if (!email.includes('.')) {
     newErrors.email = 'Invalid Pattern';
