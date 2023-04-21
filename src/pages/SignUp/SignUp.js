@@ -21,7 +21,7 @@ function SignUp() {
     if (!errorMessage) {
       try {
         const response = await fetch(
-          'https://project-management-be-kwwz.onrender.com/user/register',
+          'https://mytrip-backend-pc4j.onrender.com/user/sign-up',
           {
             method: 'POST',
             headers: {
@@ -32,7 +32,8 @@ function SignUp() {
         );
 
         if (response.ok) {
-          navigate('../sign-in');
+          alert('Registered Successfully');
+          //navigate('../sign-in');
         } else {
           const error = await response.json();
           alert(error.message);
