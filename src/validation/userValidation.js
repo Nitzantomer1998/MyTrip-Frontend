@@ -1,28 +1,20 @@
-const validateLoginForm = (formData, setErrors) => {
-  let valid = true;
-  const newErrors = { email: '', password: '' };
+function validateSignUpForm(formData) {
+  const { username, email, password } = formData;
+  const newErrors = {};
 
-  if (!formData.email.trim()) {
-    newErrors.email = 'Email is required';
-    valid = false;
-  } else if (!formData.email.includes('@')) {
-    newErrors.email = 'Email must contain @';
-    valid = false;
-  } else if (!formData.email.includes('.')) {
-    newErrors.email = 'Email must contain .';
-    valid = false;
+  if (username.length < 6) {
+    newErrors.username = 'is too weak';
   }
 
-  if (!formData.password.trim()) {
-    newErrors.password = 'Password is required';
-    valid = false;
-  } else if (formData.password.length < 8) {
-    newErrors.password = 'Password must be at least 8 characters long';
-    valid = false;
+  if (!email.includes('.')) {
+    newErrors.email = 'Invalid Pattern';
   }
 
-  setErrors(newErrors);
-  return valid;
-};
+  if (password.length < 8) {
+    newErrors.password = 'is too weak';
+  }
 
-export { validateLoginForm };
+  return newErrors;
+}
+
+export { validateSignUpForm };
