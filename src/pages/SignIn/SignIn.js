@@ -1,41 +1,39 @@
 import './SignIn.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { validateSignUpForm } from '../../validation/userValidation.js';
+import { validateSignInForm } from '../../validation/userValidation.js';
 import SignInImage from '../../images/SignUpImage.png';
 
 function SignIn() {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [gender, setGender] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    setErrorMessage(validateSignUpForm({ username, email, password }));
+    setErrorMessage(validateSignInForm({ email, password }));
 
     if (!errorMessage) {
       try {
         const response = await fetch(
-          'https://project-management-be-kwwz.onrender.com/user/register',
+          'https://mytrip-backend-pc4j.onrender.com/user/sign-in',
           {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, email, password, gender }),
+            body: JSON.stringify({ email, password }),
           }
         );
 
         if (response.ok) {
-          navigate('../');
+          navigate('../home');
         } else {
           const error = await response.json();
-          setErrors({ username: error.message });
+          alert(error.message);
         }
       } catch (error) {
         console.error(error);

@@ -17,4 +17,18 @@ function validateSignUpForm(formData) {
   return newErrors;
 }
 
-export { validateSignUpForm };
+function validateSignInForm(formData) {
+  const { email, password } = formData;
+
+  if (!email.includes('.')) {
+    newErrors.email = 'Invalid Pattern';
+  }
+
+  if (password.length < 8) {
+    newErrors.password = 'is too weak';
+  }
+
+  return newErrors;
+}
+
+export { validateSignUpForm, validateSignUpForm };

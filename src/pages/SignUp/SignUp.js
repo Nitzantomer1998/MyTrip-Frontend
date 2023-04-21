@@ -32,8 +32,7 @@ function SignUp() {
         );
 
         if (response.ok) {
-          alert('Registered Successfully');
-          //navigate('../sign-in');
+          navigate('../sign-in');
         } else {
           const error = await response.json();
           alert(error.message);
