@@ -2,7 +2,20 @@ import './SignUp.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validateSignUpForm } from '../../validation/userValidation.js';
-import SignUpImage from '../../images/SignUpImage.png';
+import SignUpImage from '../../images/SignUpIn.jpg';
+
+const backgroundImageStyle = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  backgroundImage: `url(${SignUpImage})`,
+  backgroundSize: 'cover',
+  filter: 'blur(5px)',
+  opacity: 0.7,
+  zIndex: -1,
+};
 
 function SignUp() {
   const navigate = useNavigate();
@@ -32,7 +45,7 @@ function SignUp() {
         );
 
         if (response.ok) {
-          navigate('../sign-in');
+          navigate('../after-sign-up');
         } else {
           const error = await response.json();
           alert(error.message);
@@ -45,6 +58,7 @@ function SignUp() {
 
   return (
     <section className='sign-up-container'>
+      <div style={backgroundImageStyle}></div>
       <div className='rectangle-container'>
         <section className='form-container'>
           <div className='logo'>MyTrip</div>

@@ -2,7 +2,20 @@ import './SignIn.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validateSignInForm } from '../../validation/userValidation.js';
-import SignInImage from '../../images/SignUpImage.png';
+import SignUpImage from '../../images/SignUpIn.jpg';
+
+const backgroundImageStyle = {
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  backgroundImage: `url(${SignUpImage})`,
+  backgroundSize: 'cover',
+  filter: 'blur(5px)',
+  opacity: 0.7,
+  zIndex: -1,
+};
 
 function SignIn() {
   const navigate = useNavigate();
@@ -30,7 +43,7 @@ function SignIn() {
         );
 
         if (response.ok) {
-          navigate('../home');
+          navigate('../after-sign-up');
         } else {
           const error = await response.json();
           alert(error.message);
@@ -44,9 +57,8 @@ function SignIn() {
   return (
     <div>
       <section className='sign-in-container'>
-        <div className='background-image'>
-          <img src={SignInImage} alt='Image presenting traveling' />
-        </div>
+        <div style={backgroundImageStyle}></div>
+
         <div className='rectangle-container1'>
           <section className='form-container1'>
             <div className='logo1'>MyTrip</div>
@@ -104,7 +116,7 @@ function SignIn() {
             </div>
           </section>
           <section className='image-container1'>
-            <img src={SignInImage} alt='Image presenting traveling' />
+            <img src={SignUpImage} alt='Image presenting traveling' />
           </section>
         </div>
       </section>
