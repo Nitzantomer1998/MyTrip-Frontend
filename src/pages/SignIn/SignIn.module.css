@@ -61,6 +61,7 @@
   border-radius: 0.5em;
   font-size: 0.65em;
   font-weight: 50;
+  box-sizing: border-box;
 }
 
 .formContainer label {
