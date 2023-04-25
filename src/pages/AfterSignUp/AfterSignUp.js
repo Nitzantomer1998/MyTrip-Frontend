@@ -16,7 +16,7 @@ const AfterRegister = () => {
   }, [navigate]);
 
   return (
-    <div className="registration-success">
+    <div className='registration-success'>
       <h1>Redirection To MyTrip</h1>
     </div>
   );

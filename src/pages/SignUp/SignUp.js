@@ -1,21 +1,8 @@
-import './SignUp.css';
+import style from './SignUp.module.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validateSignUpForm } from '../../validation/userValidation.js';
 import SignUpImage from '../../images/SignUpIn.jpg';
-
-const backgroundImageStyle = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  backgroundImage: `url(${SignUpImage})`,
-  backgroundSize: 'cover',
-  filter: 'blur(5px)',
-  opacity: 0.7,
-  zIndex: -1,
-};
 
 function SignUp() {
   const navigate = useNavigate();
@@ -57,102 +44,88 @@ function SignUp() {
   };
 
   return (
-    <section className='sign-up-container'>
-      <div style={backgroundImageStyle}></div>
-      <div className='rectangle-container'>
-        <section className='form-container'>
-          <div className='logo'>MyTrip</div>
+    <div className={style.signUpContainer}>
+      <div className={style.backgroundImage}></div>
+      <div className={style.rectangleContainer}>
+        <div className={style.formContainer}>
+          <div className={style.logo}>MyTrip</div>
 
           <p>
             Social Network for the Traveler
             <br />
-            <span>Welcome, Please create to your account</span>
+            <span>Welcome, Please create your account</span>
           </p>
 
           <form onSubmit={handleFormSubmit}>
-            <div>
-              <label htmlFor='username'>
-                Username{' '}
-                {errorMessage.username && <span>{errorMessage.username}</span>}
-              </label>
-              <input
-                type='text'
-                id='username'
-                name='username'
-                placeholder='Abc'
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-                required
-              />
-            </div>
+            <label htmlFor='username'>
+              Username{' '}
+              {errorMessage.username && <span>{errorMessage.username}</span>}
+            </label>
+            <input
+              type='text'
+              id='username'
+              name='username'
+              placeholder='Abc'
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              required
+            />
 
-            <div>
-              <label htmlFor='email'>
-                Email {errorMessage.email && <span>{errorMessage.email}</span>}
-              </label>
-              <input
-                type='email'
-                id='email'
-                name='email'
-                placeholder='Abc@gmail.com'
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-            </div>
+            <label htmlFor='email'>
+              Email {errorMessage.email && <span>{errorMessage.email}</span>}
+            </label>
+            <input
+              type='email'
+              id='email'
+              name='email'
+              placeholder='Abc@gmail.com'
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              required
+            />
 
-            <div>
-              <label htmlFor='password'>
-                Password{' '}
-                {errorMessage.password && <span>{errorMessage.password}</span>}
-              </label>
-              <input
-                type='password'
-                id='password'
-                name='password'
-                placeholder='********'
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                required
-              />
-            </div>
+            <label htmlFor='password'>
+              Password{' '}
+              {errorMessage.password && <span>{errorMessage.password}</span>}
+            </label>
+            <input
+              type='password'
+              id='password'
+              name='password'
+              placeholder='********'
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              required
+            />
 
-            <div>
-              <label htmlFor='gender'>Gender</label>
-              <select
-                id='gender'
-                name='gender'
-                onChange={(event) => setGender(event.target.value)}
-                required
-              >
-                <option value=''>Please select</option>
-                <option value='male'>Male</option>
-                <option value='female'>Female</option>
-                <option value='refrigerator'>Refrigerator</option>
-              </select>
-            </div>
+            <label htmlFor='gender'>Gender</label>
+            <select
+              id='gender'
+              name='gender'
+              onChange={(event) => setGender(event.target.value)}
+              required
+            >
+              <option value=''>Please select</option>
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
+              <option value='non-binary'>Non-Binary</option>
+            </select>
 
-            <div>
-              <input type='checkbox' id='terms' name='terms' required />
-              <label htmlFor='terms'>Agree to the terms & condition</label>
-            </div>
+            <input type='checkbox' id='terms' name='terms' required />
+            <label htmlFor='terms'>Agree to the terms & condition</label>
 
-            <div>
-              <button type='submit'>Sign Up</button>
-            </div>
+            <button type='submit'>Sign Up</button>
           </form>
 
-          <div>
-            <label>
-              Already have an account? <a href='/sign-in'>Sign in!</a>
-            </label>
-          </div>
-        </section>
-        <section className='image-container'>
+          <label>
+            Already have an account? <a href='/sign-in'>Sign in!</a>
+          </label>
+        </div>
+        <div className={style.imageContainer}>
           <img src={SignUpImage} alt='Image presenting traveling' />
-        </section>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
 

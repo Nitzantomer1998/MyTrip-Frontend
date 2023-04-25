@@ -1,21 +1,8 @@
-import './SignIn.css';
+import style from './SignIn.module.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validateSignInForm } from '../../validation/userValidation.js';
 import SignUpImage from '../../images/SignUpIn.jpg';
-
-const backgroundImageStyle = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  backgroundImage: `url(${SignUpImage})`,
-  backgroundSize: 'cover',
-  filter: 'blur(5px)',
-  opacity: 0.7,
-  zIndex: -1,
-};
 
 function SignIn() {
   const navigate = useNavigate();
@@ -56,12 +43,11 @@ function SignIn() {
 
   return (
     <div>
-      <section className='sign-in-container'>
-        <div style={backgroundImageStyle}></div>
-
-        <div className='rectangle-container1'>
-          <section className='form-container1'>
-            <div className='logo1'>MyTrip</div>
+      <div className={style.signInContainer}>
+        <div className={style.backgroundImage}></div>
+        <div className={style.rectangleContainer}>
+          <div className={style.formContainer}>
+            <div className={style.logo}>MyTrip</div>
 
             <p>
               Social Network for the Traveler
@@ -70,56 +56,45 @@ function SignIn() {
             </p>
 
             <form onSubmit={handleFormSubmit}>
-              <div>
-                <label htmlFor='email'>
-                  Email{' '}
-                  {errorMessage.email && <span>{errorMessage.email}</span>}
-                </label>
-                <input
-                  type='email'
-                  id='email'
-                  name='email'
-                  placeholder='Abc@gmail.com'
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  required
-                />
-              </div>
+              <label htmlFor='email'>
+                Email {errorMessage.email && <span>{errorMessage.email}</span>}
+              </label>
+              <input
+                type='email'
+                id='email'
+                name='email'
+                placeholder='Abc@gmail.com'
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+              />
 
-              <div>
-                <label htmlFor='password'>
-                  Password{' '}
-                  {errorMessage.password && (
-                    <span>{errorMessage.password}</span>
-                  )}
-                </label>
-                <input
-                  type='password'
-                  id='password'
-                  name='password'
-                  placeholder='********'
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  required
-                />
-              </div>
+              <label htmlFor='password'>
+                Password{' '}
+                {errorMessage.password && <span>{errorMessage.password}</span>}
+              </label>
+              <input
+                type='password'
+                id='password'
+                name='password'
+                placeholder='********'
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                required
+              />
 
-              <div>
-                <button type='submit'>Sign In</button>
-              </div>
+              <button type='submit'>Sign In</button>
             </form>
 
-            <div>
-              <label>
-                Dont have an account? <a href='/sign-up'>Sign Up!</a>
-              </label>
-            </div>
-          </section>
-          <section className='image-container1'>
+            <label>
+              Dont have an account? <a href='/sign-up'>Sign Up!</a>
+            </label>
+          </div>
+          <div className={style.imageContainer}>
             <img src={SignUpImage} alt='Image presenting traveling' />
-          </section>
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
