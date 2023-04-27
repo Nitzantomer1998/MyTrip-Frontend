@@ -6,12 +6,12 @@ import Content from '../Content/Content.js';
 
 function Dashboard() {
   return (
-    <>
+    <div>
       <div className='app-container'>
         <Sidebar />
         <Navbar />
       </div>
-    </>
+    </div>
   );
 }
 
