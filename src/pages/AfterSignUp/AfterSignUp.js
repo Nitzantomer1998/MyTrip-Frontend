@@ -7,7 +7,7 @@ const AfterRegister = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('/home');
+      navigate('/dashboard');
     }, 3000);
 
     return () => {
