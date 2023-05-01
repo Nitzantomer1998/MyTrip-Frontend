@@ -14,26 +14,31 @@ function SignIn() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    setErrorMessage(validateSignInForm({ email, password }));
+    const formErrors = validateSignInForm({ email, password });
+    setErrorMessage(formErrors);
 
-    if (!errorMessage) {
+    // Vérifier s'il y a des erreurs dans formErrors.
+    const hasErrors = Object.values(formErrors).some((error) => error !== '');
+
+    if (!hasErrors) {
       try {
-        const response = await fetch(
-          'https://mytrip-backend-pc4j.onrender.com/user/sign-in',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-          }
-        );
+        const response = await fetch('https://mytrip-backend-pc4j.onrender.com/user/sign-in', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
 
         if (response.ok) {
           navigate('../after-sign-up');
         } else {
           const error = await response.json();
-          alert(error.message);
+          if (error.message.password === 'Doesnt match') {
+            alert('Incorrect email or password');
+          } else {
+            alert(JSON.stringify(error.message));
+          }
         }
       } catch (error) {
         console.error(error);

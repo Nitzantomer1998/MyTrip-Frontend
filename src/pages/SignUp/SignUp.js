@@ -16,20 +16,21 @@ function SignUp() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    setErrorMessage(validateSignUpForm({ username, email, password }));
+    const formErrors = validateSignUpForm({ username, email, password });
+    setErrorMessage(formErrors);
 
-    if (!errorMessage) {
+    // Vérifier s'il y a des erreurs dans formErrors.
+    const hasErrors = Object.values(formErrors).some((error) => error !== '');
+
+    if (!hasErrors) {
       try {
-        const response = await fetch(
-          'https://mytrip-backend-pc4j.onrender.com/user/sign-up',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, email, password, gender }),
-          }
-        );
+        const response = await fetch('https://mytrip-backend-pc4j.onrender.com/user/sign-up', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, email, password, gender }),
+        });
 
         if (response.ok) {
           navigate('../after-sign-up');
