@@ -41,6 +41,21 @@ function Navbar() {
     }
   }, [searchTerm, searchBy, users]);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const searchBar = document.querySelector('.navbar-search');
+      if (searchBar && !searchBar.contains(event.target)) {
+        setSearchTerm('');
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };

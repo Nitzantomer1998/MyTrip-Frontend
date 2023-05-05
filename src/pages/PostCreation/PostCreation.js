@@ -22,27 +22,25 @@ function PostCreation({ showPopup, onClose }) {
         &times;
       </span>
 
-      <h2>Create a post</h2>
+      <h2 className='create-a-post'>Create a post</h2>
       <form className='create-post-form'>
         <div className='user-info'>
           <label className='user-name' htmlFor='username'>
             Username
           </label>
+          <input
+            className='location-input'
+            type='text'
+            id='location'
+            name='location'
+            placeholder='Location'
+          />
         </div>
-        <label className='create-post-form-title' htmlFor='title'>
-          Location
-        </label>
-        <input
-          type='text1'
-          id='location'
-          name='location'
-          placeholder='Location'
-        />
-        <label htmlFor='description'>Description</label>
         <textarea
+        className='description'
           id='description'
           name='description'
-          placeholder='Description'
+          placeholder="What's up ?"
         />
         <div className='upload-photo'>
           <label htmlFor='image'>Images</label>
@@ -57,7 +55,15 @@ function PostCreation({ showPopup, onClose }) {
         </div>
         <div className='selected-files'>
           {selectedFiles.map((file, index) => (
-            <div key={index}>{file.name}</div>
+            <div key={index}>
+              <p>{file.name}</p>
+              <img
+                src={URL.createObjectURL(file)}
+                alt={file.name}
+                style={{ maxWidth: '100%', maxHeight: '200px' }}
+              />{' '}
+              {/* Ajouter cette ligne pour afficher l'image */}
+            </div>
           ))}
         </div>
         <button type='submit'>Create</button>

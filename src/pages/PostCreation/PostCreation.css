@@ -23,20 +23,8 @@ h2 {
 
 .user-info {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.user-name,
-.user-location {
-  width: 48%;
-}
-
-.create-post-form-title,
-#description,
-.upload-photo,
-#tags {
-  margin-bottom: 10px;
+  align-items: center;
+  gap: 10px;
 }
 
 input[type='text1'],
@@ -76,3 +64,15 @@ button:hover {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+.create-a-post {
+  text-align: center;
+}
+
+.location-input {
+  flex-grow: 0;
+  margin-left: 250px;
+  height: 10px;
+}
+
+
