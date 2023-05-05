@@ -10,6 +10,7 @@ function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -21,14 +22,19 @@ function SignIn() {
     const hasErrors = Object.values(formErrors).some((error) => error !== '');
 
     if (!hasErrors) {
+      setIsLoading(true);
+
       try {
-        const response = await fetch('https://mytrip-backend-pc4j.onrender.com/user/sign-in', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-        });
+        const response = await fetch(
+          'https://mytrip-backend-pc4j.onrender.com/user/sign-in',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+          }
+        );
 
         if (response.ok) {
           navigate('../after-sign-up');
@@ -37,11 +43,13 @@ function SignIn() {
           if (error.message.password === 'Doesnt match') {
             alert('Incorrect email or password');
           } else {
-            alert(JSON.stringify(error.message));
+            alert(error.message);
           }
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -88,7 +96,9 @@ function SignIn() {
                 required
               />
 
-              <button type='submit'>Sign In</button>
+              <button type='submit' className={isLoading ? style.loading : ''}>
+                {isLoading ? '' : 'Sign In'}
+              </button>
             </form>
 
             <label>

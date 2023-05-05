@@ -12,6 +12,7 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -23,14 +24,19 @@ function SignUp() {
     const hasErrors = Object.values(formErrors).some((error) => error !== '');
 
     if (!hasErrors) {
+      setIsLoading(true);
+
       try {
-        const response = await fetch('https://mytrip-backend-pc4j.onrender.com/user/sign-up', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, email, password, gender }),
-        });
+        const response = await fetch(
+          'https://mytrip-backend-pc4j.onrender.com/user/sign-up',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, password, gender }),
+          }
+        );
 
         if (response.ok) {
           navigate('../after-sign-up');
@@ -40,6 +46,8 @@ function SignUp() {
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -115,7 +123,9 @@ function SignUp() {
             <input type='checkbox' id='terms' name='terms' required />
             <label htmlFor='terms'>Agree to the terms & condition</label>
 
-            <button type='submit'>Sign Up</button>
+            <button type='submit' className={isLoading ? style.loading : ''}>
+              {isLoading ? '' : 'Sign Up'}
+            </button>
           </form>
 
           <label>
