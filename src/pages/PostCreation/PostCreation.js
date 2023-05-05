@@ -16,10 +16,6 @@ function PostCreation({ showPopup, onClose }) {
     }
   };
 
-  if (!showPopup) {
-    return null;
-  }
-
   return (
     <div className='create-post-tab'>
       <span className='close-btn' onClick={handleClose}>

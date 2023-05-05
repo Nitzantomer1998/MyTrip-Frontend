@@ -6,7 +6,7 @@ function Sidebar() {
   return (
     <div className='sidebar-container'>
       <div className='sidebar'>
-        <div className='logo'>Profile</div>
+        <div className='logo'>MyTrip</div>
         <div className='menu'>
           <ul>
             <li>Home</li>
