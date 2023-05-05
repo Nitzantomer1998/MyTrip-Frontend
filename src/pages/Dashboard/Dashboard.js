@@ -8,8 +8,8 @@ function Dashboard() {
   return (
     <div>
       <div className='app-container'>
-        <Sidebar />
         <Navbar />
+        <Sidebar />
       </div>
     </div>
   );

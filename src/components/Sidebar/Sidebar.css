@@ -36,17 +36,10 @@ body {
   cursor: pointer;
 }
 
-/* Menu */
-.menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
 .menu ul li {
   cursor: pointer;
   font-size: 1.125em;
-  margin: 0 0 0.625em 0;
+  margin: 0 0 5.625em 0;
   display: flex;
   align-items: center;
 }
@@ -64,7 +57,16 @@ body {
 /* Logout button */
 .log-out {
   font-size: 1.125em;
-  font-weight: bold;
   margin: 1.25em 0 0 0;
   cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0 0 1.25em 0;
+  cursor: pointer;
+  position: relative;
+  margin-top: 15px;
 }
