@@ -1,4 +1,10 @@
 .navbar-container {
+  position: fixed;
+  top: 0;
+  left: 15em;
+  right: 0;
+  height: 3.5em;
+  background-color: #f5f5f5;
   display: flex;
   justify-content: center;
   align-items: center;

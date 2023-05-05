@@ -1,4 +1,4 @@
-import style from './SignUp.module.css';
+import './SignUp.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validateSignUpForm } from '../../validation/userValidation.js';
@@ -12,6 +12,7 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -23,14 +24,19 @@ function SignUp() {
     const hasErrors = Object.values(formErrors).some((error) => error !== '');
 
     if (!hasErrors) {
+      setIsLoading(true);
+
       try {
-        const response = await fetch('https://mytrip-backend-pc4j.onrender.com/user/sign-up', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, email, password, gender }),
-        });
+        const response = await fetch(
+          'https://mytrip-backend-pc4j.onrender.com/user/sign-up',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, password, gender }),
+          }
+        );
 
         if (response.ok) {
           navigate('../after-sign-up');
@@ -40,16 +46,18 @@ function SignUp() {
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
 
   return (
-    <div className={style.signUpContainer}>
-      <div className={style.backgroundImage}></div>
-      <div className={style.rectangleContainer}>
-        <div className={style.formContainer}>
-          <div className={style.logo}>MyTrip</div>
+    <div className='signUpContainer'>
+      <div className='backgroundImage'></div>
+      <div className='rectangleContainer'>
+        <div className='formContainer'>
+          <div className='logo'>MyTrip</div>
 
           <p>
             Social Network for the Traveler
@@ -115,14 +123,16 @@ function SignUp() {
             <input type='checkbox' id='terms' name='terms' required />
             <label htmlFor='terms'>Agree to the terms & condition</label>
 
-            <button type='submit'>Sign Up</button>
+            <button type='submit' className={isLoading ? 'loading' : ''}>
+              {isLoading ? '' : 'Sign Up'}
+            </button>
           </form>
 
           <label>
             Already have an account? <a href='/sign-in'>Sign in!</a>
           </label>
         </div>
-        <div className={style.imageContainer}>
+        <div className='imageContainer'>
           <img src={SignUpImage} alt='Image presenting traveling' />
         </div>
       </div>
