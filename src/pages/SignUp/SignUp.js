@@ -42,7 +42,7 @@ function SignUp() {
           navigate('../after-sign-up');
         } else {
           const error = await response.json();
-          alert(error.message);
+          setErrorMessage(error.message);
         }
       } catch (error) {
         console.error(error);

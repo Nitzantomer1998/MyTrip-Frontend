@@ -40,11 +40,7 @@ function SignIn() {
           navigate('../after-sign-up');
         } else {
           const error = await response.json();
-          if (error.message.password === 'Doesnt match') {
-            alert('Incorrect email or password');
-          } else {
-            alert(error.message);
-          }
+          setErrorMessage(error.message);
         }
       } catch (error) {
         console.error(error);
