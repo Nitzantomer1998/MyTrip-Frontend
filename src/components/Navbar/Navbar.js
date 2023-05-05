@@ -10,7 +10,7 @@ function Navbar() {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [users, setUsers] = useState([]);
 
-  const API_URL = 'https://mytrip-backend-pc4j.onrender.com/user/search-in';
+  const API_URL = 'http://localhost:10000/user/search';
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -79,8 +79,15 @@ function Navbar() {
               <p>{filteredUsers.length} result(s) found(s)</p>
             </div>
             <div className='filtered-user-tabs'>
+              {/* {filteredUsers.map((user, index) => (
+                <div key={index} className='user-tab'>
+                  <img src={user.profilePicture} alt="Profile" className="profile-picture" />
+                  {searchBy === 'username' ? user.username : user.location}
+                </div>
+              ))} */}
               {filteredUsers.map((user, index) => (
                 <div key={index} className='user-tab'>
+                  <div className='profile-placeholder'></div>
                   {searchBy === 'username' ? user.username : user.location}
                 </div>
               ))}

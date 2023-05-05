@@ -50,7 +50,7 @@
 }
 
 .result-count {
-  margin:10px;
+  margin: 10px;
   text-align: center;
 }
 
@@ -88,4 +88,43 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+/* .user-tab {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.profile-picture {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+} */
+
+.user-tab {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.profile-placeholder {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 10px;
 }
