@@ -1,4 +1,4 @@
-import style from './SignIn.module.css';
+import './SignIn.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validateSignInForm } from '../../validation/userValidation.js';
@@ -10,6 +10,7 @@ function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -21,14 +22,19 @@ function SignIn() {
     const hasErrors = Object.values(formErrors).some((error) => error !== '');
 
     if (!hasErrors) {
+      setIsLoading(true);
+
       try {
-        const response = await fetch('https://mytrip-backend-pc4j.onrender.com/user/sign-in', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-        });
+        const response = await fetch(
+          'https://mytrip-backend-pc4j.onrender.com/user/sign-in',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
+          }
+        );
 
         if (response.ok) {
           navigate('../after-sign-up');
@@ -37,22 +43,24 @@ function SignIn() {
           if (error.message.password === 'Doesnt match') {
             alert('Incorrect email or password');
           } else {
-            alert(JSON.stringify(error.message));
+            alert(error.message);
           }
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
 
   return (
     <div>
-      <div className={style.signInContainer}>
-        <div className={style.backgroundImage}></div>
-        <div className={style.rectangleContainer}>
-          <div className={style.formContainer}>
-            <div className={style.logo}>MyTrip</div>
+      <div className='signInContainer'>
+        <div className='backgroundImage'></div>
+        <div className='rectangleContainer'>
+          <div className='formContainer'>
+            <div className='logo'>MyTrip</div>
 
             <p>
               Social Network for the Traveler
@@ -88,14 +96,16 @@ function SignIn() {
                 required
               />
 
-              <button type='submit'>Sign In</button>
+              <button type='submit' className={isLoading ? 'loading' : ''}>
+                {isLoading ? '' : 'Sign In'}
+              </button>
             </form>
 
             <label>
               Dont have an account? <a href='/sign-up'>Sign Up!</a>
             </label>
           </div>
-          <div className={style.imageContainer}>
+          <div className='imageContainer'>
             <img src={SignUpImage} alt='Image presenting traveling' />
           </div>
         </div>
