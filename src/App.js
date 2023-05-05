@@ -5,6 +5,7 @@ import SignIn from './pages/SignIn/SignIn.js';
 import SignUp from './pages/SignUp/SignUp.js';
 import Dashboard from './pages/Dashboard/Dashboard.js';
 import AfterSignUp from './pages/AfterSignUp/AfterSignUp.js';
+import Profile from './pages/Profile/Profile.js';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/sign-up' element={<SignUp />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/after-sign-up' element={<AfterSignUp />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
       </div>
     </>

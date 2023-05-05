@@ -1,0 +1,144 @@
+.profile-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(84, 82, 82);
+  position: fixed;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 7em;
+  padding: 1em 1em;
+  box-sizing: border-box;
+  background-color: rgb(83, 97, 116);
+}
+
+.profile-pic {
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin-right: 20px;
+}
+
+.username {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  margin-right: 30em;
+}
+
+.profile-stats {
+  display: flex;
+  width: 30%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  margin-left: 20em;
+}
+
+.profile-stats .stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.profile-stats .stats .stat-label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 1em 1em;
+  box-sizing: border-box;
+  background-color: rgb(64, 90, 94);
+}
+
+.content-options {
+  display: flex;
+  width: 100%;
+  height: 3em;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  height: 2em;
+  background-color: rgb(64, 90, 94);
+  border: none;
+  border-radius: 0.5em;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(83, 97, 116);
+}
+
+.about-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 1em 1em;
+  box-sizing: border-box;
+  background-color: rgb(64, 90, 94);
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+  width: 100%;
+  height: 100%;
+  padding: 1em 1em;
+  box-sizing: border-box;
+  background-color: rgb(64, 90, 94);
+}
+
+.post-grid .post {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 0.5em;
+}
+
+.post-grid .post .post-img {
+  width: 100%;
+  height: 10em;
+  background-color: #ccc;
+  border-radius: 0.5em 0.5em 0 0;
+}
+
+.post-grid .post .post-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 1em 1em;
+  box-sizing: border-box;
+}
+
+.post-grid .post .post-content .post-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+}
