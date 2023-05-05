@@ -7,6 +7,8 @@ import Dashboard from './pages/Dashboard/Dashboard.js';
 import AfterSignUp from './pages/AfterSignUp/AfterSignUp.js';
 import Home from './pages/HomePage/Home';
 import PostCreation from './pages/PostCreation/PostCreation';
+import Profile from './pages/Profile/Profile.js';
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
           <Route path='/after-sign-up' element={<AfterSignUp />} />
           <Route path='/home' element={<Home />} />
           <Route path='/post-creation' element={<PostCreation />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
       </div>
     </>
