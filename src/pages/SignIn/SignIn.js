@@ -1,4 +1,4 @@
-import style from './SignIn.module.css';
+import './SignIn.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validateSignInForm } from '../../validation/userValidation.js';
@@ -56,11 +56,11 @@ function SignIn() {
 
   return (
     <div>
-      <div className={style.signInContainer}>
-        <div className={style.backgroundImage}></div>
-        <div className={style.rectangleContainer}>
-          <div className={style.formContainer}>
-            <div className={style.logo}>MyTrip</div>
+      <div className='signInContainer'>
+        <div className='backgroundImage'></div>
+        <div className='rectangleContainer'>
+          <div className='formContainer'>
+            <div className='logo'>MyTrip</div>
 
             <p>
               Social Network for the Traveler
@@ -96,7 +96,7 @@ function SignIn() {
                 required
               />
 
-              <button type='submit' className={isLoading ? style.loading : ''}>
+              <button type='submit' className={isLoading ? 'loading' : ''}>
                 {isLoading ? '' : 'Sign In'}
               </button>
             </form>
@@ -105,7 +105,7 @@ function SignIn() {
               Dont have an account? <a href='/sign-up'>Sign Up!</a>
             </label>
           </div>
-          <div className={style.imageContainer}>
+          <div className='imageContainer'>
             <img src={SignUpImage} alt='Image presenting traveling' />
           </div>
         </div>
