@@ -1,8 +1,7 @@
-/* Navbar.css */
 .navbar-container {
   position: fixed;
   top: 0;
-  left: 12.5em;
+  left: 15em;
   right: 0;
   height: 3.5em;
   background-color: #f5f5f5;
