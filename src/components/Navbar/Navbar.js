@@ -10,7 +10,7 @@ function Navbar() {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [users, setUsers] = useState([]);
 
-  const API_URL = 'http://localhost:10000/user/search';
+  const API_URL = 'https://mytrip-backend-pc4j.onrender.com/user/search-in';
 
   useEffect(() => {
     const fetchUsers = async () => {
