@@ -1,39 +1,85 @@
-/* Navbar.css */
 .navbar-container {
-  position: fixed;
-  top: 0;
-  left: 12.5em;
-  right: 0;
-  height: 3.5em;
-  background-color: #f5f5f5;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 0 1em;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 20px 0;
 }
 
 .navbar-search {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  height: 2.5em;
-  width: 50%;
-  max-width: 500px;
-  padding: 0.5em;
-}
-
-.navbar-search-icon {
-  font-size: 1.25em;
-  margin-right: 0.5em;
-  color: #ccc;
 }
 
 .navbar-search-input {
-  flex: 1;
-  font-size: 1em;
-  border: none;
-  outline: none;
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.navbar-select {
+  width: 150px;
+  padding: 10px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.user-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.user-tab:hover {
+  background-color: #ddd;
+}
+
+.result-count {
+  margin:10px;
+  text-align: center;
+}
+
+.search-input-container {
+  display: flex;
+  align-items: center;
+}
+
+.filtered-user-tabs-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-left: -80px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 320px;
+}
+
+.filtered-user-tabs {
+  display: flex;
+  flex-direction: column;
+  max-height: 135px;
+  overflow-y: scroll;
+  overflow: scroll;
+  width: 100%;
+}
+
+.search-results-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
