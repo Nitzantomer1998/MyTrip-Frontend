@@ -1,8 +1,10 @@
 import './SignIn.css';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { validateSignInForm } from '../../validation/userValidation.js';
 import SignUpImage from '../../images/SignUpIn.jpg';
+import PropTypes from 'prop-types';
+import { UserContext } from '../../providers/UserProvider';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -11,6 +13,7 @@ function SignIn() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const context = useContext(UserContext);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -26,7 +29,7 @@ function SignIn() {
 
       try {
         const response = await fetch(
-          'https://mytrip-backend-pc4j.onrender.com/user/sign-in',
+          'http://localhost:10000/api/user/sign-in',
           {
             method: 'POST',
             headers: {
@@ -35,8 +38,14 @@ function SignIn() {
             body: JSON.stringify({ email, password }),
           }
         );
-
+        const data = await response.json();
         if (response.ok) {
+          localStorage.setItem('token', data.token);
+          context.setUserDetails({
+            userName: data.user.username,
+            email: data.user.email,
+            token: data.token,
+          });
           navigate('../after-sign-up');
         } else {
           const error = await response.json();
