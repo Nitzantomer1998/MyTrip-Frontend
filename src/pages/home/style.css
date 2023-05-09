@@ -9,7 +9,7 @@
 .home_middle {
   margin-top: 75px;
   position: absolute;
-  left: 50%;
+  left: 60%;
   transform: translateX(-50%);
 }
 @media (max-width: 1175px) {

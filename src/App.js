@@ -13,6 +13,7 @@ import axios from 'axios';
 import { postsReducer } from './functions/reducers';
 import Friends from './pages/friends';
 import LeftHome from './components/home/left/index';
+import About from './pages/about/index';
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -51,6 +52,7 @@ function App() {
   };
   return (
     <div>
+      <LeftHome user={user} />
       {visible && (
         <CreatePostPopup
           user={user}
@@ -102,6 +104,13 @@ function App() {
             }
             exact
           />
+
+          <Route
+            path='/about'
+            element={<About setVisible={setVisible} />}
+            exact
+          />
+
           <Route
             path='/'
             element={

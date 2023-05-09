@@ -8,6 +8,7 @@
   background: var(--bg-primary);
   color: white;
   background-color: rgba(70, 70, 103, 1);
+  padding-left: 195px;
 }
 
 .profile_menu {
@@ -250,6 +251,7 @@
   display: grid;
   grid-template-columns: 1fr 1.4fr;
   gap: 10px;
+  left: 12%;
 }
 /*------ppl u may know------*/
 .left_header_grid {

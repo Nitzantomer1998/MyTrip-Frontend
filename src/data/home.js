@@ -20,6 +20,6 @@ export const left = [
   {
     text: 'About Us',
     img: 'ad',
-    path: '/profile',
+    path: '/about',
   },
 ];

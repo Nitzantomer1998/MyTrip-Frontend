@@ -26,7 +26,7 @@ export default function LeftHome({ user }) {
         className={`left_link hover1 ${
           activeLink === 'profile' ? 'active' : ''
         }`}
-        onClick={() => setActiveLink('profile')}
+        // onClick={() => setActiveLink('profile')}
       >
         <img src={user?.picture} alt='' />
         <span>

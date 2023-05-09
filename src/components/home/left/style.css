@@ -3,7 +3,7 @@
   margin-top: 58px;
   max-height: 100vh;
   top: -2px;
-  width: 14vw;
+  width: 18.8vw;
   overflow-y: auto;
   color: var(--color-primary);
   padding: 155px 0;
@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - 58px);
+  height: calc(150vh - 58px);
   background-color: rgba(70, 70, 103, 1);
   color: rgb(255, 255, 255);
 }
@@ -46,6 +46,7 @@
 .logout_site {
   display: fixed;
   font-size: 18px;
-  margin-left: 43px;
+  margin-left: -30px;
   cursor: pointer;
+  margin-top: -50px;
 }
