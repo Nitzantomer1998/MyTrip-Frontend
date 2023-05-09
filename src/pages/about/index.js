@@ -9,11 +9,11 @@ import Header from '../../components/header';
 
 export default function About(getAllPosts) {
   const teamMembers = [
-    { name: 'Nitzan Tomer', image: nitzan },
-    { name: 'Gad Nadjar', image: gad },
-    { name: 'Zaccharie Attias', image: zaccharie },
-    { name: 'Rudy Haddad', image: rudy },
-    { name: 'Guy Shabtay', image: guy },
+    { name: 'Nitzan Tomer', image: nitzan, linkedin: 'https://www.linkedin.com/in/nitzan-tomer/' },
+    { name: 'Gad Nadjar', image: gad, linkedin: 'https://www.linkedin.com/in/gad-nadjar-810028241/' },
+    { name: 'Zaccharie Attias', image: zaccharie, linkedin: 'https://www.linkedin.com/in/zaccharie-attias-883b08250/' },
+    { name: 'Rudy Haddad', image: rudy, linkedin: 'https://www.linkedin.com/in/rudy-haddad-749999189/' },
+    { name: 'Guy Shabtay', image: guy, linkedin: 'https://www.linkedin.com/in/software-engineering-student/' },
   ];
 
   return (
@@ -50,8 +50,8 @@ export default function About(getAllPosts) {
         <div className='team-container'>
           {teamMembers.map((member, index) => (
             <div className='team-member' key={index}>
-              <img src={member.image} alt={member.name} />
-              <h3>{member.name}</h3>
+              <a href = {member.linkedin}><img src={member.image} alt={member.name} />
+              <h3>{member.name}</h3></a>
             </div>
           ))}
         </div>
