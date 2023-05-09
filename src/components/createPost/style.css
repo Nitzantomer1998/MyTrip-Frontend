@@ -31,25 +31,3 @@
   align-items: center;
   padding-left: 10px;
 }
-.create_splitter {
-  height: 1px;
-  width: 95%;
-  background: var(--bg-third);
-  margin: 7px 10px;
-}
-.createPost_body {
-  padding: 0 10px 8px 10px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-.createPost_icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: 600;
-  padding: 7px;
-  color: var(--color-secondary);
-  border-radius: 10px;
-  font-size: 14px;
-}
