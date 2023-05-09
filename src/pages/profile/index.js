@@ -76,15 +76,17 @@ export default function Profile({ getAllPosts }) {
           );
           setPhotos(images.data);
 
-          const saved = await axios.get(
-            `${process.env.REACT_APP_BACKEND_URL}/getAllPostsSaved/${user.id}`,
-            {
-              headers: {
-                Authorization: `Bearer ${user.token}`,
-              },
-            }
-          );
-          setSavedPosts(saved.data);
+          // const saved = await axios.get(
+          //   `${process.env.REACT_APP_BACKEND_URL}/getAllPostsSaved/${user.username}`,
+          //   {
+          //     headers: {
+          //       Authorization: `Bearer ${user.token}`,
+          //     },
+          //   }
+          // );
+          // setSavedPosts(saved.data);
+
+          
         } catch (error) {
           console.log('whats happen ??');
           console.log(error);

@@ -6,7 +6,7 @@ export const left = [
   },
 
   {
-    text: 'Profil',
+    text: 'Profile',
     img: 'marketplace',
     path: '/profile',
   },
@@ -14,7 +14,7 @@ export const left = [
   {
     text: 'Statistics',
     img: 'saved',
-    path: '/profile',
+    path: '/statistics',
   },
 
   {

@@ -14,6 +14,7 @@ import { postsReducer } from './functions/reducers';
 import Friends from './pages/friends';
 import LeftHome from './components/home/left/index';
 import About from './pages/about/index';
+import Statistics from './pages/statistics/index';
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -67,7 +68,7 @@ function App() {
           <Route
             path='/profile'
             element={
-              <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
+              <Profile setVisible={setVisible} />
             }
             exact
           />
@@ -108,6 +109,12 @@ function App() {
           <Route
             path='/about'
             element={<About setVisible={setVisible} />}
+            exact
+          />
+
+          <Route
+            path='/statistics'
+            element={<Statistics setVisible={setVisible} />}
             exact
           />
 
