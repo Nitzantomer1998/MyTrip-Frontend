@@ -29,6 +29,7 @@ header {
   padding: 10px 32px 10px 10px;
   border-radius: 50px;
   cursor: text;
+  width: 230px;
   
 }
 .search input {
