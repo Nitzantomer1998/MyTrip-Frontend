@@ -14,7 +14,12 @@ import Friends from './Friends';
 import Intro from '../../components/intro';
 import { useMediaQuery } from 'react-responsive';
 import CreatePostPopup from '../../components/createPostPopup';
-import LeftHome from '../../components/home/left/LeftLink';
+
+import Saved from './Saved';
+import Liked from './Liked';
+import Recommended from './Recommended';
+import About from './About';
+
 export default function Profile({ getAllPosts }) {
   const [visible, setVisible] = useState(false);
   const { username } = useParams();
@@ -22,6 +27,8 @@ export default function Profile({ getAllPosts }) {
   const { user } = useSelector((state) => ({ ...state }));
   const [photos, setPhotos] = useState({});
   var userName = username === undefined ? user.username : username;
+  const [activeTab, setActiveTab] = useState('about');
+  const [savedPosts, setSavedPosts] = useState([]); // ajout d'une nouvelle variable d'état pour les posts sauvegardés
 
   const [{ loading, error, profile }, dispatch] = useReducer(profileReducer, {
     loading: false,
@@ -30,7 +37,7 @@ export default function Profile({ getAllPosts }) {
   });
   useEffect(() => {
     getProfile();
-  }, [userName]);
+  }, [userName,]);
   useEffect(() => {
     setOthername(profile?.details?.otherName);
   }, [profile]);
@@ -68,7 +75,20 @@ export default function Profile({ getAllPosts }) {
             }
           );
           setPhotos(images.data);
+
+          // const saved = await axios.get(
+          //   `${process.env.REACT_APP_BACKEND_URL}/getAllPostsSaved/${user.username}`,
+          //   {
+          //     headers: {
+          //       Authorization: `Bearer ${user.token}`,
+          //     },
+          //   }
+          // );
+          // setSavedPosts(saved.data);
+
+          
         } catch (error) {
+          console.log('whats happen ??');
           console.log(error);
         }
         dispatch({
@@ -77,6 +97,7 @@ export default function Profile({ getAllPosts }) {
         });
       }
     } catch (error) {
+      console.log('whyyyyyyyyy');
       dispatch({
         type: 'PROFILE_ERROR',
         payload: error.response?.data.message,
@@ -104,7 +125,6 @@ export default function Profile({ getAllPosts }) {
   };
   return (
     <div className='profile'>
-
       {visible && (
         <CreatePostPopup
           user={user}
@@ -114,24 +134,18 @@ export default function Profile({ getAllPosts }) {
           profile
         />
       )}
-      
+
       <Header page='profile' getAllPosts={getAllPosts} />
-      
-      
+
       <div className='profile_top' ref={profileTop}>
         <div className='profile_container'>
-          {/* <Cover
-            cover={profile.cover}
-            visitor={visitor}
-            photos={photos.resources}
-          /> */}
           <ProfielPictureInfos
             profile={profile}
             visitor={visitor}
             photos={photos.resources}
             othername={othername}
           />
-          <ProfileMenu />
+          <ProfileMenu activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </div>
       <div className='profile_bottom'>
@@ -161,13 +175,18 @@ export default function Profile({ getAllPosts }) {
                 )}
                 <GridPosts />
                 <div className='posts'>
-                  {profile.posts && profile.posts.length ? (
-                    profile.posts.map((post) => (
-                      <Post post={post} user={user} key={post._id} profile />
-                    ))
-                  ) : (
-                    <div className='no_posts'>No posts available</div>
-                  )}
+                  {activeTab === 'about' &&
+                  profile.posts &&
+                  profile.posts.length
+                    ? profile.posts.map((post) => (
+                        <Post post={post} user={user} key={post._id} profile />
+                      ))
+                    : activeTab === 'saved' &&
+                      savedPosts.map((post) => (
+                        <Post post={post} user={user} key={post._id} profile />
+                      ))}
+                  {activeTab === 'liked' && <Liked />}
+                  {activeTab === 'recommended' && <Recommended />}
                 </div>
               </div>
             </div>

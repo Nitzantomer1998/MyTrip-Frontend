@@ -179,6 +179,7 @@ export default function Post({ post, user, profile }) {
         <div className="to_right">
           <div className="comments_count">{comments.length} comments</div>
           <div className="share_count">0 share</div>
+          <div className="Location" ><img src="https://img.icons8.com/?size=512&id=59830&format=png" width={20}></img> Location </div>
         </div>
       </div>
       <div className="post_actions">
