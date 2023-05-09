@@ -24,6 +24,5 @@
     "react/react-in-jsx-scope": "off",
     "max-len": "off",
     "operator-linebreak": "off",
-    "linebreak-style": "off"
   }
 }
