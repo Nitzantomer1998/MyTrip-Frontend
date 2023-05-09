@@ -11,6 +11,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 17px 5px 15px;
+  height: 90px;
 }
 .createPost_header img {
   width: 40px;
