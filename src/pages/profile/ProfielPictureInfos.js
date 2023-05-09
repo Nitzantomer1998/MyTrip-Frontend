@@ -58,7 +58,7 @@ export default function ProfielPictureInfos({
         <div className='profile_w_right'>
           <div className='gray_btn'>
             <i className='edit_icon'></i>
-            <span>Edit profile</span>
+            <span>Edit Profile</span>
           </div>
         </div>
       )}

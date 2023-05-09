@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 html {
   overflow-y: scroll;
@@ -88,6 +88,7 @@ a {
 .blue_btn,
 .gray_btn span {
   transform: translateY(-1px);
+  white-space: nowrap;
 }
 /*----Buttons----*/
 .blur {
