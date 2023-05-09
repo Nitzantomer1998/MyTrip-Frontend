@@ -130,12 +130,8 @@ export default function CreateComment({ user, postId, setComments, setCount }) {
           >
             <i className="camera_icon"></i>
           </div>
-          <div className="comment_circle_icon hover2">
-            <i className="gif_icon"></i>
-          </div>
-          <div className="comment_circle_icon hover2">
-            <i className="sticker_icon"></i>
-          </div>
+          
+          
         </div>
       </div>
       {commentImage && (
