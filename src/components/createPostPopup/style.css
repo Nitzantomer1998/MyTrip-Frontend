@@ -186,6 +186,7 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
+  color: black;
 }
 .small_white_circle {
   width: 30px;
@@ -231,6 +232,7 @@
 .mobile_text {
   font-size: 12px;
   font-weight: 600;
+  color: black;
 }
 .addphone_btn {
   background: var(--bg-third);
@@ -241,6 +243,7 @@
   position: absolute;
   right: 10px;
   cursor: pointer;
+  color: black;
 }
 .p0 {
   padding: 0;
