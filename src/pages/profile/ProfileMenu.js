@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 
+
 export default function ProfileMenu({ activeTab, setActiveTab }) {
   const handleClick = (tab) => {
     setActiveTab(tab);
-  };
-
+  }
+    
   return (
     <div className='profile_menu_wrap'>
       <div className='profile_menu'>
