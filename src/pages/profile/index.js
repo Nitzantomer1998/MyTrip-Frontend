@@ -37,7 +37,7 @@ export default function Profile({ getAllPosts }) {
   });
   useEffect(() => {
     getProfile();
-  }, [userName,]);
+  }, [userName]);
   useEffect(() => {
     setOthername(profile?.details?.otherName);
   }, [profile]);
@@ -85,8 +85,6 @@ export default function Profile({ getAllPosts }) {
           //   }
           // );
           // setSavedPosts(saved.data);
-
-          
         } catch (error) {
           console.log('whats happen ??');
           console.log(error);

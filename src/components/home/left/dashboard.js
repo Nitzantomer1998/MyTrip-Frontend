@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 export default function dashboard({ user }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-z
+  z;
 
   const [visible, setVisible] = useState(false);
   return (

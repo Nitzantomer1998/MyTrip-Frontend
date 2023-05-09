@@ -1,9 +1,6 @@
 import './style.css';
 import { Link } from 'react-router-dom';
-import {
-  Logo,
-  Search,
-} from '../../svg';
+import { Logo, Search } from '../../svg';
 import { useSelector } from 'react-redux';
 import SearchMenu from './SearchMenu';
 import { useRef, useState } from 'react';
@@ -52,7 +49,6 @@ export default function Header({ page, getAllPosts }) {
           token={user.token}
         />
       )}
-      
     </header>
   );
 }

@@ -4,7 +4,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   background-color: rgba(46, 46, 71, 1);
-
 }
 .home_middle {
   margin-top: 75px;

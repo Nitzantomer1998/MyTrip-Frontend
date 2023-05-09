@@ -67,9 +67,7 @@ function App() {
         <Route element={<LoggedInRoutes />}>
           <Route
             path='/profile'
-            element={
-              <Profile setVisible={setVisible} />
-            }
+            element={<Profile setVisible={setVisible} />}
             exact
           />
           <Route

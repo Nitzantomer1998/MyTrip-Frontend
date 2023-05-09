@@ -1,43 +1,43 @@
-import "./style.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Cookies from "js-cookie";
-import { useState } from "react";
-import SearchAccount from "./SearchAccount";
-import SendEmail from "./SendEmail";
-import CodeVerification from "./CodeVerification";
-import ChangePassword from "./ChangePassword";
+import './style.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
+import { useState } from 'react';
+import SearchAccount from './SearchAccount';
+import SendEmail from './SendEmail';
+import CodeVerification from './CodeVerification';
+import ChangePassword from './ChangePassword';
 export default function Reset() {
   const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [visible, setVisible] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
-  const [password, setPassword] = useState("");
-  const [conf_password, setConf_password] = useState("");
-  const [error, setError] = useState("");
-  const [userInfos, setUserInfos] = useState("");
+  const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [conf_password, setConf_password] = useState('');
+  const [error, setError] = useState('');
+  const [userInfos, setUserInfos] = useState('');
   const logout = () => {
-    Cookies.set("user", "");
+    Cookies.set('user', '');
     dispatch({
-      type: "LOGOUT",
+      type: 'LOGOUT',
     });
-    navigate("/login");
+    navigate('/login');
   };
   console.log(userInfos);
   return (
-    <div className="reset">
-      <div className="reset_header">
-        <img src="../../../icons/MyTrip_logo" alt="" />
+    <div className='reset'>
+      <div className='reset_header'>
+        <img src='../../../icons/MyTrip_logo' alt='' />
         {user ? (
-          <div className="right_reset">
-            <Link to="/profile">
-              <img src={user.picture} alt="" />
+          <div className='right_reset'>
+            <Link to='/profile'>
+              <img src={user.picture} alt='' />
             </Link>
             <button
-              className="blue_btn"
+              className='blue_btn'
               onClick={() => {
                 logout();
               }}
@@ -46,12 +46,12 @@ export default function Reset() {
             </button>
           </div>
         ) : (
-          <Link to="/login" className="right_reset">
-            <button className="blue_btn">Login</button>
+          <Link to='/login' className='right_reset'>
+            <button className='blue_btn'>Login</button>
           </Link>
         )}
       </div>
-      <div className="reset_wrap">
+      <div className='reset_wrap'>
         {visible === 0 && (
           <SearchAccount
             email={email}
