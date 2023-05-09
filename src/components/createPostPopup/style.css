@@ -1,7 +1,7 @@
 .postBox {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 42.2%;
+  left: 59.5%;
   transform: translate(-50%, -50%);
   background: var(--bg-primary);
   box-shadow: 0 12px 28px 0 var(--shadow-1), 0 2px 4px 0 var(--shadow-2),
@@ -53,6 +53,7 @@
   padding: 3px 8px 4px 8px;
   border-radius: 7px;
   background: var(--bg-third);
+  color: black;
   cursor: pointer;
 }
 .box_privacy span {
@@ -120,6 +121,7 @@
   width: 50%;
   font-weight: 600;
   font-size: 14px;
+  color: black;
 }
 .post_header_right {
   width: 35px;
