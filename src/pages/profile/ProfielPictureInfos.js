@@ -80,7 +80,7 @@ export default function ProfielPictureInfos({
               : `${profile?.followers.length}`}
           </div>
         )}
-        <Link to='/' className='hover1'>
+        <Link to='/friends/all' className='hover1'>
           Followers
         </Link>
       </div>

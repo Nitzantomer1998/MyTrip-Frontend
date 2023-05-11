@@ -86,7 +86,6 @@ export default function Profile({ getAllPosts }) {
           // );
           // setSavedPosts(saved.data);
         } catch (error) {
-          console.log('whats happen ??');
           console.log(error);
         }
         dispatch({
@@ -95,7 +94,6 @@ export default function Profile({ getAllPosts }) {
         });
       }
     } catch (error) {
-      console.log('whyyyyyyyyy');
       dispatch({
         type: 'PROFILE_ERROR',
         payload: error.response?.data.message,

@@ -2,29 +2,35 @@ import { useEffect, useReducer } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import Header from '../../components/header';
-import { friendspage } from '../../functions/reducers';
-import { getFriendsPageInfos } from '../../functions/user';
+import { followingpage } from '../../functions/reducers';
+import { getFollowingPageInfos } from '../../functions/user';
+import { followerspage } from '../../functions/reducers';
+import { getFollowersPageInfos } from '../../functions/user';
+
 import Card from './Card';
 import './style.css';
+
 export default function Friends() {
   const { user } = useSelector((state) => ({ ...state }));
   const { type } = useParams();
 
-  const [{ loading, error, data }, dispatch] = useReducer(friendspage, {
+  const [{ loading, error, data }, dispatch] = useReducer(followingpage, {
     loading: false,
     data: {},
     error: '',
   });
+
   useEffect(() => {
     getData();
   }, []);
+
   const getData = async () => {
-    dispatch({ type: 'FRIENDS_REQUEST' });
-    const data = await getFriendsPageInfos(user.token);
-    if (data.status === 'ok') {
-      dispatch({ type: 'FRIENDS_SUCCESS', payload: data.data });
+    dispatch({ type: 'FOLLOWING_REQUEST' });
+    const responseData = await getFollowingPageInfos(user.token);
+    if (responseData.status === 'ok') {
+      dispatch({ type: 'FOLLOWING_SUCCESS', payload: responseData.data });
     } else {
-      dispatch({ type: 'FRIENDS_ERROR', payload: data.data });
+      dispatch({ type: 'FOLLOWING_ERROR', payload: responseData.data });
     }
   };
 
@@ -48,6 +54,30 @@ export default function Friends() {
               </div>
             </div>
           )}
+          {(type === undefined || type === 'followers') && (
+            <div className='friends_right_wrap'>
+              <div className='friends_left_header'>
+                <h3>Followers</h3>
+                {type === undefined && (
+                  <Link to='/friends/followers' className='see_link hover3'>
+                    See all
+                  </Link>
+                )}
+              </div>
+              <div className='flex_wrap'>
+                {data.followers &&
+                  data.followers.map((user) => (
+                    <Card
+                      userr={user}
+                      key={user._id}
+                      type='follower'
+                      getData={getData}
+                    />
+                  ))}
+              </div>
+            </div>
+          )}
+
           {(type === undefined || type === 'all') && (
             <div className='friends_right_wrap'>
               <div className='friends_left_header'>
@@ -59,12 +89,12 @@ export default function Friends() {
                 )}
               </div>
               <div className='flex_wrap'>
-                {data.friends &&
-                  data.friends.map((user) => (
+                {data.following &&
+                  data.following.map((user) => (
                     <Card
                       userr={user}
                       key={user._id}
-                      type='friends'
+                      type='following'
                       getData={getData}
                     />
                   ))}
