@@ -10,7 +10,6 @@ import ProfileMenu from './ProfileMenu';
 import CreatePost from '../../components/createPost';
 import GridPosts from './GridPosts';
 import Post from '../../components/post';
-import Friends from './Friends';
 import Intro from '../../components/intro';
 import { useMediaQuery } from 'react-responsive';
 import CreatePostPopup from '../../components/createPostPopup';
@@ -18,7 +17,6 @@ import CreatePostPopup from '../../components/createPostPopup';
 import Saved from './Saved';
 import Liked from './Liked';
 import Recommended from './Recommended';
-import About from './About';
 
 export default function Profile({ getAllPosts }) {
   const [visible, setVisible] = useState(false);
@@ -163,7 +161,6 @@ export default function Profile({ getAllPosts }) {
                   visitor={visitor}
                   setOthername={setOthername}
                 />
-                <Friends friends={profile.friends} />
               </div>
               <div className='profile_right'>
                 {!visitor && (

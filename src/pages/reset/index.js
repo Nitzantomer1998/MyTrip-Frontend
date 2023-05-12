@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
-import SearchAccount from './SearchAccount';
-import SendEmail from './SendEmail';
-import CodeVerification from './CodeVerification';
+// import SearchAccount from './SearchAccount';
+// import SendEmail from './SendEmail';
+// import CodeVerification from './CodeVerification';
 import ChangePassword from './ChangePassword';
 export default function Reset() {
   const { user } = useSelector((state) => ({ ...state }));
@@ -13,8 +13,8 @@ export default function Reset() {
   const navigate = useNavigate();
   const [visible, setVisible] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [code, setCode] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [code, setCode] = useState('');
   const [password, setPassword] = useState('');
   const [conf_password, setConf_password] = useState('');
   const [error, setError] = useState('');
@@ -52,7 +52,7 @@ export default function Reset() {
         )}
       </div>
       <div className='reset_wrap'>
-        {visible === 0 && (
+        {/* {visible === 0 && (
           <SearchAccount
             email={email}
             setEmail={setEmail}
@@ -62,8 +62,8 @@ export default function Reset() {
             setUserInfos={setUserInfos}
             setVisible={setVisible}
           />
-        )}
-        {visible === 1 && userInfos && (
+        )} */}
+        {/* {visible === 1 && userInfos && (
           <SendEmail
             email={email}
             userInfos={userInfos}
@@ -73,8 +73,8 @@ export default function Reset() {
             setUserInfos={setUserInfos}
             setVisible={setVisible}
           />
-        )}
-        {visible === 2 && (
+        )} */}
+        {/* {visible === 2 && (
           <CodeVerification
             user={user}
             code={code}
@@ -85,7 +85,7 @@ export default function Reset() {
             setVisible={setVisible}
             userInfos={userInfos}
           />
-        )}
+        )} */}
         {visible === 3 && (
           <ChangePassword
             password={password}
