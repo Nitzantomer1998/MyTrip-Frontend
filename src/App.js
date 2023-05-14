@@ -15,7 +15,8 @@ import Friends from './pages/friends';
 import LeftHome from './components/home/left/index';
 import About from './pages/about/index';
 import Statistics from './pages/statistics/index';
-
+import EditProfile from './pages/profile/EditProfile';
+import { ChangePassword } from './pages/reset/ChangePassword';
 function App() {
   const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => ({ ...state }));
@@ -113,6 +114,12 @@ function App() {
           <Route
             path='/statistics'
             element={<Statistics setVisible={setVisible} />}
+            exact
+          />
+
+          <Route
+            path='/editprofile'
+            element ={<EditProfile setVisible={setVisible}/> }
             exact
           />
 
