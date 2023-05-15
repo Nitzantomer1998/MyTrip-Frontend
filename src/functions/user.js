@@ -272,4 +272,3 @@ export const getFollowersPageInfos = async (token) => {
     return error.response.data.message;
   }
 };
-
