@@ -347,6 +347,16 @@
   object-fit: cover;
 }
 
+.shared_by {
+  font-size: 14px; /* Taille de la police */
+  color: #333; /* Couleur du texte */
+  background-color: #f8f8f8; /* Couleur d'arrière-plan */
+  padding: 10px; /* Espace intérieur autour du texte */
+  margin-bottom: 10px; /* Espace extérieur en dessous de l'élément */
+  border-radius: 5px; /* Coins arrondis */
+  border: 1px solid #ddd; /* Bordure autour de l'élément */
+}
+
 /*-----create comment-----*/
 .comments_wrap {
   padding: 10px 15px;

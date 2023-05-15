@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 export const createPost = async (
   type,
   background,
@@ -23,7 +23,7 @@ export const createPost = async (
         },
       }
     );
-    return { status: "ok", data };
+    return { status: 'ok', data };
   } catch (error) {
     return error.response.data.message;
   }
@@ -42,7 +42,7 @@ export const reactPost = async (postId, react, token) => {
         },
       }
     );
-    return "ok";
+    return 'ok';
   } catch (error) {
     return error.response.data.message;
   }
@@ -113,6 +113,57 @@ export const deletePost = async (postId, token) => {
       }
     );
     return data;
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
+
+export const sharePost = async (postId, userId, token) => {
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/sharePost/${postId}/${userId}`,
+      {
+        post: postId,
+        userId: userId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return data.post;
+  } catch (error) {
+    return error; // Return the complete error
+  }
+};
+
+export const editPost = async (
+  postId,
+  type,
+  background,
+  text,
+  images,
+  user,
+  token
+) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/editPost/${postId}`,
+      {
+        type,
+        background,
+        text,
+        images,
+        user,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return { status: 'ok', data };
   } catch (error) {
     return error.response.data.message;
   }

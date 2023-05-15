@@ -74,15 +74,15 @@ export default function Profile({ getAllPosts }) {
           );
           setPhotos(images.data);
 
-          // const saved = await axios.get(
-          //   `${process.env.REACT_APP_BACKEND_URL}/getAllPostsSaved/${user.username}`,
-          //   {
-          //     headers: {
-          //       Authorization: `Bearer ${user.token}`,
-          //     },
-          //   }
-          // );
-          // setSavedPosts(saved.data);
+          const saved = await axios.get(
+            `${process.env.REACT_APP_BACKEND_URL}/getAllPostsSaved/${user.username}`,
+            {
+              headers: {
+                Authorization: `Bearer ${user.token}`,
+              },
+            }
+          );
+          setSavedPosts(saved.data);
         } catch (error) {
           console.log(error);
         }
@@ -139,7 +139,12 @@ export default function Profile({ getAllPosts }) {
             photos={photos.resources}
             othername={othername}
           />
-          <ProfileMenu activeTab={activeTab} setActiveTab={setActiveTab} />
+          <ProfileMenu
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            savedPosts={savedPosts}
+            user={user}
+          />
         </div>
       </div>
       <div className='profile_bottom'>

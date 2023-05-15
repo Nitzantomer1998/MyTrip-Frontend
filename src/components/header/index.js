@@ -37,7 +37,7 @@ export default function Header({ page, getAllPosts }) {
           <Search color={color} />
           <input
             type='text'
-            placeholder='Search MyTrip'
+            placeholder='Search In MyTrip'
             className='hide_input'
           />
         </div>

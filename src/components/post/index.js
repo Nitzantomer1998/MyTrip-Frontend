@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
-import "./style.css";
-import Moment from "react-moment";
-import { Dots, Public } from "../../svg";
-import ReactsPopup from "./ReactsPopup";
-import { useEffect, useRef, useState } from "react";
-import CreateComment from "./CreateComment";
-import PostMenu from "./PostMenu";
-import { comment, getReacts, reactPost } from "../../functions/post";
-import Comment from "./Comment";
+import { Link } from 'react-router-dom';
+import './style.css';
+import Moment from 'react-moment';
+import { Dots, Public } from '../../svg';
+import ReactsPopup from './ReactsPopup';
+import { useEffect, useRef, useState } from 'react';
+import CreateComment from './CreateComment';
+import PostMenu from './PostMenu';
+import { comment, getReacts, reactPost } from '../../functions/post';
+import Comment from './Comment';
+import SharePost from './SharePost';
+
 export default function Post({ post, user, profile }) {
   const [visible, setVisible] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -17,6 +19,7 @@ export default function Post({ post, user, profile }) {
   const [count, setCount] = useState(1);
   const [checkSaved, setCheckSaved] = useState();
   const [comments, setComments] = useState([]);
+
   useEffect(() => {
     getPostReacts();
   }, [post]);
@@ -30,6 +33,14 @@ export default function Post({ post, user, profile }) {
     setCheck(res.check);
     setTotal(res.total);
     setCheckSaved(res.checkSaved);
+  };
+
+  const handleShareSuccess = () => {
+    alert('Post shared successfully!');
+  };
+
+  const handleShareFailure = () => {
+    alert('Failed to share post!');
   };
 
   const reactHandler = async (type) => {
@@ -63,100 +74,108 @@ export default function Post({ post, user, profile }) {
   const postRef = useRef(null);
   return (
     <div
-      className="post"
-      style={{ width: `${profile && "100%"}` }}
+      className='post'
+      style={{ width: `${profile && '100%'}` }}
       ref={postRef}
     >
-      <div className="post_header">
+      {/* Message de partage */}
+      {post.sharedFrom != null && (
+        <div className='shared_by'>
+          {user.id === post.sharingUser._id
+            ? 'You shared your own post'
+            : `${post.sharingUser.first_name} ${post.sharingUser.last_name} shared the post of ${post.originalUser.first_name} ${post.originalUser.last_name}`}
+        </div>
+      )}
+
+      <div className='post_header'>
         <Link
           to={`/profile/${post.user.username}`}
-          className="post_header_left"
+          className='post_header_left'
         >
-          <img src={post.user.picture} alt="" />
-          <div className="header_col">
-            <div className="post_profile_name">
+          <img src={post.user.picture} alt='' />
+          <div className='header_col'>
+            <div className='post_profile_name'>
               {post.user.first_name} {post.user.last_name}
-              <div className="updated_p">
-                {post.type == "profilePicture" &&
+              <div className='updated_p'>
+                {post.type == 'profilePicture' &&
                   `updated ${
-                    post.user.gender === "male" ? "his" : "her"
+                    post.user.gender === 'male' ? 'his' : 'her'
                   } profile picture`}
-                {post.type == "coverPicture" &&
+                {post.type == 'coverPicture' &&
                   `updated ${
-                    post.user.gender === "male" ? "his" : "her"
+                    post.user.gender === 'male' ? 'his' : 'her'
                   } cover picture`}
               </div>
             </div>
-            <div className="post_profile_privacy_date">
+            <div className='post_profile_privacy_date'>
               <Moment fromNow interval={30}>
                 {post.createdAt}
               </Moment>
-              . <Public color="#828387" />
+              . <Public color='#828387' />
             </div>
           </div>
         </Link>
         <div
-          className="post_header_right hover1"
+          className='post_header_right hover1'
           onClick={() => setShowMenu((prev) => !prev)}
         >
-          <Dots color="#828387" />
+          <Dots color='#828387' />
         </div>
       </div>
       {post.background ? (
         <div
-          className="post_bg"
+          className='post_bg'
           style={{ backgroundImage: `url(${post.background})` }}
         >
-          <div className="post_bg_text">{post.text}</div>
+          <div className='post_bg_text'>{post.text}</div>
         </div>
       ) : post.type === null ? (
         <>
-          <div className="post_text">{post.text}</div>
+          <div className='post_text'>{post.text}</div>
           {post.images && post.images.length && (
             <div
               className={
                 post.images.length === 1
-                  ? "grid_1"
+                  ? 'grid_1'
                   : post.images.length === 2
-                  ? "grid_2"
+                  ? 'grid_2'
                   : post.images.length === 3
-                  ? "grid_3"
+                  ? 'grid_3'
                   : post.images.length === 4
-                  ? "grid_4"
-                  : post.images.length >= 5 && "grid_5"
+                  ? 'grid_4'
+                  : post.images.length >= 5 && 'grid_5'
               }
             >
               {post.images.slice(0, 5).map((image, i) => (
-                <img src={image.url} key={i} alt="" className={`img-${i}`} />
+                <img src={image.url} key={i} alt='' className={`img-${i}`} />
               ))}
               {post.images.length > 5 && (
-                <div className="more-pics-shadow">
+                <div className='more-pics-shadow'>
                   +{post.images.length - 5}
                 </div>
               )}
             </div>
           )}
         </>
-      ) : post.type === "profilePicture" ? (
-        <div className="post_profile_wrap">
-          <div className="post_updated_bg">
-            <img src={post.user.cover} alt="" />
+      ) : post.type === 'profilePicture' ? (
+        <div className='post_profile_wrap'>
+          <div className='post_updated_bg'>
+            <img src={post.user.cover} alt='' />
           </div>
           <img
             src={post.images[0].url}
-            alt=""
-            className="post_updated_picture"
+            alt=''
+            className='post_updated_picture'
           />
         </div>
       ) : (
-        <div className="post_cover_wrap">
-          <img src={post.images[0].url} alt="" />
+        <div className='post_cover_wrap'>
+          <img src={post.images[0].url} alt='' />
         </div>
       )}
-
-      <div className="post_infos">
-        <div className="reacts_count">
-          <div className="reacts_count_imgs">
+      <div className='post_infos'>
+        <div className='reacts_count'>
+          <div className='reacts_count_imgs'>
             {reacts &&
               reacts
                 .sort((a, b) => {
@@ -168,28 +187,34 @@ export default function Post({ post, user, profile }) {
                     react.count > 0 && (
                       <img
                         src={`../../../reacts/${react.react}.svg`}
-                        alt=""
+                        alt=''
                         key={i}
                       />
                     )
                 )}
           </div>
-          <div className="reacts_count_num">{total > 0 && total}</div>
+          <div className='reacts_count_num'>{total > 0 && total}</div>
         </div>
-        <div className="to_right">
-          <div className="comments_count">{comments.length} comments</div>
-          <div className="share_count">0 share</div>
-          <div className="Location" ><img src="https://img.icons8.com/?size=512&id=59830&format=png" width={20}></img> Location </div>
+        <div className='to_right'>
+          <div className='comments_count'>{comments.length} comments</div>
+          <div className='share_count'>0 share</div>
+          <div className='Location'>
+            <img
+              src='https://img.icons8.com/?size=512&id=59830&format=png'
+              width={20}
+            ></img>{' '}
+            Location{' '}
+          </div>
         </div>
       </div>
-      <div className="post_actions">
+      <div className='post_actions'>
         <ReactsPopup
           visible={visible}
           setVisible={setVisible}
           reactHandler={reactHandler}
         />
         <div
-          className="post_action hover1"
+          className='post_action hover1'
           onMouseOver={() => {
             setTimeout(() => {
               setVisible(true);
@@ -200,54 +225,62 @@ export default function Post({ post, user, profile }) {
               setVisible(false);
             }, 500);
           }}
-          onClick={() => reactHandler(check ? check : "like")}
+          onClick={() => reactHandler(check ? check : 'like')}
         >
           {check ? (
             <img
               src={`../../../reacts/${check}.svg`}
-              alt=""
-              className="small_react"
-              style={{ width: "18px" }}
+              alt=''
+              className='small_react'
+              style={{ width: '18px' }}
             />
           ) : (
-            <i className="like_icon"></i>
+            <i className='like_icon'></i>
           )}
           <span
             style={{
               color: `
           
           ${
-            check === "like"
-              ? "#4267b2"
-              : check === "love"
-              ? "#f63459"
-              : check === "haha"
-              ? "#f7b125"
-              : check === "sad"
-              ? "#f7b125"
-              : check === "wow"
-              ? "#f7b125"
-              : check === "angry"
-              ? "#e4605a"
-              : ""
+            check === 'like'
+              ? '#4267b2'
+              : check === 'love'
+              ? '#f63459'
+              : check === 'haha'
+              ? '#f7b125'
+              : check === 'sad'
+              ? '#f7b125'
+              : check === 'wow'
+              ? '#f7b125'
+              : check === 'angry'
+              ? '#e4605a'
+              : ''
           }
           `,
             }}
           >
-            {check ? check : "Like"}
+            {check ? check : 'Like'}
           </span>
         </div>
-        <div className="post_action hover1">
-          <i className="comment_icon"></i>
+        <div className='post_action hover1'>
+          <i className='comment_icon'></i>
           <span>Comment</span>
         </div>
-        <div className="post_action hover1">
-          <i className="share_icon"></i>
-          <span>Share</span>
+        <div className='post_action hover1'>
+          <SharePost
+            post={post}
+            user={user}
+            onSuccess={() => {
+              console.log('test');
+            }}
+            onFailure={() => {
+              console.log('test');
+            }}
+          />
         </div>
       </div>
-      <div className="comments_wrap">
-        <div className="comments_order"></div>
+      <div className='comments_wrap'>
+        <div className='comments_order'></div>
         <CreateComment
           user={user}
           postId={post._id}
@@ -262,7 +295,7 @@ export default function Post({ post, user, profile }) {
             .slice(0, count)
             .map((comment, i) => <Comment comment={comment} key={i} />)}
         {count < comments.length && (
-          <div className="view_comments" onClick={() => showMore()}>
+          <div className='view_comments' onClick={() => showMore()}>
             View more comments
           </div>
         )}
@@ -279,6 +312,7 @@ export default function Post({ post, user, profile }) {
           setCheckSaved={setCheckSaved}
           images={post.images}
           postRef={postRef}
+
         />
       )}
     </div>
