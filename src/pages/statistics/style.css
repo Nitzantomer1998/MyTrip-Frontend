@@ -1,0 +1,35 @@
+.header_page {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+
+.statistics_container {
+  display: flex;
+  justify-content: space-around; /* align horizontal */
+  align-items: center; /* align vertical */
+  height: 100%;
+  margin-left: 550px;
+}
+
+.number_likes {
+  background-color: white;
+  width: 30%;
+  height: 50%;
+}
+
+.number_likes p {
+  color: black;
+  font-size: 40px;
+}
+
+.number_recommends {
+  background-color: white;
+  width: 30%;
+  height: 50%;
+}
+
+.number_recommends p {
+  color: black;
+  font-size: 40px;
+}
