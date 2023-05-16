@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Bio from "./Bio";
+import { useState } from 'react';
+import Bio from './Bio';
 
 export default function Detail({
   img,
@@ -15,17 +15,17 @@ export default function Detail({
   const [show, setShow] = useState(false);
   return (
     <div>
-      <div className="add_details_flex " onClick={() => setShow(true)}>
+      <div className='add_details_flex ' onClick={() => setShow(true)}>
         {value ? (
-          <div className="info_profile ">
-            <img src={`../../../icons/${img}.png`} alt="" />
+          <div className='info_profile '>
+            <img src={`../../../icons/${img}.png`} alt='' />
             {value}
-            <i className="edit_icon"></i>
+            <i className='edit_icon'></i>
           </div>
         ) : (
           <>
-            <i className="rounded_plus_icon"></i>
-            <span className="underline">Add {text}</span>
+            <i className='rounded_plus_icon'></i>
+            <span className='underline'>Add {text}</span>
           </>
         )}
       </div>
