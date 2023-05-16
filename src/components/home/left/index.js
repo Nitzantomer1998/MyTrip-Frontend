@@ -29,9 +29,7 @@ export default function LeftHome({ user }) {
         // onClick={() => setActiveLink('profile')}
       >
         <img src={user?.picture} alt='' />
-        <span>
-          {user?.username}
-        </span>
+        <span>{user?.username}</span>
       </Link>
       {left.slice(0, 4).map((link, i) => (
         <LeftLink
