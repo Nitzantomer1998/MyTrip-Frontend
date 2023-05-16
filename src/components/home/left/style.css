@@ -1,0 +1,52 @@
+.left_home {
+  position: fixed;
+  margin-top: 58px;
+  max-height: 100vh;
+  top: -2px;
+  width: 18.8vw;
+  overflow-y: auto;
+  color: var(--color-primary);
+  padding: 155px 0;
+  padding-bottom: 5rem;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(150vh - 58px);
+  background-color: rgba(70, 70, 103, 1);
+  color: rgb(255, 255, 255);
+}
+
+.hover1:hover {
+  background-color: rgba(46, 46, 71, 1);
+}
+
+.left_link.active {
+  background-color: rgba(46, 46, 71, 1) !important;
+}
+
+.left_link {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.left_link img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 11px;
+  vertical-align: -0.25em;
+}
+
+.logout_site {
+  display: fixed;
+  font-size: 18px;
+  margin-left: -30px;
+  cursor: pointer;
+  margin-top: -50px;
+}
