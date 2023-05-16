@@ -15,9 +15,7 @@ export default function dashboard({ user }) {
     <div className='left_home scrollbar'>
       <Link to='/profile' className='left_link hover1'>
         <img src={user?.picture} alt='' />
-        <span>
-          {user?.username}
-        </span>
+        <span>{user?.username}</span>
       </Link>
       {left.slice(0, 4).map((link, i) => (
         <LeftLink
