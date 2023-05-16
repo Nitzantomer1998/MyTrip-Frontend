@@ -9,7 +9,7 @@ export default function ChangePassword({
   conf_password,
   setConf_password,
   error,
-  laoding,
+  loading,
   setLoading,
   userInfos,
   setError,
@@ -32,11 +32,10 @@ export default function ChangePassword({
     try {
       setLoading(true);
       await axios.post(`${process.env.REACT_APP_BACKEND_URL}/changePassword`, {
-        email,
         password,
       });
       setError('');
-      navigate('/');
+      navigate('/src/pages/statistics/index.js');
     } catch (error) {
       setLoading(false);
       setError(error.response.data.message);

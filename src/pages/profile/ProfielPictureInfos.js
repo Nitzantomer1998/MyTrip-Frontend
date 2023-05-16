@@ -47,9 +47,7 @@ export default function ProfielPictureInfos({
           )}
         </div>
         <div className='profile_w_col'>
-          <div className='profile_name'>
-            {profile?.username}
-          </div>
+          <div className='profile_name'>{profile?.username}</div>
         </div>
       </div>
       {visitor ? (
@@ -58,7 +56,7 @@ export default function ProfielPictureInfos({
         <div className='profile_w_right'>
           <div className='gray_btn'>
             <i className='edit_icon'></i>
-            <span>Edit Profile</span>
+            <Link to='/editprofile'>Edit Profile</Link>
           </div>
         </div>
       )}
