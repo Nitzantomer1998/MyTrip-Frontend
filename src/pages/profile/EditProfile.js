@@ -47,7 +47,7 @@ export default function EditProfile(user) {
         <br />
         <br />
         <h1>Edit Profile</h1>
-        <p>
+        <div>
           <button
             className='btn_delete_account'
             onClick={handleDeleteConfirmation}
@@ -83,7 +83,7 @@ export default function EditProfile(user) {
             userInfos={userInfos}
             setError={setError}
           />
-        </p>
+        </div>
 
         <div>
           {/*
