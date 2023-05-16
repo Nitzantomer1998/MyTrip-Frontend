@@ -13,7 +13,7 @@ export default function SharePost({ user, post, onSuccess, onFailure }) {
         }
       } else {
         if (onFailure) {
-            console.log(response);
+          console.log(response);
           onFailure();
         } else {
           alert("Une erreur s'est produite lors du partage du post.");
