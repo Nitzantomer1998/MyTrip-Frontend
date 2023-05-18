@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import LoginInput from '../../components/inputs/loginInput';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { combineReducers } from 'redux';
 export default function ChangePassword({
   password,
   setPassword,
@@ -27,17 +28,24 @@ export default function ChangePassword({
       .required('Confirm your password.')
       .oneOf([Yup.ref('password')], 'Passwords must match.'),
   });
-  const { email } = userInfos;
+  // const { email } = userInfos.email;
+
   const changePassword = async () => {
     try {
       setLoading(true);
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/changePassword`, {
+      const temp = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/changePassword`, {
+        userInfos,
         password,
       });
+      console.log('1');
+      console.log("temp " + JSON.stringify(temp)); //SUCESS PRINT USER
+
+    
       setError('');
-      navigate('/src/pages/statistics/index.js');
+      navigate('/');
     } catch (error) {
       setLoading(false);
+      console.log('3');
       setError(error.response.data.message);
     }
   };
@@ -53,6 +61,7 @@ export default function ChangePassword({
         }}
         validationSchema={validatePassword}
         onSubmit={() => {
+          console.log('test');
           changePassword();
         }}
       >

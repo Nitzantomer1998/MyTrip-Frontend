@@ -4,16 +4,40 @@ import Header from '../../components/header/index';
 import ChangePassword from '../reset/ChangePassword';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
-export default function EditProfile(user) {
+
+export default function EditProfile() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [password, setPassword] = useState('');
   const [conf_password, setConf_password] = useState('');
   const [editPassword, setEditPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [userInfos, setUserInfos] = useState({ email: '`{user.email}`' });
+  const { user } = useSelector((state) => state);
+  console.log("the user is " + JSON.stringify(user)); //SUCESS PRINT USER
+  const [userInfos, setUserInfos] = useState({ user });
 
+  // useEffect(() => {
+  //   setUserInfos({ email: user ? user.email : '' });
+  // }, [user]);
+  
+  // useEffect(() => {
+  //   console.log("the userInfos is " + JSON.stringify(userInfos));
+  // }, [userInfos]);
+  
+  // useEffect(() => {
+  //   updateUserInfo();
+  // }, [user]);
+  
+  // const updateUserInfo = () => {
+  //   setUserInfos({ email: user ? user.email : '' });
+  // }
+
+  console.log("the userInfos is " + JSON.stringify(userInfos)); //SUCESS PRINT USERINFOS
+
+  
+  
   const handleDeleteConfirmation = () => {
     setShowDeleteConfirmation(true);
   };
@@ -48,6 +72,19 @@ export default function EditProfile(user) {
         <br />
         <h1>Edit Profile</h1>
         <div>
+        <ChangePassword
+            password={password}
+            setPassword={setPassword}
+            conf_password={conf_password}
+            setConf_password={setConf_password}
+            error={error}
+            loading={loading}
+            setLoading={setLoading}
+            userInfos={userInfos}
+            setError={setError}
+          />
+          <br />
+          <br />
           <button
             className='btn_delete_account'
             onClick={handleDeleteConfirmation}
@@ -72,17 +109,7 @@ export default function EditProfile(user) {
               </button>
             </div>
           )}
-          <ChangePassword
-            password={password}
-            setPassword={setPassword}
-            conf_password={conf_password}
-            setConf_password={setConf_password}
-            error={error}
-            loading={loading}
-            setLoading={setLoading}
-            userInfos={userInfos}
-            setError={setError}
-          />
+          
         </div>
 
         <div>
