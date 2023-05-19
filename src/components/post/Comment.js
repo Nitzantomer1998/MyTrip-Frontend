@@ -3,7 +3,7 @@ import Moment from "react-moment";
 export default function Comment({ comment }) {
   return (
     <div className="comment">
-      <img src={comment.commentBy.picture} alt="" className="comment_img" />
+      <img src={comment.commentBy?.picture} alt="" className="comment_img" />
       <div className="comment_col">
         <div className="comment_wrap">
           <div className="comment_name">

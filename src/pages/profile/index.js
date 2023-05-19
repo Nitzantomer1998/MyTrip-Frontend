@@ -11,6 +11,8 @@ import CreatePost from '../../components/createPost';
 import GridPosts from './GridPosts';
 import Post from '../../components/post';
 import Intro from '../../components/intro';
+import Friends from './Friends';
+
 import { useMediaQuery } from 'react-responsive';
 import CreatePostPopup from '../../components/createPostPopup';
 
@@ -166,6 +168,7 @@ export default function Profile({ getAllPosts }) {
                   visitor={visitor}
                   setOthername={setOthername}
                 />
+                <Friends friends={profile.friends} />
               </div>
               <div className='profile_right'>
                 {!visitor && (

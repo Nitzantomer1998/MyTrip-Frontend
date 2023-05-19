@@ -104,7 +104,7 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
                   to={`/profile/${user?.user?.username}`}
                   onClick={() => addToSearchHistoryHandler(user.user._id)}
                 >
-                  <img src={user.user.picture} alt='' />
+                  <img src={user.user?.picture} alt='' />
                   <span>{user?.user?.username}</span>
                 </Link>
                 <i

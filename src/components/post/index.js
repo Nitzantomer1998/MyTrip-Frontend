@@ -92,14 +92,14 @@ export default function Post({ post, user, profile }) {
           to={`/profile/${post?.user?.username}`}
           className='post_header_left'
         >
-          <img src={post.user.picture} alt='' />
+          <img src={post?.user?.picture} alt='' />
           <div className='header_col'>
             <div className='post_profile_name'>
               {post?.user?.username}
               <div className='updated_p'>
                 {post.type == 'profilePicture' &&
                   `updated ${
-                    post.user.gender === 'male' ? 'his' : 'her'
+                    post.user?.gender === 'male' ? 'his' : 'her'
                   } profile picture`}
                 {post.type == 'coverPicture' &&
                   `updated ${
@@ -160,7 +160,7 @@ export default function Post({ post, user, profile }) {
       ) : post.type === 'profilePicture' ? (
         <div className='post_profile_wrap'>
           <div className='post_updated_bg'>
-            <img src={post.user.cover} alt='' />
+            <img src={post.user?.cover} alt='' />
           </div>
           <img
             src={post.images[0].url}

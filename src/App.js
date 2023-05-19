@@ -15,6 +15,8 @@ import Friends from './pages/friends';
 import LeftHome from './components/home/left/index';
 import About from './pages/about/index';
 import Statistics from './pages/statistics/index';
+import Followers from './pages/profile/Followers';
+import Following from './pages/profile/Following';
 
 import EditProfile from './pages/profile/EditProfile';
 import { ChangePassword } from './pages/reset/ChangePassword';
@@ -79,6 +81,10 @@ function App() {
             }
             exact
           />
+
+          <Route path='/followers' element={<Followers />} exact />
+          <Route path='/following' element={<Following />} exact />
+
           <Route
             path='/friends'
             element={
@@ -123,7 +129,7 @@ function App() {
             element={<EditProfile setVisible={setVisible} />}
             exact
           />
-          
+
           <Route
             path='/'
             element={
