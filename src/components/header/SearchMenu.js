@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Return, Search } from '../../svg';
 import useClickOutside from '../../helpers/clickOutside';
+import { getUniqueLocations, getPostsByLocation } from '../../functions/post'; // Import the new API functions
+
 import {
   addToSearchHistory,
   getSearchHistory,
@@ -15,6 +17,10 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
   const [searchHistory, setSearchHistory] = useState([]);
   const menu = useRef(null);
   const input = useRef(null);
+  const [posts, setPosts] = useState([]);
+
+  const [locationResults, setLocationResults] = useState([]); // New state variable for location search results
+
   useClickOutside(menu, () => {
     setShowSearchMenu(false);
   });
@@ -31,11 +37,22 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
   const searchHandler = async () => {
     if (searchTerm === '') {
       setResults('');
+      setLocationResults([]);
     } else {
       const res = await search(searchTerm, token);
       setResults(res);
     }
+    getUniqueLocations(token).then((locations) => {
+      console.log(locations, 'locations');
+      console.log(searchTerm, 'searchTerm');
+      console.log(token, 'token');
+      const matchedLocations = locations.filter((location) =>
+        location.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setLocationResults(matchedLocations);
+    });
   };
+
   const addToSearchHistoryHandler = async (searchUser) => {
     const res = await addToSearchHistory(searchUser, token);
     getHistory();
@@ -44,6 +61,13 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
     removeFromSearch(searchUser, token);
     getHistory();
   };
+
+  const locationSearchHandler = async (location) => {
+    console.log('Searching for location:', location);
+    const fetchedPosts = await getPostsByLocation(location, token);
+    setPosts(fetchedPosts);
+  };
+
   return (
     <div className='header_left search_area scrollbar' ref={menu}>
       <div className='search_wrap'>
@@ -127,6 +151,17 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
             >
               <img src={user.picture} alt='' />
               <span>{user?.username}</span>
+            </Link>
+          ))}
+        {locationResults &&
+          locationResults.map((location) => (
+            <Link
+              to={`/location/${location}`}
+              className='search_location_item hover1'
+              key={location}
+              onClick={() => locationSearchHandler(location)} // Ajouter cet onClick
+            >
+              {location}
             </Link>
           ))}
       </div>

@@ -71,7 +71,7 @@ export default function CreateComment({ user, postId, setComments, setCount }) {
       } else {
         setLoading(true);
 
-        const comments = await comment(postId, text, "", user.token);
+        const comments = await comment(postId, text, "", user?.token);
         setComments(comments);
         setCount((prev) => ++prev);
         setLoading(false);
