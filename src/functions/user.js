@@ -104,6 +104,24 @@ export const unfollow = async (id, token) => {
     return error.response.data.message;
   }
 };
+export const unfollowReverse = async (id, token) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/unfollowReverse/${id}`,
+      {},
+
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return 'ok';
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
+
 export const acceptRequest = async (id, token) => {
   try {
     const { data } = await axios.put(
@@ -255,8 +273,30 @@ export const getFollowingPageInfos = async (token) => {
     return error.response.data.message;
   }
 };
+export const getFollowersPageInfosId = async (id, token) => {
+  try {
+    console.log("reached to user.js begining")
+
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/getFollowersPageInfosId/${id}`,
+      {},
+
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("reached to user.js")
+
+    return { status: 'ok', data };
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
 
 export const getFollowersPageInfos = async (token) => {
+
   try {
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getFollowersPageInfos`,
@@ -267,6 +307,27 @@ export const getFollowersPageInfos = async (token) => {
         },
       }
     );
+    return { status: 'ok', data };
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
+export const getFollowingPageInfosId = async (id, token) => {
+  try {
+    console.log("reached to user.js begining")
+
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/getFollowingPageInfosId/${id}`,
+      {},
+
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("reached to user.js")
+
     return { status: 'ok', data };
   } catch (error) {
     return error.response.data.message;

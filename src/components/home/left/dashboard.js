@@ -3,7 +3,6 @@ import './style.css';
 import { left } from '../../../data/home';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 
 export default function dashboard({ user }) {
@@ -17,7 +16,7 @@ export default function dashboard({ user }) {
       <Link to='/profile' className='left_link hover1'>
         <img src={user?.picture} alt='' />
         <span>
-          {user?.first_name} {user.last_name}
+          {user?.username}
         </span>
       </Link>
       {left.slice(0, 4).map((link, i) => (

@@ -1,0 +1,145 @@
+.modalBackground{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.9;
+    background-color:rgba(46, 46, 71, 1);
+}
+
+.modalContainer{
+    width: 700px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: rgba(70, 70, 103, 1);
+    border-radius: 15px;
+    color: white;
+    max-height: 70%;
+}
+
+
+.followersContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    padding: 30px;
+    max-height: 50%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.followerRow{
+    display: grid;
+    grid-template-columns: 1fr 2fr 0.5fr 1fr;
+    align-items: center;
+    width: 100%;
+    white-space : nowrap
+
+}
+
+.followBtn{
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-weight: bold;
+    font-size: 1.6em;
+    color:rgb(0, 159, 212);
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+
+}
+
+.followerInfo{
+    display: flex;
+    height: 50%;
+    width: 100%;
+
+    justify-content: center;
+    width: 40%;
+    height: fit-content;
+    /* background-color: white; */
+}
+
+
+
+.followBtn:hover{
+    cursor: pointer;
+    border: 1px solid;
+    box-shadow: 0px 0px 10px #888888;
+    border-color: white;
+    background-color: #88888887;
+    transition: background-color 0.3s, box-shadow 0.3s, border 0.3s;
+
+    
+}
+
+
+.closeBtnFollowers{
+    position: relative;
+    top: 10px; 
+    left: 475px;
+    color: red;
+    font-size: 25px;
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+
+}
+
+.closeBtnFollowers:hover{
+    transform: scale(1.3);
+    transition: all 0.3s;
+    cursor:pointer;
+}
+
+.title{
+    position: relative;
+    bottom: 20px;
+}
+.removeBtn {
+    display: flex;
+    justify-content: right;
+    background-color: rgba(46, 46, 71, 0.467); /* Set background color */
+    border: none; /* Remove borders */
+    color: white; /* Set text color */
+    padding: 15px; /* Set padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make it an inline element */
+    font-size: 1.1em;
+    margin: 4px 2px; /* Set margin */
+    cursor: pointer; /* Set cursor style */
+    transition: background-color 0.3s ease; /* Set transition effect */
+  }
+  
+  .removeBtn:hover {
+    background-color: #ba0000; /* Change background color on hover */
+    opacity: 0.7; /* Set opacity */
+  }
+ 
+
+  @keyframes spin {
+    0% { transform: rotate(0); }
+    50% { transform: rotate(360deg); }
+    100% { transform: rotate(0); }
+  }
+  
+  #profileImg:hover   {
+    animation: spin 2s infinite; /* Adjust the duration as needed */
+  }
+  
+  
+ 
+                      
+                       

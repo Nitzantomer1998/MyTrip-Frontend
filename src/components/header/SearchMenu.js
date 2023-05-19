@@ -70,7 +70,7 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
           )}
           <input
             type='text'
-            placeholder='Search Facebook'
+            placeholder='Search Users'
             ref={input}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -101,13 +101,11 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
               <div className='search_user_item hover1' key={user._id}>
                 <Link
                   className='flex'
-                  to={`/profile/${user.user.username}`}
+                  to={`/profile/${user?.user?.username}`}
                   onClick={() => addToSearchHistoryHandler(user.user._id)}
                 >
                   <img src={user.user.picture} alt='' />
-                  <span>
-                    {user.user.first_name} {user.user.last_name}
-                  </span>
+                  <span>{user?.user?.username}</span>
                 </Link>
                 <i
                   className='exit_icon'
@@ -122,15 +120,13 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
         {results &&
           results.map((user) => (
             <Link
-              to={`/profile/${user.username}`}
+              to={`/profile/${user?.username}`}
               className='search_user_item hover1'
               onClick={() => addToSearchHistoryHandler(user._id)}
               key={user._id}
             >
               <img src={user.picture} alt='' />
-              <span>
-                {user.first_name} {user.last_name}
-              </span>
+              <span>{user?.username}</span>
             </Link>
           ))}
       </div>

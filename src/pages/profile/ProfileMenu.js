@@ -36,6 +36,7 @@ export default function ProfileMenu({ activeTab, setActiveTab }) {
         >
           Recommended
         </Link>
+        
       </div>
     </div>
   );

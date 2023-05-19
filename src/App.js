@@ -15,6 +15,8 @@ import Friends from './pages/friends';
 import LeftHome from './components/home/left/index';
 import About from './pages/about/index';
 import Statistics from './pages/statistics/index';
+import Followers from './pages/profile/Followers';
+import Following from './pages/profile/Following';
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -78,7 +80,21 @@ function App() {
             exact
           />
           <Route
-            path='/friends'
+          path='/followers'
+          element={
+            <Followers />
+          }
+          exact
+        />
+        <Route
+        path='/following'
+        element={
+          <Following />
+        }
+        exact
+      />
+          <Route
+            path='/friends' 
             element={
               <Friends setVisible={setVisible} getAllPosts={getAllPosts} />
             }
