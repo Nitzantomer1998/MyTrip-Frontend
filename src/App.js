@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 import Login from './pages/login';
 import Profile from './pages/profile';
 import Home from './pages/home';
@@ -17,10 +19,15 @@ import About from './pages/about/index';
 import Statistics from './pages/statistics/index';
 import Followers from './pages/profile/Followers';
 import Following from './pages/profile/Following';
+import LocationPosts from './components/LocationPosts/LocationPosts';
+import LocationPostsPage from './pages/LocationPostsPage/LocationPostsPage';
 
 import EditProfile from './pages/profile/EditProfile';
 import { ChangePassword } from './pages/reset/ChangePassword';
 function App() {
+  const params = useParams();
+  const { location } = params;
+
   const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => ({ ...state }));
   const [{ loading, error, posts }, dispatch] = useReducer(postsReducer, {
@@ -128,6 +135,16 @@ function App() {
             path='/editprofile'
             element={<EditProfile setVisible={setVisible} />}
             exact
+          />
+
+
+          <Route
+            path='/location/:location'
+            element={
+              <>
+                <LocationPostsPage />
+              </>
+            }
           />
 
           <Route

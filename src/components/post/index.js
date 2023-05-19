@@ -28,7 +28,7 @@ export default function Post({ post, user, profile }) {
   }, [post]);
 
   const getPostReacts = async () => {
-    const res = await getReacts(post._id, user.token);
+    const res = await getReacts(post?._id, user?.token);
     setReacts(res.reacts);
     setCheck(res.check);
     setTotal(res.total);
@@ -44,7 +44,7 @@ export default function Post({ post, user, profile }) {
   };
 
   const reactHandler = async (type) => {
-    reactPost(post._id, type, user.token);
+    reactPost(post?._id, type, user.token);
     if (check == type) {
       setCheck();
       let index = reacts.findIndex((x) => x.react == check);
