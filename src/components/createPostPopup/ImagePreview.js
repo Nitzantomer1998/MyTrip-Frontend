@@ -4,12 +4,12 @@ import EmojiPickerBackgrounds from './EmojiPickerBackgrounds';
 export default function ImagePreview({
   text,
   user,
+  location,
   setText,
   images,
   setImages,
   setShowPrev,
   setError,
-  location,
   setLocation,
 }) {
   const imageInputRef = useRef(null);

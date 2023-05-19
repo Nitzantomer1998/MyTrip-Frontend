@@ -34,22 +34,26 @@ export default function CreatePostPopup({
       const response = await createPost(
         null,
         background,
+        location,
         text,
         null,
         user.id,
-        user.token,
-        location
+        user.token
       );
       setLoading(false);
       if (response.status === 'ok') {
+        console.log(response.data);
         dispatch({
           type: profile ? 'PROFILE_POSTS' : 'POSTS_SUCCESS',
           payload: [response.data, ...posts],
         });
         setBackground('');
+        setLocation('');
         setText('');
         setVisible(false);
       } else {
+        console.log(response.data);
+
         setError(response);
       }
     } else if (images && images.length) {
@@ -68,6 +72,7 @@ export default function CreatePostPopup({
       const res = await createPost(
         null,
         null,
+        location,
         text,
         response,
         user.id,
@@ -80,6 +85,7 @@ export default function CreatePostPopup({
           payload: [res.data, ...posts],
         });
         setText('');
+        setLocation('');
         setImages('');
         setVisible(false);
       } else {
@@ -90,6 +96,7 @@ export default function CreatePostPopup({
       const response = await createPost(
         null,
         null,
+        location,
         text,
         null,
         user.id,
@@ -102,6 +109,7 @@ export default function CreatePostPopup({
           payload: [response.data, ...posts],
         });
         setBackground('');
+        setLocation('');
         setText('');
         setVisible(false);
       } else {

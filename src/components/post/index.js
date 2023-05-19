@@ -131,13 +131,15 @@ export default function Post({ post, user, profile }) {
         </div>
       ) : post.type === null ? (
         <>
-          <div className='post_text'>
-            <img
-              src='https://img.icons8.com/?size=512&id=59830&format=png'
-              width={20}
-            ></img>{' '}
-            Paris
-          </div>
+          {post.location && (
+            <div className='post_text'>
+              <img
+                src='https://img.icons8.com/?size=512&id=59830&format=png'
+                width={20}
+              ></img>{' '}
+              {post.location}
+            </div>
+          )}
 
           <div className='post_text'>{post.text}</div>
           {post.images && post.images.length && (

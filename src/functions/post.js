@@ -2,6 +2,7 @@ import axios from 'axios';
 export const createPost = async (
   type,
   background,
+  location,
   text,
   images,
   user,
@@ -13,6 +14,7 @@ export const createPost = async (
       {
         type,
         background,
+        location,
         text,
         images,
         user,
