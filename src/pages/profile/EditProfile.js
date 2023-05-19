@@ -6,7 +6,6 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-
 export default function EditProfile() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [password, setPassword] = useState('');
@@ -15,37 +14,45 @@ export default function EditProfile() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => state);
-  console.log("the user is " + JSON.stringify(user)); //SUCESS PRINT USER
   const [userInfos, setUserInfos] = useState({ user });
 
   // useEffect(() => {
   //   setUserInfos({ email: user ? user.email : '' });
   // }, [user]);
-  
+
   // useEffect(() => {
   //   console.log("the userInfos is " + JSON.stringify(userInfos));
   // }, [userInfos]);
-  
+
   // useEffect(() => {
   //   updateUserInfo();
   // }, [user]);
-  
+
   // const updateUserInfo = () => {
   //   setUserInfos({ email: user ? user.email : '' });
   // }
 
-  console.log("the userInfos is " + JSON.stringify(userInfos)); //SUCESS PRINT USERINFOS
-
-  
-  
   const handleDeleteConfirmation = () => {
     setShowDeleteConfirmation(true);
   };
 
-  const handleDeleteAccount = () => {
-    // Perform your dangerous critical action here.
-    console.log('Deleting account...');
-    setShowDeleteConfirmation(false);
+  const handleDeleteAccount = async () => {
+    try {
+      console.log('Deleting account...');
+      console.log('user.id ' + user.id);
+      console.log('user ' + JSON.stringify(user));
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/deleteUser/${user.id}`
+      );
+      setPassword('');
+      setConf_password('');
+      setError('');
+      setShowDeleteConfirmation(false);
+      console.log('Account deleted!');
+    } catch (error) {
+      console.log('1');
+      setError(error.response.data.message);
+    }
   };
 
   const handleCancelDelete = () => {
@@ -72,7 +79,7 @@ export default function EditProfile() {
         <br />
         <h1>Edit Profile</h1>
         <div>
-        <ChangePassword
+          <ChangePassword
             password={password}
             setPassword={setPassword}
             conf_password={conf_password}
@@ -109,7 +116,6 @@ export default function EditProfile() {
               </button>
             </div>
           )}
-          
         </div>
 
         <div>
