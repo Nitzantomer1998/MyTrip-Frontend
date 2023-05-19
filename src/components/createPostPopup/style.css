@@ -63,8 +63,10 @@
   min-height: 90px;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 .post_input {
   position: relative;
@@ -79,12 +81,15 @@
   font-size: 24px;
   background: var(--bg-primary);
   color: var(--color-primary);
+  flex-direction: column;
+
 }
+
 .flex_center textarea {
   min-height: 90px;
   background: transparent;
   overflow-y: visible;
-  position: absolute;
+  display: block;
 }
 .post_emojis_wrap {
   position: relative;
@@ -144,6 +149,8 @@
   cursor: pointer;
 }
 .overflow_a {
+  display: flex;
+  flex-direction: column;
   max-height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -153,6 +160,7 @@
   display: block;
   font-size: 15px;
   min-height: 15px !important;
+  width: 90px;
 }
 .moveleft {
   transform: translateX(-10px);
@@ -386,6 +394,7 @@
   text-align: center;
   height: 360px;
   margin-top: 10px;
+  display: block;
 }
 
 /*----post error----*/
@@ -462,4 +471,18 @@
 }
 .l0 {
   left: 0;
+}
+
+.flex_center textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 17px;
+  font-family: inherit;
+  padding: 10px;
+  color: var(--color-primary);
+  background: transparent;
+  display: block;
 }

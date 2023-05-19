@@ -10,21 +10,22 @@ export default function ProfileMenu({ activeTab, setActiveTab, user }) {
   };
 
   const getSavedPosts = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/getAllPostsSaved/${user?.username}`,
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      console.log('Saved Posts:', response.data); // Ajouter cette ligne pour vérifier les données renvoyées par l'API
+    // try {
+    //   const response = await axios.get(
+    //     `${process.env.REACT_APP_BACKEND_URL}/getAllPostsSaved/${user?.username}`,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${user.token}`,
+    //       },
+    //     }
+    //   );
+    //   console.log('Saved Posts:', response.data); // Ajouter cette ligne pour vérifier les données renvoyées par l'API
 
-      setSavedPosts(response.data);
-    } catch (error) {
-      console.error('Error fetching saved posts:', error);
-    }
+    //   setSavedPosts(response.data);
+    // } catch (error) {
+    //   console.error('Error fetching saved posts:', error);
+    // }
+  
   };
 
   useEffect(() => {

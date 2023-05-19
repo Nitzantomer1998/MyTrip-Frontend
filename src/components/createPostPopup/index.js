@@ -24,6 +24,7 @@ export default function CreatePostPopup({
   const [error, setError] = useState('');
   const [images, setImages] = useState([]);
   const [background, setBackground] = useState('');
+  const [location, setLocation] = useState('');
   useClickOutside(popup, () => {
     setVisible(false);
   });
@@ -36,7 +37,8 @@ export default function CreatePostPopup({
         text,
         null,
         user.id,
-        user.token
+        user.token,
+        location
       );
       setLoading(false);
       if (response.status === 'ok') {
@@ -145,6 +147,8 @@ export default function CreatePostPopup({
               showPrev={showPrev}
               setBackground={setBackground}
               background={background}
+              location={location}
+              setLocation={setLocation}
             />
           </>
         ) : (
@@ -157,6 +161,8 @@ export default function CreatePostPopup({
             setImages={setImages}
             setShowPrev={setShowPrev}
             setError={setError}
+            location={location}
+            setLocation={setLocation}
           />
         )}
         <AddToYourPost setShowPrev={setShowPrev} />

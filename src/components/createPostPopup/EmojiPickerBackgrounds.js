@@ -3,8 +3,10 @@ import Picker from 'emoji-picker-react';
 import { useMediaQuery } from 'react-responsive';
 export default function EmojiPickerBackgrounds({
   text,
+  location, // ajout de la propriété de localisation
   user,
   setText,
+  setLocation, // ajout du setter de localisation
   type2,
   background,
   setBackground,
@@ -13,6 +15,7 @@ export default function EmojiPickerBackgrounds({
   const [showBgs, setShowBgs] = useState(false);
   const [cursorPosition, setCursorPosition] = useState();
   const textRef = useRef(null);
+  const locationRef = useRef(null); // ajout d'une référence pour le champ de localisation
   const bgRef = useRef(null);
 
   useEffect(() => {
@@ -53,7 +56,17 @@ export default function EmojiPickerBackgrounds({
   });
   return (
     <div className={type2 ? 'images_input' : ''}>
-      <div className={!type2 ? 'flex_center' : ''} ref={bgRef}>
+      <div className='flex_center' ref={bgRef}>
+        <textarea
+          ref={locationRef}
+          maxLength='20'
+          value={location}
+          placeholder={`Location`}
+          className={`post_input ${type2 ? 'input2' : ''} ${
+            sm && !background && 'l0'
+          }`}
+          onChange={(e) => setLocation(e.target.value)}
+        ></textarea>
         <textarea
           ref={textRef}
           maxLength='250'
@@ -63,15 +76,9 @@ export default function EmojiPickerBackgrounds({
             sm && !background && 'l0'
           }`}
           onChange={(e) => setText(e.target.value)}
-          style={{
-            paddingTop: `${
-              background
-                ? Math.abs(textRef.current.value.length * 0.1 - 32)
-                : '0'
-            }%`,
-          }}
         ></textarea>
       </div>
+
       <div className={!type2 ? 'post_emojis_wrap' : ''}>
         {picker && (
           <div

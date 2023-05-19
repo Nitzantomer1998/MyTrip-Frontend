@@ -9,6 +9,8 @@ export default function ImagePreview({
   setImages,
   setShowPrev,
   setError,
+  location,
+  setLocation,
 }) {
   const imageInputRef = useRef(null);
   const handleImages = (e) => {
@@ -41,7 +43,14 @@ export default function ImagePreview({
   };
   return (
     <div className='overflow_a scrollbar'>
-      <EmojiPickerBackgrounds text={text} user={user} setText={setText} type2 />
+      <EmojiPickerBackgrounds
+        text={text}
+        user={user}
+        setText={setText}
+        type2
+        location={location}
+        setLocation={setLocation}
+      />
       <div className='add_pics_wrap'>
         <input
           type='file'
@@ -122,13 +131,6 @@ export default function ImagePreview({
             </div>
           </div>
         )}
-        <div className='add_pics_inside2'>
-          <div className='add_circle'>
-            <i className='phone_icon'></i>
-          </div>
-          <div className='mobile_text'>Add phots from your mobile device.</div>
-          <span className='addphone_btn'>Add</span>
-        </div>
       </div>
     </div>
   );
