@@ -387,6 +387,43 @@ header {
   font-size: 14px;
 }
 
+.search_location_item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+  background-color: var(--bg-secondary);
+  color: var(--color-primary);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+
+.search_location_item:hover {
+  background-color: var(--color-primary);
+  color: var(--bg-secondary);
+  transform: translateY(-2px);
+}
+
+.search_location_item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.search_location_item span {
+  flex-grow: 1;
+}
+
+
+
+
+
 /*---responsive----------*/
 @media (max-width: 1295px) {
   .middle_icon {

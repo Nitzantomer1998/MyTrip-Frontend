@@ -23,8 +23,6 @@ export default function LocationPosts({ location, user }) {
     }
   };
 
-  console.log('Location:', location);
-  console.log('Tokenici:', user);
 
   return (
     <div>

@@ -36,14 +36,9 @@ export default function Followers(props) {
     let followers = [];
     if (location.state.user._id === user.id) {
       window.path = '/profile';
-      console.log('THAT USER IS ME');
-      console.log('my user name:', user.username);
       followers = (await getFollowersPageInfos(user.token)).data.followers;
     } else {
       window.path = `/profile/${location.state.user.username}`;
-      console.log('THAT USER IS NOT ME');
-      console.log('other user name:', location.state.user.username);
-      console.log('other user name:', location.state.user._id);
       followers = (
         await getFollowersPageInfosId(location.state.user._id, user.token)
       )?.data.followers;

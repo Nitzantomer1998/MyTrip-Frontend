@@ -35,6 +35,13 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
     input.current.focus();
   }, []);
   const searchHandler = async () => {
+    if (searchTerm.length < 3) {
+      // Si moins de trois lettres ont été entrées, effacer les résultats de recherche
+      setResults([]);
+      setLocationResults([]);
+      return;
+    }
+
     if (searchTerm === '') {
       setResults('');
       setLocationResults([]);
@@ -42,10 +49,8 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
       const res = await search(searchTerm, user.token);
       setResults(res);
     }
+
     getUniqueLocations(user.token).then((locations) => {
-      console.log(locations, 'locations');
-      console.log(searchTerm, 'searchTerm');
-      console.log(user.token, 'token');
       const matchedLocations = locations.filter((location) =>
         location?.toLowerCase().includes(searchTerm.toLowerCase())
       );
