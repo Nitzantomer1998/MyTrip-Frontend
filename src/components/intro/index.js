@@ -4,7 +4,7 @@ import './style.css';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 export default function Intro({ detailss, visitor, setOthername }) {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
   const [details, setDetails] = useState();
   useEffect(() => {
     setDetails(detailss);

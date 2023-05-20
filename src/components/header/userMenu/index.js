@@ -10,11 +10,12 @@ export default function UserMenu({ user }) {
   const navigate = useNavigate();
   const [visible, setVisible] = useState(0);
   const logout = () => {
-    Cookies.set('user', '');
-    dispatch({
-      type: 'LOGOUT',
-    });
-    navigate('/login');
+    // Cookies.set('user', '');
+    // dispatch({
+    //   type: 'LOGOUT',
+    // });
+    // navigate('/login');
+    console.log('logout');
   };
   return (
     <div className='mmenu'>
@@ -80,12 +81,7 @@ export default function UserMenu({ user }) {
               <i className='right_icon'></i>
             </div>
           </div>
-          <div
-            className='mmenu_item hover3'
-            onClick={() => {
-              logout();
-            }}
-          >
+          <div className='mmenu_item hover3' onClick={logout}>
             <div className='small_circle'>
               <i className='logout_filled_icon'></i>
             </div>

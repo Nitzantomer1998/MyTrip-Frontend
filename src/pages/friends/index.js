@@ -11,7 +11,7 @@ import Card from './Card';
 import './style.css';
 
 export default function Friends() {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
   const { type } = useParams();
 
   const [{ loading, error, data }, dispatch] = useReducer(followingpage, {

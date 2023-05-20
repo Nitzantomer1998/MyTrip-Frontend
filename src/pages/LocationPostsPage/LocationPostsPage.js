@@ -8,14 +8,12 @@ import './style.css';
 
 export default function LocationPostsPage() {
   const location = useParams().location;
-  const { token, user } = useSelector((state) => state.user); // Ajoutez la déconstruction de 'user' ici
-  console.log('Location:', location);
-  console.log('Token:', token);
+  const { user } = useSelector((state) => state.user);
   return (
     <div className='posts-container-location'>
       <Header />
 
-      <LocationPosts location={location} token={token} />
+      <LocationPosts location={location} user={user} />
     </div>
   );
 }

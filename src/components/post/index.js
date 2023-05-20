@@ -215,6 +215,7 @@ export default function Post({ post, user, profile }) {
           visible={visible}
           setVisible={setVisible}
           reactHandler={reactHandler}
+          user={user}
         />
         <div
           className='post_action hover1'

@@ -11,7 +11,7 @@ export default function LeftHome({ user }) {
   const [activeLink, setActiveLink] = useState(null);
   const navigate = useNavigate();
   const logout = () => {
-    Cookies.set('user', '');
+    Cookies.remove('user');
     dispatch({
       type: 'LOGOUT',
     });
@@ -29,9 +29,7 @@ export default function LeftHome({ user }) {
         // onClick={() => setActiveLink('profile')}
       >
         <img src={user?.picture} alt='' />
-        <span>
-          {user?.username}
-        </span>
+        <span>{user?.username}</span>
       </Link>
       {left.slice(0, 4).map((link, i) => (
         <LeftLink
@@ -51,12 +49,7 @@ export default function LeftHome({ user }) {
         ></div>
       )}
       <div className='splitter'></div>
-      <h1
-        className='logout_site'
-        onClick={() => {
-          logout();
-        }}
-      >
+      <h1 className='logout_site' onClick={logout}>
         Logout
       </h1>
     </div>

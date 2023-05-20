@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Post from '../post/index';
 import { getPostsByLocation } from '../../functions/post';
 
-export default function LocationPosts({ location, token }) {
+export default function LocationPosts({ location, user }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export default function LocationPosts({ location, token }) {
 
   const fetchPostsByLocation = async () => {
     console.log('Fetching posts for location:', location);
-    const res = await getPostsByLocation(location, token); // Utiliser le résultat de la recherche des emplacements
+    const res = await getPostsByLocation(location, user.token); // Utiliser le résultat de la recherche des emplacements
     console.log('Response:', res);
     if (Array.isArray(res)) {
       console.log('Setting posts:', res);
@@ -23,18 +23,11 @@ export default function LocationPosts({ location, token }) {
     }
   };
 
-  console.log('Location:', location);
-  console.log('Token:', token);
 
   return (
     <div>
       {posts.map((post) => (
-        <Post
-          post={post}
-          key={post._id}
-          token={token}
-          comments={post.comments}
-        />
+        <Post post={post} key={post._id} user={user} comments={post.comments} />
       ))}
     </div>
   );

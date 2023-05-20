@@ -29,7 +29,8 @@ function App() {
   const { location } = params;
 
   const [visible, setVisible] = useState(false);
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
+  console.log(user, 'u');
   const [{ loading, error, posts }, dispatch] = useReducer(postsReducer, {
     loading: false,
     posts: [],
@@ -37,7 +38,7 @@ function App() {
   });
   useEffect(() => {
     getAllPosts();
-  }, []);
+  }, [user]);
   const getAllPosts = async () => {
     try {
       dispatch({
@@ -64,7 +65,7 @@ function App() {
   };
   return (
     <div>
-      <LeftHome user={user} />
+      {user.id && <LeftHome user={user} />}
       {visible && (
         <CreatePostPopup
           user={user}
@@ -136,7 +137,6 @@ function App() {
             element={<EditProfile setVisible={setVisible} />}
             exact
           />
-
 
           <Route
             path='/location/:location'

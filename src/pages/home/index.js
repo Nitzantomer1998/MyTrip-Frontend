@@ -6,7 +6,7 @@ import LeftHome from '../../components/home/left';
 import Post from '../../components/post';
 import './style.css';
 export default function Home({ setVisible, posts, loading, getAllPosts }) {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
   const middle = useRef(null);
   const [height, setHeight] = useState();
   useEffect(() => {

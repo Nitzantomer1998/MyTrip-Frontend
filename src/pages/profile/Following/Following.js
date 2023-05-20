@@ -14,7 +14,7 @@ export default function Following(props) {
   const [following, setFollowing] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
   /*var currentPath = window.location.pathname;
     var isProfilePage = currentPath.includes("/profile/");
     if (isProfilePage) {
@@ -33,17 +33,14 @@ export default function Following(props) {
     let following = [];
     if (location.state.user._id === user.id) {
       window.path = '/profile';
-      console.log('THAT USER IS ME');
-      console.log('my user name:', user.username);
       following = (await getFollowingPageInfos(user.token)).data.following;
+      console.log('FOLLOWING:', following)
     } else {
       window.path = `/profile/${location.state.user.username}`;
-      console.log('THAT USER IS NOT ME');
-      console.log('other user name:', location.state.user.username);
-      console.log('other user name:', location.state.user._id);
       following = (
         await getFollowingPageInfosId(location.state.user._id, user.token)
       )?.data.following;
+      console.log('FOLLOWING:', following)
       ///following = (await getFollowingPageInfos(user.token)).data.following;
     }
     setFollowing(following);

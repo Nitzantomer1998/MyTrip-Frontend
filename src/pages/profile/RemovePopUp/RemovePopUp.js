@@ -3,7 +3,7 @@ import { unfollow, unfollowReverse } from '../../../functions/user';
 import './RemovePopUpStyle.css';
 
 export default function RemovePopUp(props) {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
 
   const removeFriend = async () => {
     //await unfollow(props.user._id, user.token);

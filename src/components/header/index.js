@@ -6,7 +6,7 @@ import SearchMenu from './SearchMenu';
 import { useRef, useState } from 'react';
 import useClickOutside from '../../helpers/clickOutside';
 export default function Header({ page, getAllPosts }) {
-  const { user } = useSelector((user) => ({ ...user }));
+  const { user } = useSelector((state) => ({ ...state.user }));
   const color = '#65676b';
   const [showSearchMenu, setShowSearchMenu] = useState(false);
   const [showAllMenu, setShowAllMenu] = useState(false);
@@ -46,7 +46,7 @@ export default function Header({ page, getAllPosts }) {
         <SearchMenu
           color={color}
           setShowSearchMenu={setShowSearchMenu}
-          token={user.token}
+          user={user}
         />
       )}
     </header>

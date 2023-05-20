@@ -5,7 +5,7 @@ import UpdateProfilePicture from './UpdateProfilePicture';
 import { useSelector } from 'react-redux';
 export default function ProfilePicture({ setShow, pRef, photos }) {
   const popup = useRef(null);
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
   const refInput = useRef(null);
   const [image, setImage] = useState('');
   const [error, setError] = useState('');

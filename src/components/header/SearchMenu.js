@@ -10,7 +10,7 @@ import {
   search,
 } from '../../functions/user';
 import { Link } from 'react-router-dom';
-export default function SearchMenu({ color, setShowSearchMenu, token }) {
+export default function SearchMenu({ color, setShowSearchMenu, user }) {
   const [iconVisible, setIconVisible] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
@@ -20,7 +20,7 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
   const [posts, setPosts] = useState([]);
 
   const [locationResults, setLocationResults] = useState([]); // New state variable for location search results
-
+  console.log(user, 'pooooo');
   useClickOutside(menu, () => {
     setShowSearchMenu(false);
   });
@@ -28,43 +28,48 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
     getHistory();
   }, []);
   const getHistory = async () => {
-    const res = await getSearchHistory(token);
+    const res = await getSearchHistory(user.token);
     setSearchHistory(res);
   };
   useEffect(() => {
     input.current.focus();
   }, []);
   const searchHandler = async () => {
+    if (searchTerm.length < 3) {
+      // Si moins de trois lettres ont été entrées, effacer les résultats de recherche
+      setResults([]);
+      setLocationResults([]);
+      return;
+    }
+
     if (searchTerm === '') {
       setResults('');
       setLocationResults([]);
     } else {
-      const res = await search(searchTerm, token);
+      const res = await search(searchTerm, user.token);
       setResults(res);
     }
-    getUniqueLocations(token).then((locations) => {
-      console.log(locations, 'locations');
-      console.log(searchTerm, 'searchTerm');
-      console.log(token, 'token');
+
+    getUniqueLocations(user.token).then((locations) => {
       const matchedLocations = locations.filter((location) =>
-        location.toLowerCase().includes(searchTerm.toLowerCase())
+        location?.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setLocationResults(matchedLocations);
     });
   };
 
   const addToSearchHistoryHandler = async (searchUser) => {
-    const res = await addToSearchHistory(searchUser, token);
+    const res = await addToSearchHistory(searchUser, user.token);
     getHistory();
   };
   const handleRemove = async (searchUser) => {
-    removeFromSearch(searchUser, token);
+    removeFromSearch(searchUser, user.token);
     getHistory();
   };
 
   const locationSearchHandler = async (location) => {
     console.log('Searching for location:', location);
-    const fetchedPosts = await getPostsByLocation(location, token);
+    const fetchedPosts = await getPostsByLocation(location, user.token);
     setPosts(fetchedPosts);
   };
 

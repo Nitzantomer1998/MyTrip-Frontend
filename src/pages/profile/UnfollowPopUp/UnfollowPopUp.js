@@ -2,7 +2,7 @@ import './UnfollowPopUpStyle.css';
 import { unfollow } from '../../../functions/user';
 import { useSelector } from 'react-redux';
 export default function UnfollowPopUp(props) {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
 
   const unfollowFriend = async () => {
     await unfollow(props.user._id, user.token);

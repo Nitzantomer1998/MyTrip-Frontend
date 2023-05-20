@@ -9,7 +9,12 @@ const reactsArray = [
   },
 ];
 
-export default function ReactsPopup({ visible, setVisible, reactHandler }) {
+export default function ReactsPopup({
+  visible,
+  setVisible,
+  reactHandler,
+  user,
+}) {
   return (
     <>
       {visible && (
