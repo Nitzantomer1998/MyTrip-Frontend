@@ -16,7 +16,7 @@ export default function Followers(props) {
 
   const [followers, setFollowers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
 
   useEffect(() => {
     fetchFriends();

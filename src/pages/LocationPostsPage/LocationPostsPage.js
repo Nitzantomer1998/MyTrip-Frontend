@@ -8,7 +8,7 @@ import './style.css';
 
 export default function LocationPostsPage() {
   const location = useParams().location;
-  const user = useSelector((state) => state.user); // Ajoutez la déconstruction de 'user' ici
+  const { user } = useSelector((state) => state.user);
   return (
     <div className='posts-container-location'>
       <Header />

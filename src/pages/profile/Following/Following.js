@@ -14,7 +14,7 @@ export default function Following(props) {
   const [following, setFollowing] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
   /*var currentPath = window.location.pathname;
     var isProfilePage = currentPath.includes("/profile/");
     if (isProfilePage) {

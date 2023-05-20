@@ -8,7 +8,7 @@ import { useState } from 'react';
 // import CodeVerification from './CodeVerification';
 import ChangePassword from './ChangePassword';
 export default function Reset() {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [visible, setVisible] = useState(0);

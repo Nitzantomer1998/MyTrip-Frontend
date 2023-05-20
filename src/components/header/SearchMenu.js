@@ -20,7 +20,7 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
   const [posts, setPosts] = useState([]);
 
   const [locationResults, setLocationResults] = useState([]); // New state variable for location search results
-
+  console.log(user, 'pooooo');
   useClickOutside(menu, () => {
     setShowSearchMenu(false);
   });

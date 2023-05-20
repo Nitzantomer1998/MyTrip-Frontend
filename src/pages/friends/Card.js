@@ -7,7 +7,7 @@ import {
 } from '../../functions/user';
 
 export default function Card({ userr, type, getData }) {
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
   const cancelRequestHandler = async (userId) => {
     const res = await cancelRequest(userId, user.token);
     if (res == 'ok') {
@@ -31,9 +31,7 @@ export default function Card({ userr, type, getData }) {
       <Link to={`/profile/${userr?.username}`}>
         <img src={userr.picture} alt='' />
       </Link>
-      <div className='req_name'>
-        {userr?.username}
-      </div>
+      <div className='req_name'>{userr?.username}</div>
       {type === 'sent' ? (
         <button
           className='blue_btn'

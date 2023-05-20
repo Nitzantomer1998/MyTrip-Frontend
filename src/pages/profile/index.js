@@ -24,7 +24,7 @@ export default function Profile({ getAllPosts }) {
   const [visible, setVisible] = useState(false);
   const { username } = useParams();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state.user }));
   const [photos, setPhotos] = useState({});
   var userName = username === undefined ? user.username : username;
   const [activeTab, setActiveTab] = useState('about');
