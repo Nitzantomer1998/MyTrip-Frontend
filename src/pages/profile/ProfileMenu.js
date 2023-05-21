@@ -73,21 +73,6 @@ export default function ProfileMenu({
     return null;
   };
 
-  const renderLikedPosts = () => {
-    if (activeTab === 'liked') {
-      return likedPosts.map((post) => (
-        <Post
-          key={post._id}
-          post={post}
-          user={user}
-          profile={true}
-          handleUnsave={handleUnsave}
-        />
-      ));
-    }
-    return null;
-  };
-
   return (
     <div className='profile_menu_wrap'>
       <div className='profile_menu'>

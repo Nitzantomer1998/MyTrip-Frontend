@@ -35,6 +35,9 @@ export default function Profile({ getAllPosts }) {
     profile: {},
     error: '',
   });
+
+
+  
   useEffect(() => {
     setActiveTab('about');
     getProfile();
