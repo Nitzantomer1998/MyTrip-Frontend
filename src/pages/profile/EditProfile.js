@@ -39,14 +39,11 @@ export default function EditProfile() {
   const handleDeleteAccount = async () => {
     try {
       console.log('user ' + JSON.stringify(user));
-      await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/deleteUser`,
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/deleteUser`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       setPassword('');
       setConf_password('');
       setError('');
@@ -90,7 +87,7 @@ export default function EditProfile() {
             error={error}
             loading={loading}
             setLoading={setLoading}
-            userInfos={userInfos}
+            user={userInfos.user}
             setError={setError}
           />
           <br />
