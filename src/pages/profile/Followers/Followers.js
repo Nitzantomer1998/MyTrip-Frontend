@@ -20,7 +20,6 @@ export default function Followers(props) {
 
   useEffect(() => {
     fetchFriends();
-    console.log('Fetching friends');
   }, []);
 
   const handleFollow = async (followerId) => {
@@ -39,15 +38,17 @@ export default function Followers(props) {
       followers = (await getFollowersPageInfos(user.token)).data.followers;
     } else {
       window.path = `/profile/${location.state.user.username}`;
-      followers = (
-        await getFollowersPageInfosId(location.state.user._id, user.token)
-      )?.data.followers;
+
+      const response = await getFollowersPageInfosId(
+        location.state.user._id,
+        user.token
+      );
+      if (response && response.data) {
+        followers = response.data.followers;
+      } else {
+      }
     }
     setFollowers(followers);
-
-    ///const test = await getFollowersPageInfos(user.token)
-    //console.log(test.data.followers)
-    ////setFollowers(test.data.followers)
   };
 
   const showFollowers = () => {
@@ -66,7 +67,7 @@ export default function Followers(props) {
               ) : (
                 <button
                   className='followBtn'
-                  onClick={() => handleFollow(follower._id)}
+                  // onClick={() => handleFollow(follower._id)}
                 >
                   Follow
                 </button>
@@ -94,7 +95,7 @@ export default function Followers(props) {
                 {location.state.user._id === user.id && (
                   <button
                     className='removeBtn'
-                    onClick={() => setSelectedUser(follower)}
+                    // onClick={() => setSelectedUser(follower)}
                   >
                     Remove
                   </button>

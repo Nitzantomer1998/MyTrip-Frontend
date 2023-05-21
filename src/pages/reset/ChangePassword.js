@@ -61,7 +61,6 @@ export default function ChangePassword({
         }}
         validationSchema={validatePassword}
         onSubmit={() => {
-          console.log('test');
           changePassword();
         }}
       >

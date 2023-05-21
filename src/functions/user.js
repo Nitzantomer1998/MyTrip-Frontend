@@ -275,19 +275,16 @@ export const getFollowersPageInfos = async (token) => {
 
 export const getFollowersPageInfosId = async (id, token) => {
   try {
-    console.log('reached to user.js begining');
-
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getFollowersPageInfosId/${id}`,
       {},
 
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      // {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // }
     );
-    console.log('reached to user.js');
 
     return { status: 'ok', data };
   } catch (error) {
@@ -297,19 +294,16 @@ export const getFollowersPageInfosId = async (id, token) => {
 
 export const getFollowingPageInfosId = async (id, token) => {
   try {
-    console.log('reached to user.js begining');
-
+    console.log("salut du backaubackdude")
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getFollowingPageInfosId/${id}`,
       {},
-
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      // {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //   },
+      // }
     );
-    console.log('reached to user.js');
 
     return { status: 'ok', data };
   } catch (error) {

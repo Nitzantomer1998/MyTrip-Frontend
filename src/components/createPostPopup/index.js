@@ -42,7 +42,6 @@ export default function CreatePostPopup({
       );
       setLoading(false);
       if (response.status === 'ok') {
-        console.log(response.data);
         dispatch({
           type: profile ? 'PROFILE_POSTS' : 'POSTS_SUCCESS',
           payload: [response.data, ...posts],
@@ -52,7 +51,6 @@ export default function CreatePostPopup({
         setText('');
         setVisible(false);
       } else {
-        console.log(response.data);
 
         setError(response);
       }
@@ -116,7 +114,6 @@ export default function CreatePostPopup({
         setError(response);
       }
     } else {
-      console.log('nothing');
     }
   };
   return (
