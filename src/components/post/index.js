@@ -211,7 +211,8 @@ export default function Post({ post, user, profile }) {
                   (react, i) =>
                     react.count > 0 && (
                       <img
-                        src={`../../../reacts/${react.react}.svg`}
+                        src={`../../../reacts/${react.react === 'recommend' ? 'love' : react.react}.svg`}
+                        
                         alt=''
                         key={i}
                       />
