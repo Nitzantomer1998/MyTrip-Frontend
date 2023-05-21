@@ -6,12 +6,10 @@ export default function LocationPosts({ location, user }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    console.log('Fetching posts for location:', location);
     fetchPostsByLocation();
   }, [location]);
 
   const fetchPostsByLocation = async () => {
-    console.log('Fetching posts for location:', location);
     const res = await getPostsByLocation(location, user.token); // Utiliser le résultat de la recherche des emplacements
     console.log('Response:', res);
     if (Array.isArray(res)) {

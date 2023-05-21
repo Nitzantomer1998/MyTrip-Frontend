@@ -30,7 +30,6 @@ function App() {
 
   const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => ({ ...state.user }));
-  console.log(user, 'u');
   const [{ loading, error, posts }, dispatch] = useReducer(postsReducer, {
     loading: false,
     posts: [],

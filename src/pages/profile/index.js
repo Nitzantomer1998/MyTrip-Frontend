@@ -35,7 +35,11 @@ export default function Profile({ getAllPosts }) {
     profile: {},
     error: '',
   });
+
+
+  
   useEffect(() => {
+    setActiveTab('about');
     getProfile();
   }, [userName]);
   useEffect(() => {
@@ -75,16 +79,6 @@ export default function Profile({ getAllPosts }) {
             }
           );
           setPhotos(images.data);
-
-          // const saved = await axios.get(
-          //   `${process.env.REACT_APP_BACKEND_URL}/getAllPostsSaved/${user?.username}`,
-          //   {
-          //     headers: {
-          //       Authorization: `Bearer ${user.token}`,
-          //     },
-          //   }
-          // );
-          // setSavedPosts(saved.data);
         } catch (error) {
           console.log(error);
         }
@@ -92,6 +86,7 @@ export default function Profile({ getAllPosts }) {
           type: 'PROFILE_SUCCESS',
           payload: data,
         });
+        window.scrollTo(0, 0);
       }
     } catch (error) {
       dispatch({
@@ -144,8 +139,9 @@ export default function Profile({ getAllPosts }) {
           <ProfileMenu
             activeTab={activeTab}
             setActiveTab={setActiveTab}
-            savedPosts={savedPosts}
+            savedPosts={savedPosts} // passez la variable d'état savedPosts au composant ProfileMenu
             user={user}
+            userName={userName}
           />
         </div>
       </div>
@@ -163,18 +159,22 @@ export default function Profile({ getAllPosts }) {
               }`}
             >
               <div className='profile_left' ref={leftSide}>
-                <Intro
-                  detailss={profile.details}
-                  visitor={visitor}
-                  setOthername={setOthername}
-                />
-                <Friends friends={profile.friends} />
+                {activeTab !== 'saved' && (
+                  <>
+                    <Intro
+                      detailss={profile.details}
+                      visitor={visitor}
+                      setOthername={setOthername}
+                    />
+                    <Friends friends={profile.friends} />
+                  </>
+                )}
               </div>
               <div className='profile_right'>
-                {!visitor && (
+                {!visitor && activeTab !== 'saved' && (
                   <CreatePost user={user} profile setVisible={setVisible} />
                 )}
-                <GridPosts />
+                {activeTab !== 'saved' && <GridPosts />}
                 <div className='posts'>
                   {activeTab === 'about' &&
                   profile.posts &&

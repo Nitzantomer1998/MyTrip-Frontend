@@ -20,7 +20,6 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
   const [posts, setPosts] = useState([]);
 
   const [locationResults, setLocationResults] = useState([]); // New state variable for location search results
-  console.log(user, 'pooooo');
   useClickOutside(menu, () => {
     setShowSearchMenu(false);
   });
@@ -68,7 +67,6 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
   };
 
   const locationSearchHandler = async (location) => {
-    console.log('Searching for location:', location);
     const fetchedPosts = await getPostsByLocation(location, user.token);
     setPosts(fetchedPosts);
   };

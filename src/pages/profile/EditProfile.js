@@ -38,8 +38,6 @@ export default function EditProfile() {
 
   const handleDeleteAccount = async () => {
     try {
-      console.log('Deleting account...');
-      console.log('user.id ' + user.id);
       console.log('user ' + JSON.stringify(user));
       await axios.delete(
         `${process.env.REACT_APP_BACKEND_URL}/deleteUser`,
