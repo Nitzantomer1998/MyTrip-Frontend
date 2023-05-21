@@ -2,7 +2,7 @@ import axios from 'axios';
 export const updateprofilePicture = async (url, token) => {
   try {
     const { data } = await axios.put(
-      `${process.env.REACT_APP_BACKEND_URL}/updateProfilePicture`,
+      `${process.env.REACT_APP_BACKEND_URL}/updateUserProfilePicture`,
       {
         url,
       },
@@ -276,8 +276,8 @@ export const getFollowersPageInfos = async (token) => {
 export const getFollowersPageInfosId = async (id, token) => {
   try {
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/getFollowersPageInfosId/${id}`,
-      {},
+      `${process.env.REACT_APP_BACKEND_URL}/getUserFollowersPage/${id}`,
+      {}
 
       // {
       //   headers: {
@@ -294,10 +294,10 @@ export const getFollowersPageInfosId = async (id, token) => {
 
 export const getFollowingPageInfosId = async (id, token) => {
   try {
-    console.log("salut du backaubackdude")
+    console.log('salut du backaubackdude');
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/getFollowingPageInfosId/${id}`,
-      {},
+      `${process.env.REACT_APP_BACKEND_URL}/getUserFollowingPage/${id}`,
+      {}
       // {
       //   headers: {
       //     Authorization: `Bearer ${token}`,
