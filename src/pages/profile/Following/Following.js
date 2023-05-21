@@ -28,21 +28,21 @@ export default function Following(props) {
 
   const fetchFollowing = async () => {
     let following = [];
-    if (location.state.user._id === user.id) {
-      window.path = '/profile';
-      following = (await getFollowingPageInfos(user.token)).data.following;
+    // if (location.state.user._id === user.id) {
+    //   window.path = '/profile';
+    //   following = (await getFollowingPageInfos(user.token)).data.following;
+    // } else {
+    window.path = `/profile/${location.state.user.username}`;
+    const response = await getFollowingPageInfosId(
+      location.state.user._id,
+      user.token
+    );
+    console.log(response, 'RESPONSE');
+    if (response && response.data) {
+      following = response.data.following;
     } else {
-      window.path = `/profile/${location.state.user.username}`;
-      const response = await getFollowingPageInfosId(
-        location.state.user._id,
-        user.token
-      );
-      console.log(response, 'RESPONSE');
-      if (response && response.data) {
-        following = response.data.following;
-      } else {
-      }
     }
+    // }
     setFollowing(following);
   };
 

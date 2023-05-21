@@ -33,21 +33,21 @@ export default function Followers(props) {
 
   const fetchFriends = async () => {
     let followers = [];
-    if (location.state.user._id === user.id) {
-      window.path = '/profile';
-      followers = (await getFollowersPageInfos(user.token)).data.followers;
-    } else {
-      window.path = `/profile/${location.state.user.username}`;
+    // if (location.state.user._id === user.id) {
+    //   window.path = '/profile';
+    //   followers = (await getFollowersPageInfos(user.token)).data.followers;
+    // } else {
+    window.path = `/profile/${location.state.user.username}`;
 
-      const response = await getFollowersPageInfosId(
-        location.state.user._id,
-        user.token
-      );
-      if (response && response.data) {
-        followers = response.data.followers;
-      } else {
-      }
+    const response = await getFollowersPageInfosId(
+      location.state.user._id,
+      user.token
+    );
+    if (response && response.data) {
+      followers = response.data.followers;
+    } else {
     }
+    // }
     setFollowers(followers);
   };
 
