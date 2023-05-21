@@ -1,48 +1,88 @@
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Post from '../../components/post/index';
+import { Link } from 'react-router-dom';
 
-export default function ProfileMenu({ activeTab, setActiveTab, user }) {
+export default function ProfileMenu({
+  activeTab,
+  setActiveTab,
+  user,
+  userName,
+}) {
   const [savedPosts, setSavedPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
 
   const handleClick = (tab) => {
     setActiveTab(tab);
   };
 
   const getSavedPosts = async () => {
-    // try {
-    //   const response = await axios.get(
-    //     `${process.env.REACT_APP_BACKEND_URL}/getAllPostsSaved/${user?.username}`,
-    //     {
-    //       headers: {
-    //         Authorization: `Bearer ${user.token}`,
-    //       },
-    //     }
-    //   );
-    //   console.log('Saved Posts:', response.data); // Ajouter cette ligne pour vérifier les données renvoyées par l'API
-
-    //   setSavedPosts(response.data);
-    // } catch (error) {
-    //   console.error('Error fetching saved posts:', error);
-    // }
-  
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/getAllPostsSaved/${userName}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setSavedPosts(response.data);
+    } catch (error) {
+      console.error('Error fetching saved posts:', error);
+    }
   };
 
   useEffect(() => {
     if (activeTab === 'saved') {
       getSavedPosts();
     }
-  }, [activeTab]);
+  }, [activeTab, userName]);
+
+  const handleUnsave = async (postId) => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_BACKEND_URL}/unsavePost/${postId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+
+      const updatedSavedPosts = savedPosts.filter(
+        (post) => post._id !== postId
+      );
+      setSavedPosts(updatedSavedPosts);
+    } catch (error) {
+      console.error('Error unsaving post:', error);
+    }
+  };
 
   const renderSavedPosts = () => {
     if (activeTab === 'saved') {
-      console.log('Saved Posts:', savedPosts); // Ajouter cette ligne pour vérifier les données des posts sauvegardés
-
       return savedPosts.map((post) => (
-        <div key={post.id} className='saved-post'>
-          <h3>{post.title}</h3>
-          <p>{post.content}</p>
-        </div>
+        <Post
+          key={post._id}
+          post={post}
+          user={user}
+          profile={true}
+          handleUnsave={handleUnsave}
+        />
+      ));
+    }
+    return null;
+  };
+
+  const renderLikedPosts = () => {
+    if (activeTab === 'liked') {
+      return likedPosts.map((post) => (
+        <Post
+          key={post._id}
+          post={post}
+          user={user}
+          profile={true}
+          handleUnsave={handleUnsave}
+        />
       ));
     }
     return null;
@@ -81,7 +121,11 @@ export default function ProfileMenu({ activeTab, setActiveTab, user }) {
         </Link>
       </div>
 
-      <div className='saved-posts'>{renderSavedPosts()}</div>
+      {activeTab === 'saved' && (
+        <div>
+          <div className='saved-posts'>{renderSavedPosts()}</div>
+        </div>
+      )}
     </div>
   );
 }

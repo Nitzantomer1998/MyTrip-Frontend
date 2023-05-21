@@ -1,4 +1,4 @@
-export default function Saved({ getAllPosts }) {
+export default function Saved({ }) {
   return (
     <div>
       <h1>saved</h1>
