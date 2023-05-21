@@ -12,7 +12,7 @@ export default function ChangePassword({
   error,
   loading,
   setLoading,
-  userInfos,
+  user,
   setError,
 }) {
   const navigate = useNavigate();
@@ -33,14 +33,18 @@ export default function ChangePassword({
   const changePassword = async () => {
     try {
       setLoading(true);
-      const temp = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/changePassword`, {
-        userInfos,
-        password,
-      });
+      const temp = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/changeUserPassword`,
+        { password },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       console.log('1');
-      console.log("temp " + JSON.stringify(temp)); //SUCESS PRINT USER
+      console.log('temp ' + JSON.stringify(temp)); //SUCESS PRINT USER
 
-    
       setError('');
       navigate('/');
     } catch (error) {
