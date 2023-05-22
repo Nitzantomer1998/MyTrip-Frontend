@@ -28,10 +28,7 @@ export default function RegisterForm({ setVisible }) {
       .required("What's your username ?")
       .min(2, 'username must be between 2 and 16 characters.')
       .max(16, 'username must be between 2 and 16 characters.')
-      .matches(
-        /^[aA-zZ ]+$/,
-        'Numbers and special characters are not allowed.'
-      ),
+      .matches(/^[A-Za-z0-9 ]+$/, 'Special characters are not allowed.'),
     email: Yup.string()
       .required("You'll need this when you log in (enter a valid email).")
       .email('Enter a valid email address.'),
