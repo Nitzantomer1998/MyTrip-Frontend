@@ -211,8 +211,9 @@ export default function Post({ post, user, profile }) {
                   (react, i) =>
                     react.count > 0 && (
                       <img
-                        src={`../../../reacts/${react.react === 'recommend' ? 'love' : react.react}.svg`}
-                        
+                        src={`../../../reacts/${
+                          react.react === 'recommend' ? 'love' : react.react
+                        }.svg`}
                         alt=''
                         key={i}
                       />
@@ -247,34 +248,36 @@ export default function Post({ post, user, profile }) {
           }}
           onClick={() => reactHandler(check ? check : 'like')}
         >
-        {check === 'like' || check === 'recommend' ? (
-          <img
-            src={`../../../reacts/${check === 'recommend' ? 'love' : check}.svg`}
-            alt=""
-            className="small_react"
-            style={{ width: "18px" }}
-          />
-        ) : (
-          <i className="like_icon"></i>
-        )}
+          {check === 'like' || check === 'recommend' ? (
+            <img
+              src={`../../../reacts/${
+                check === 'recommend' ? 'love' : check
+              }.svg`}
+              alt=''
+              className='small_react'
+              style={{ width: '18px' }}
+            />
+          ) : (
+            <i className='like_icon'></i>
+          )}
           <span
             style={{
               color: `
           
           ${
-            check === "like"
-              ? "#4267b2"
-              : check === "recommend"
-              ? "#f63459"
-              : check === "haha"
-              ? "#f7b125"
-              : check === "sad"
-              ? "#f7b125"
-              : check === "wow"
-              ? "#f7b125"
-              : check === "angry"
-              ? "#e4605a"
-              : ""
+            check === 'like'
+              ? '#4267b2'
+              : check === 'recommend'
+              ? '#f63459'
+              : check === 'haha'
+              ? '#f7b125'
+              : check === 'sad'
+              ? '#f7b125'
+              : check === 'wow'
+              ? '#f7b125'
+              : check === 'angry'
+              ? '#e4605a'
+              : ''
           }
           `,
             }}
