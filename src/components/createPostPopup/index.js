@@ -135,11 +135,7 @@ export default function CreatePostPopup({
           <img src={user.picture} alt='' className='box_profile_img' />
           <div className='box_col'>
             <div className='box_profile_name'>{user?.username}</div>
-            <div className='box_privacy'>
-              <img src='../../../icons/public.png' alt='' />
-              <span>Public</span>
-              <i className='arrowDown_icon'></i>
-            </div>
+
           </div>
         </div>
 

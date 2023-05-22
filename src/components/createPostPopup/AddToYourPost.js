@@ -12,9 +12,6 @@ export default function AddToYourPost({ setShowPrev }) {
         <Photo color='#45bd62' />
       </div>
 
-      <div className='post_header_right hover1'>
-        <i className='maps_icon'></i>
-      </div>
     </div>
   );
 }

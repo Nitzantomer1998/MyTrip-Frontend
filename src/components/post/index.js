@@ -9,6 +9,7 @@ import PostMenu from './PostMenu';
 import { comment, getReacts, reactPost } from '../../functions/post';
 import Comment from './Comment';
 import SharePost from './SharePost';
+import icon from '../../images/location.png';
 
 export default function Post({ post, user, profile }) {
   const [visible, setVisible] = useState(false);
@@ -147,11 +148,8 @@ export default function Post({ post, user, profile }) {
       ) : post.type === null ? (
         <>
           {post.location && (
-            <div className='post_text'>
-              <img
-                src='https://img.icons8.com/?size=512&id=59830&format=png'
-                width={20}
-              ></img>{' '}
+            <div className='post_textt'>
+              <img className='image_location' src={icon} width={15}></img>{' '}
               {post.location}
             </div>
           )}

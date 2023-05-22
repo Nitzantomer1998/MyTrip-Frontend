@@ -1,7 +1,12 @@
 .pictureBox {
   width: 700px !important;
-
   height: 700px;
+}
+.Update_profile_picture {
+  color: black;
+}
+.your_profile_picture {
+  color: black;
 }
 .update_picture_wrap {
   padding: 10px 15px;
@@ -75,13 +80,13 @@
   align-items: center;
   justify-content: center;
 }
-.slider input[type="range"] {
+.slider input[type='range'] {
   -webkit-appearance: none;
   width: 55%;
   height: 4px;
   background: #ced0d4;
 }
-.slider input[type="range"]::-webkit-slider-thumb {
+.slider input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
