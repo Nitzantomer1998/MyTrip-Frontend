@@ -12,9 +12,15 @@ export default function ChangePassword({
   error,
   loading,
   setLoading,
-  user,
+  userInfos,
   setError,
+  user,
 }) {
+  console.log(`user : ${JSON.stringify(user)}`);
+  const {
+    user: { token },
+  } = user;
+  console.log(`token : ${JSON.stringify(token)}`);
   const navigate = useNavigate();
   const validatePassword = Yup.object({
     password: Yup.string()
@@ -38,7 +44,7 @@ export default function ChangePassword({
         { password },
         {
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
