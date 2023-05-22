@@ -59,6 +59,7 @@ export default function UpdateProfilePicture({
       let formData = new FormData();
       formData.append('file', blob);
       formData.append('path', path);
+      console.log(`user.token updateProfilePicture = ${user.token}`);
       const res = await uploadImages(formData, path, user.token);
       const updated_picture = await updateprofilePicture(
         res[0].url,
@@ -67,6 +68,7 @@ export default function UpdateProfilePicture({
       if (updated_picture === 'ok') {
         const new_post = await createPost(
           'profilePicture',
+          null,
           null,
           description,
           res,
