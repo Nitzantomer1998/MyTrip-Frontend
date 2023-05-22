@@ -23,3 +23,33 @@
     max-width: 100%;
   }
 }
+
+.terms-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-secondary);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  z-index: 1000;
+  width: 100%;
+  max-width: 300px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.terms-popup button {
+  position: fixed;
+  left: -10px;
+  top: 14px;
+  margin-left: 380px;
+  font-size: 20px;
+}
+
+@media (min-width: 539px) {
+  .terms-popup {
+    max-width: 100%;
+  }
+}

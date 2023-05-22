@@ -224,7 +224,7 @@ export default function Post({ post, user, profile }) {
         </div>
         <div className='to_right'>
           <div className='comments_count'>{comments.length} comments</div>
-          <div className='share_count'>0 share</div>
+          {/* <div className='share_count'>0 share</div> */}
         </div>
       </div>
       <div className='post_actions'>

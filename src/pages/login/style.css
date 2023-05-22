@@ -149,6 +149,10 @@
   flex-direction: column;
   gap: 10px;
 }
+
+.reg_input_username {
+  width: 368px !important;
+}
 .reg_col {
   position: relative;
   align-self: flex-start;

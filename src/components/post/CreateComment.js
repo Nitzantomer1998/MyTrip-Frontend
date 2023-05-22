@@ -124,12 +124,12 @@ export default function CreateComment({ user, postId, setComments, setCount }) {
           >
             <i className="emoji_icon"></i>
           </div>
-          <div
+          {/* <div
             className="comment_circle_icon hover2"
             onClick={() => imgInput.current.click()}
           >
             <i className="camera_icon"></i>
-          </div>
+          </div> */}
           
           
         </div>

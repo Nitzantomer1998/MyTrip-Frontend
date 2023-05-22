@@ -7,6 +7,7 @@ import DotLoader from 'react-spinners/DotLoader';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
+import './style.css';
 import { useNavigate } from 'react-router-dom';
 export default function RegisterForm({ setVisible }) {
   const dispatch = useDispatch();
@@ -18,11 +19,18 @@ export default function RegisterForm({ setVisible }) {
     gender: '',
   };
   const [user, setUser] = useState(userInfos);
+  const [showTerms, setShowTerms] = useState(false);
+
   const { username, email, password, gender } = user;
   const handleRegisterChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
+
+  const handleTermsClick = () => {
+    setShowTerms(true);
+  };
+
   const registerValidation = Yup.object({
     username: Yup.string()
       .required("What's your username ?")
@@ -106,6 +114,7 @@ export default function RegisterForm({ setVisible }) {
                 <RegisterInput
                   type='text'
                   placeholder='Username'
+                  className='reg_input_username'
                   name='username'
                   onChange={handleRegisterChange}
                 />
@@ -141,8 +150,73 @@ export default function RegisterForm({ setVisible }) {
 
               <div className='reg_infos'>
                 By clicking Sign Up, you agree to our{' '}
-                <span>Terms & conditions &nbsp;</span>
-                and <span>Cookie Policy.</span>
+                <span onClick={handleTermsClick}>
+                  Terms & conditions &nbsp;
+                </span>
+                {showTerms && (
+                  <div className='terms-popup'>
+                    <p>
+                      <p>Terms & conditions</p>
+                      General Conditions of Use of the "MyTrip" Social Network
+                      Introduction Welcome to MyTrip. By using our social
+                      network, you agree to these terms of use. Please read them
+                      carefully. Registration To use MyTrip, you must create an
+                      account. You agree to provide accurate and complete
+                      information when registering and to update such
+                      information as necessary. Privacy Your privacy is
+                      important to us. Our Privacy Policy explains how we
+                      collect, use and protect your information. Using MyTrip
+                      You are responsible for all activity on your MyTrip
+                      account. You must not harass, threaten or intimidate other
+                      users, or post any content that is unlawful, offensive,
+                      hateful, obscene, discriminatory or defamatory. Content
+                      You retain all rights to the content you post on MyTrip.
+                      However, by posting content, you grant us a non-exclusive,
+                      transferable, sublicensable, royalty-free, worldwide
+                      license to use, modify, distribute, adapt and display such
+                      content on MyTrip. Breach of Terms If you breach these
+                      terms, we reserve the right to suspend or terminate your
+                      account. Limitation of Liability MyTrip is not responsible
+                      for the content posted by users, the actions of users, or
+                      any loss or damage that may result therefrom.
+                      Modifications We reserve the right to modify these terms
+                      of use at any time. The modifications will come into force
+                      as soon as they are published on MyTrip. Applicable Law
+                      These terms of use are governed by French law and any
+                      dispute will be settled by the French courts.
+                      <p>Cookie Policy</p>
+                      <p>
+                        What is a cookie ? A cookie is a small text file stored
+                        on your computer, tablet or smartphone when you visit a
+                        website. Use of Cookies by MyTrip We use cookies to
+                        improve user experience, remember your preferences,
+                        provide social media functionality and gather statistics
+                        about the use of our site. Types of Cookies Used
+                        Functionality Cookies: These cookies allow us to
+                        remember the choices you have made on our site.
+                        Performance Cookies: These cookies collect information
+                        about the use of our site, such as the most visited
+                        pages and error messages received. Advertising Cookies:
+                        These cookies collect information about your browsing
+                        habits in order to provide you with advertisements that
+                        are of interest to you. Cookie management You have the
+                        choice to accept or refuse cookies. You can modify your
+                        browser settings to refuse cookies or to be notified
+                        when a cookie is installed. Amendments We reserve the
+                        right to modify this cookie policy at any time. The
+                        modifications will come into force as soon as they are
+                        published on MyTrip.
+                      </p>
+                    </p>
+                    <button
+                      className='close_popup'
+                      onClick={() => setShowTerms(false)}
+                    >
+                      X
+                    </button>
+                  </div>
+                )}
+                and <span onClick={handleTermsClick}>Cookie Policy.</span>
               </div>
 
               <div className='reg_btn_wrapper'>
