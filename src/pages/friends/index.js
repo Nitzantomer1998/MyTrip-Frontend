@@ -26,7 +26,8 @@ export default function Friends() {
 
   const getData = async () => {
     dispatch({ type: 'FOLLOWING_REQUEST' });
-    const responseData = await getFollowingPageInfos(user.token);
+    console.log(`user  : ${user}`);
+    const responseData = await getFollowingPageInfos(user);
     if (responseData.status === 'ok') {
       dispatch({ type: 'FOLLOWING_SUCCESS', payload: responseData.data });
     } else {
