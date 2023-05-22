@@ -241,6 +241,7 @@ export const getFriendsPageInfos = async (token) => {
 
 export const getFollowingPageInfos = async (token) => {
   try {
+    console.log(`token ${token}`);
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getFollowingPageInfos`,
 
@@ -275,15 +276,15 @@ export const getFollowersPageInfos = async (token) => {
 
 export const getFollowersPageInfosId = async (id, token) => {
   try {
+    console.log(`token ${token}`);
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getUserFollowersPage/${id}`,
-      {}
 
-      // {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // }
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     return { status: 'ok', data };
@@ -294,15 +295,14 @@ export const getFollowersPageInfosId = async (id, token) => {
 
 export const getFollowingPageInfosId = async (id, token) => {
   try {
-    console.log('salut du backaubackdude');
+    console.log(`token ${token}`);
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getUserFollowingPage/${id}`,
-      {}
-      // {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // }
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     return { status: 'ok', data };
