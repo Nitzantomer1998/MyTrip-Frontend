@@ -78,7 +78,7 @@ export default function ProfielPictureInfos({
               : `${profile?.followers.length}`}
           </div>
         )}
-        <Link to='/followers' state={{user: profile}} className='hover1'>
+        <Link to='/followers' state={{ user: profile }} className='hover1'>
           Followers
         </Link>
       </div>
@@ -93,19 +93,20 @@ export default function ProfielPictureInfos({
               : `${profile?.following.length}`}
           </div>
         )}
-        <Link to='/following' state={{user: profile}} className='hover1'>
+        <Link to='/following' state={{ user: profile }} className='hover1'>
           Following
         </Link>
       </div>
 
       <div className='following'>
         {profile?.following && (
-          <div className='profile_following_count'>
-            {profile?.following.length === 0
+          <div className='profile_recommend_count'>
+            {/* {profile?.following.length === 0
               ? '0'
               : profile?.following.length === 1
               ? '1'
-              : `${profile?.following.length}`}
+              : `${profile?.following.length}`} */}
+            0
           </div>
         )}
         {/* <Link to='/' className='hover1'> */}
