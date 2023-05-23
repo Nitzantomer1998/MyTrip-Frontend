@@ -1,6 +1,9 @@
 .posts {
   margin-top: 1rem;
   width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 .post {
   position: relative;
@@ -11,6 +14,9 @@
   user-select: none;
   color: var(--color-primary);
   margin-bottom: 10px;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 .post_header {
   display: flex;
@@ -68,9 +74,8 @@
 .post_textt {
   padding: 0 15px 10px 15px;
   font-weight: bold;
-  color:rgb(210, 35, 35);
+  color: rgb(210, 35, 35);
 }
-
 
 /*-----------------------------GRID IMAGES----------------*/
 .grid_1 img {
@@ -604,4 +609,11 @@
     width: 10px;
     height: 10px;
   }
+}
+.posts {
+  word-wrap: break-word;
+}
+
+.post {
+  word-break: break-word;
 }

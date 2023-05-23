@@ -29,6 +29,8 @@ export default function Profile({ getAllPosts }) {
   var userName = username === undefined ? user.username : username;
   const [activeTab, setActiveTab] = useState('about');
   const [savedPosts, setSavedPosts] = useState([]); // ajout d'une nouvelle variable d'état pour les posts sauvegardés
+  const [likedPosts, setLikedPosts] = useState([]); // ajout d'une nouvelle variable d'état pour les posts likés
+  const [recommendedPosts, setRecommendedPosts] = useState([]); // ajout d'une nouvelle variable d'état pour les posts recommandés
 
   const [{ loading, error, profile }, dispatch] = useReducer(profileReducer, {
     loading: false,
@@ -36,8 +38,6 @@ export default function Profile({ getAllPosts }) {
     error: '',
   });
 
-
-  
   useEffect(() => {
     setActiveTab('about');
     getProfile();
@@ -139,7 +139,9 @@ export default function Profile({ getAllPosts }) {
           <ProfileMenu
             activeTab={activeTab}
             setActiveTab={setActiveTab}
-            savedPosts={savedPosts} // passez la variable d'état savedPosts au composant ProfileMenu
+            savedPosts={savedPosts}
+            likedPosts={likedPosts}
+            recommendedPosts={recommendedPosts}
             user={user}
             userName={userName}
           />
@@ -159,22 +161,24 @@ export default function Profile({ getAllPosts }) {
               }`}
             >
               <div className='profile_left' ref={leftSide}>
-                {activeTab !== 'saved' && (
-                  <>
-                    <Intro
-                      detailss={profile.details}
-                      visitor={visitor}
-                      setOthername={setOthername}
-                    />
-                    <Friends friends={profile.friends} />
-                  </>
-                )}
+                {activeTab !== 'saved' &&
+                  activeTab !== 'liked' &&
+                  activeTab !== 'recommended' && (
+                    <>
+                      <Intro
+                        detailss={profile.details}
+                        visitor={visitor}
+                        setOthername={setOthername}
+                      />
+                      <Friends friends={profile.friends} />
+                    </>
+                  )}
               </div>
               <div className='profile_right'>
-                {!visitor && activeTab !== 'saved' && (
+                {!visitor && activeTab === 'about' && (
                   <CreatePost user={user} profile setVisible={setVisible} />
                 )}
-                {activeTab !== 'saved' && <GridPosts />}
+                {activeTab === 'about' && <GridPosts />}
                 <div className='posts'>
                   {activeTab === 'about' &&
                   profile.posts &&
@@ -182,12 +186,7 @@ export default function Profile({ getAllPosts }) {
                     ? profile.posts.map((post) => (
                         <Post post={post} user={user} key={post._id} profile />
                       ))
-                    : activeTab === 'saved' &&
-                      savedPosts.map((post) => (
-                        <Post post={post} user={user} key={post._id} profile />
-                      ))}
-                  {activeTab === 'liked' && <Liked />}
-                  {activeTab === 'recommended' && <Recommended />}
+                    : ''}
                 </div>
               </div>
             </div>
