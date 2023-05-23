@@ -78,30 +78,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
-
-### Project Structure 
-
-The tree below displays the main files and folders structure.
-textile
-├── .Circleci    // folder for the CI process 
-    ├── config.yml
-├── model   // contains model class files that include the properties of the objects
-    ├── user //User functionality
-├── public
-    ├── index // react app
-├── views // contains HTML files for the application
-├── src
-    ├── index // For the server
-    ├── components  // the components that handle user interaction
-    ├── pages  // management of the page
-├── test
-├── .eslintrc.json  //configuration file
-├── .gitignore     //Contains the files we don't want to track in git
-├── .nodemon.json  //contains the environmental variables
-├── .package-lock.json //For version management of our project
-├── .package.json //Includes all dependencies and devDependepncies
-├── README.md
-
 ## Authors
 
 * Gad Nadjar
