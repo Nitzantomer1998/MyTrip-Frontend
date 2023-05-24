@@ -16,6 +16,9 @@ export default function EditProfile() {
   const { user } = useSelector((state) => state);
   const [userInfos, setUserInfos] = useState({ user });
 
+  const {
+    user: { token },
+  } = user;
   // useEffect(() => {
   //   setUserInfos({ email: user ? user.email : '' });
   // }, [user]);
@@ -41,7 +44,7 @@ export default function EditProfile() {
       console.log('user ' + JSON.stringify(user));
       await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/deleteUser`, {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       setPassword('');
