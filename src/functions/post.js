@@ -202,3 +202,110 @@ export const getPostsByLocation = async (location, token) => {
     return error.response.data.message;
   }
 };
+export const addLike = async (id, token) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/addLike/${id}`,
+      {},
+
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return 'ok';
+  } catch (error) {
+    console.log(error.response.data.message);
+    return error.response.data.message;
+  }
+};
+export const removeLike = async (id, token) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/removeLike/${id}`,
+      {},
+
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return 'ok';
+  } catch (error) {
+    console.log(error.response.data.message);
+    return error.response.data.message;
+  }
+};
+
+export const addRecommend = async (id, token) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/addRecommend/${id}`,
+      {},
+
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return 'ok';
+  } catch (error) {
+    console.log(error.response.data.message);
+    return error.response.data.message;
+  }
+};
+export const removeRecommend = async (id, token) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/removeRecommend/${id}`,
+      {},
+
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return 'ok';
+  } catch (error) {
+    console.log(error.response.data.message);
+    return error.response.data.message;
+  }
+};
+export const getPostLikes = async (id, token) => {
+  try {
+    console.log(`token ${token}`);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/getPostLikes/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return { status: 'ok', data };
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
+export const getPostRecommends = async (id, token) => {
+  try {
+    console.log(`token ${token}`);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/getPostRecommends/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return { status: 'ok', data };
+  } catch (error) {
+    return error.response.data.message;
+  }
+};

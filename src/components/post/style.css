@@ -278,6 +278,10 @@
   align-items: center;
   gap: 5px;
 }
+.reacts_count_num:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
 .reacts_count_imgs {
   display: flex;
   align-items: center;
@@ -286,6 +290,25 @@
 .reacts_count_imgs img {
   width: 18px;
 }
+.likeRow img {
+  width: 18px;
+}
+.likeRow {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+.recommendRow img {
+  width: 18px;
+}
+.recommend {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
 .reacts_count_num {
   font-size: 14px;
   color: var(--color-secondary);
@@ -305,7 +328,7 @@
 .post_actions {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   padding: 0 8px 5px 8px;
   border-top: 1px solid var(--bg-third);
   border-bottom: 1px solid var(--bg-third);
@@ -605,3 +628,8 @@
     height: 10px;
   }
 }
+.button:active {
+  /* CSS properties for active state */
+  background-color: darkgray;
+}
+

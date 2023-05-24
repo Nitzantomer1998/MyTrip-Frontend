@@ -6,10 +6,21 @@ import ReactsPopup from './ReactsPopup';
 import { useEffect, useRef, useState } from 'react';
 import CreateComment from './CreateComment';
 import PostMenu from './PostMenu';
-import { comment, getReacts, reactPost } from '../../functions/post';
+import {
+  comment,
+  getReacts,
+  addLike,
+  removeLike,
+  addRecommend,
+  removeRecommend,
+  reactPost,
+} from '../../functions/post';
 import Comment from './Comment';
 import SharePost from './SharePost';
 import icon from '../../images/location.png';
+import Reactions from '../../pages/home/Reactions/Reactions';
+import { getPostLikes, getPostRecommends } from '../../functions/post';
+import { useSelector } from 'react-redux';
 
 export default function Post({ post, user, profile }) {
   const [visible, setVisible] = useState(false);
@@ -20,21 +31,86 @@ export default function Post({ post, user, profile }) {
   const [count, setCount] = useState(1);
   const [checkSaved, setCheckSaved] = useState();
   const [comments, setComments] = useState([]);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [likedUsers, setLikedUsers] = useState([]);
+  const [recommendedUsers, setRecommendedUsers] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
+  let [likesCount, setLikesCount] = useState(0);
+  const [isRecommend, setIsRecommend] = useState(false);
+  let [recommendsCount, setRecommendsCount] = useState(0);
+  const [isPressed, setIsPressed] = useState(['like', 'unlike']);
+  const [reactionsPopUp, setReactionsPopUp] = useState(null);
 
-  useEffect(() => {
-    getPostReacts();
-  }, [post]);
+ 
   useEffect(() => {
     setComments(post?.comments);
   }, [post]);
 
-  const getPostReacts = async () => {
-    const res = await getReacts(post?._id, user?.token);
-    setReacts(res.reacts);
-    setCheck(res.check);
-    setTotal(res.total);
-    setCheckSaved(res.checkSaved);
+  useEffect(() => {
+    const fetchPostLikes = async () => {
+      const likes = await getPostLikes(post._id, user.token);
+      setLikesCount(likes.data.likes.length);
+      let i = 0;
+      let found = false;
+      while (i < likes.data.likes.length && !found) {
+        if (
+          likes.data.likes[i].like &&
+          likes.data.likes[i].like._id === user.id
+        ) {
+          setIsLiked(true);
+        }
+        i++;
+      }
+    };
+    fetchPostLikes();
+  }, [post._id, user.token]);
+
+  useEffect(() => {
+    const fetchPostRecommends = async () => {
+      const recommends = await getPostRecommends(post._id, user.token);
+      setRecommendsCount(recommends.data.recommends.length);
+      let i = 0;
+      let found = false;
+
+      while (i < recommends.data.recommends.length && !found) {
+        if (
+          recommends.data.recommends[i].recommend &&
+          recommends.data.recommends[i].recommend._id ===
+            user.id
+        ) {
+          setIsRecommend(true);
+        }
+        i++;
+      }
+    };
+    fetchPostRecommends();
+  }, [post._id, user.token]);
+
+  const handleAddLike = async () => {
+    if (!isLiked) {
+      await addLike(post._id, user.token);
+      setIsLiked(true);
+      setLikesCount(likesCount + 1);
+    } else {
+      await removeLike(post._id, user.token);
+      setIsLiked(false);
+      setLikesCount(likesCount - 1);
+    }
   };
+
+  const handleAddRecommend = async () => {
+    if (!isRecommend) {
+      await addRecommend(post._id, user.token);
+      setIsRecommend(true);
+      setRecommendsCount(recommendsCount + 1);
+    } else {
+      await removeRecommend(post._id, user.token);
+      setIsRecommend(false);
+      setRecommendsCount(recommendsCount - 1);
+    }
+  };
+
+ 
 
   const handleShareSuccess = () => {
     alert('Post shared successfully!');
@@ -44,46 +120,7 @@ export default function Post({ post, user, profile }) {
     alert('Failed to share post!');
   };
 
-  const reactHandler = async (type) => {
-    reactPost(post?._id, type, user.token);
-    if (check == type) {
-      setCheck();
-      let index = reacts.findIndex((x) => x.react == check);
-      if (index !== -1) {
-        const reactCopy = [...reacts];
-        reactCopy[index] = {
-          ...reactCopy[index],
-          count: reactCopy[index].count + 1,
-        };
-        setReacts(reactCopy);
-        setTotal((prev) => --prev);
-      }
-    } else {
-      setCheck(type);
-      let index = reacts.findIndex((x) => x.react == type);
-      let index1 = reacts.findIndex((x) => x.react == check);
-      if (index !== -1) {
-        const reactCopy = [...reacts];
-        reactCopy[index] = {
-          ...reactCopy[index],
-          count: reactCopy[index].count + 1,
-        };
-        setReacts(reactCopy);
-        setTotal((prev) => ++prev);
-        console.log(reacts);
-      }
-      if (index1 !== -1) {
-        const reactCopy = [...reacts];
-        reactCopy[index] = {
-          ...reactCopy[index],
-          count: reactCopy[index].count + 1,
-        };
-        setReacts(reactCopy);
-        setTotal((prev) => --prev);
-        console.log(reacts);
-      }
-    }
-  };
+ 
   const showMore = () => {
     setCount((prev) => prev + 3);
   };
@@ -199,26 +236,24 @@ export default function Post({ post, user, profile }) {
       <div className='post_infos'>
         <div className='reacts_count'>
           <div className='reacts_count_imgs'>
-            {reacts &&
-              reacts
-                .sort((a, b) => {
-                  return b.count - a.count;
-                })
-                .slice(0, 3)
-                .map(
-                  (react, i) =>
-                    react.count > 0 && (
-                      <img
-                        src={`../../../reacts/${
-                          react.react === 'recommend' ? 'love' : react.react
-                        }.svg`}
-                        alt=''
-                        key={i}
-                      />
-                    )
-                )}
+            {likesCount && likesCount > 0 ? (
+              <img src={`../../../reacts/like.svg`} alt='' />
+            ) : (
+              <></>
+            )}
+
+            {recommendsCount && recommendsCount > 0 ? (
+              <img src={`../../../reacts/love.svg`} alt='' />
+            ) : (
+              <></>
+            )}
           </div>
-          <div className='reacts_count_num'>{total > 0 && total}</div>
+          <div
+            className='reacts_count_num'
+            onClick={() => setSelectedPost(post)}
+          >
+            {likesCount + recommendsCount > 0 && likesCount + recommendsCount}
+          </div>
         </div>
         <div className='to_right'>
           <div className='comments_count'>{comments.length} comments</div>
@@ -226,62 +261,21 @@ export default function Post({ post, user, profile }) {
         </div>
       </div>
       <div className='post_actions'>
-        <ReactsPopup
-          visible={visible}
-          setVisible={setVisible}
-          reactHandler={reactHandler}
-          user={user}
-        />
-        <div
-          className='post_action hover1'
-          onMouseOver={() => {
-            setTimeout(() => {
-              setVisible(true);
-            }, 500);
-          }}
-          onMouseLeave={() => {
-            setTimeout(() => {
-              setVisible(false);
-            }, 500);
-          }}
-          onClick={() => reactHandler(check ? check : 'like')}
-        >
-          {check === 'like' || check === 'recommend' ? (
-            <img
-              src={`../../../reacts/${
-                check === 'recommend' ? 'love' : check
-              }.svg`}
-              alt=''
-              className='small_react'
-              style={{ width: '18px' }}
-            />
-          ) : (
-            <i className='like_icon'></i>
-          )}
-          <span
-            style={{
-              color: `
-          
-          ${
-            check === 'like'
-              ? '#4267b2'
-              : check === 'recommend'
-              ? '#f63459'
-              : check === 'haha'
-              ? '#f7b125'
-              : check === 'sad'
-              ? '#f7b125'
-              : check === 'wow'
-              ? '#f7b125'
-              : check === 'angry'
-              ? '#e4605a'
-              : ''
-          }
-          `,
-            }}
-          >
-            {check ? check : 'Like'}
-          </span>
+        <div className='post_action hover1'>
+          <div className='likeRow' onClick={handleAddLike}>
+            <span style={{ color: isLiked ? '#1877F2' : 'gray' }}>
+              {isLiked && <img src='../../../reacts/like.svg' alt='' />}
+              Like{' '}
+            </span>
+          </div>
+        </div>
+        <div className='post_action hover1'>
+          <div className='recommendRow' onClick={handleAddRecommend}>
+            <span style={{ color: isRecommend ? '#F36B7E' : 'gray' }}>
+              {isRecommend && <img src='../../../reacts/love.svg' alt='' />}
+              Recommend{' '}
+            </span>
+          </div>
         </div>
         <div className='post_action hover1'>
           <i className='comment_icon'></i>
@@ -334,6 +328,15 @@ export default function Post({ post, user, profile }) {
           images={post.images}
           postRef={postRef}
         />
+      )}
+      {selectedPost ? (
+        <Reactions
+          post={selectedPost}
+          user={user}
+          closeModal={() => setSelectedPost(null)}
+        />
+      ) : (
+        <></>
       )}
     </div>
   );
