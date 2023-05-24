@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './style.css';
 import Header from '../../components/header/index';
 import ChangePassword from '../reset/ChangePassword';
-import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
+import { useDispatch } from 'react-redux';
 
 export default function EditProfile() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -19,6 +21,8 @@ export default function EditProfile() {
   const {
     user: { token },
   } = user;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // useEffect(() => {
   //   setUserInfos({ email: user ? user.email : '' });
   // }, [user]);
@@ -52,6 +56,11 @@ export default function EditProfile() {
       setError('');
       setShowDeleteConfirmation(false);
       console.log('Account deleted!');
+      Cookies.remove('user');
+      dispatch({
+        type: 'LOGOUT',
+      });
+      navigate('/login');
     } catch (error) {
       console.log('1');
       setError(error.response.data.message);
