@@ -80,11 +80,21 @@
   cursor: pointer;
 }
 
+.likesTitle {
+  position: relative;
+  top: 0px;
+  margin-left: 200px;
+  margin-right: 200px;
+  white-space: nowrap;
+
+}
+
 .reactionsTitle {
   position: relative;
   top: 0px;
   margin-left: 200px;
   margin-right: 200px;
+  white-space: nowrap;
 
 
 }

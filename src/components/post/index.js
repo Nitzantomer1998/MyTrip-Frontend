@@ -333,6 +333,8 @@ export default function Post({ post, user, profile }) {
         <Reactions
           post={selectedPost}
           user={user}
+          likesCount={likesCount}
+          recommendsCount={recommendsCount}
           closeModal={() => setSelectedPost(null)}
         />
       ) : (

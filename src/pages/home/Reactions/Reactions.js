@@ -115,7 +115,7 @@ export default function Reactions(props) {
       <div className='modalContainer'>
       
       <div className='reactionsContainer'>
-      <h1 className='reactionsTitle'>Likes</h1>
+      <h1 className='likesTitle'> {props.likesCount} Likes</h1>
       <button
         className='closeBtnReactions'
         onClick={() => props.closeModal()}
@@ -124,7 +124,7 @@ export default function Reactions(props) {
       </button>
     </div>
         {showLikes()}
-        <h1 className='reactionsTitle'>Recommends</h1>
+        <h1 className='reactionsTitle'>{props.recommendsCount} Recommends</h1>
         {showRecommends()}
       </div>
     </div>
