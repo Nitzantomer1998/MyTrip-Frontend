@@ -329,6 +329,7 @@ export const unfollowReverse = async (id, token) => {
   }
 };
 
+
 export const getUserStatistics = async (user) => {
   try {
     const { data } = await axios.get(
@@ -346,3 +347,4 @@ export const getUserStatistics = async (user) => {
     return null;
   }
 };
+
