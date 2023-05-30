@@ -53,20 +53,20 @@ export default function Reactions(props) {
               <img
                 className='followerInfo'
                 id='profileImg'
-                src={like.like.picture}
+                src={like.like?.picture}
               ></img>
               <button
                 className='followerInfo'
                 id='nameBtn'
                 onClick={() => {
-                  if (like.like.username === props.user.username) {
+                  if (like.like?.username === props.user?.username) {
                     window.location.href = '/profile';
                   } else {
-                    window.location.href = `/profile/${like.like.username}`;
+                    window.location.href = `/profile/${like.like?.username}`;
                   }
                 }}
               >
-                {like.like.username}
+                {like.like?.username}
               </button>
             </div>
           );
