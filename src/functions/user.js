@@ -278,7 +278,7 @@ export const getFollowersPageInfosId = async (id, token) => {
   try {
     console.log(`token ${token}`);
     const { data } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/getUserFollowersPage/${id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/getFollowersPageInfosId/${id}`,
 
       {
         headers: {
