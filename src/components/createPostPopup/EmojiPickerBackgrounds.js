@@ -69,7 +69,7 @@ export default function EmojiPickerBackgrounds({
         ></textarea>
         <textarea
           ref={textRef}
-          maxLength='250'
+          maxLength='2000'
           value={text}
           placeholder={`What's on your mind, ${user?.username}`}
           className={`post_input ${type2 ? 'input2' : ''} ${

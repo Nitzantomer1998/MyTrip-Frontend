@@ -70,6 +70,9 @@ header {
 .search_area .search input {
   padding-left: 4px;
 }
+
+
+
 .search_area .search svg {
   transform: translateY(1px);
 }

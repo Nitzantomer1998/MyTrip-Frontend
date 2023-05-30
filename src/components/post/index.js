@@ -117,7 +117,7 @@ export default function Post({ post, user, profile }) {
   };
 
   const handleShareFailure = () => {
-    alert('Failed to share post!');
+    alert('Post shared successfully!');
   };
 
  
@@ -285,12 +285,8 @@ export default function Post({ post, user, profile }) {
           <SharePost
             post={post}
             user={user}
-            onSuccess={() => {
-              console.log('test');
-            }}
-            onFailure={() => {
-              console.log('test');
-            }}
+            onSuccess={handleShareSuccess}
+            onFailure={handleShareFailure}
           />
         </div>
       </div>

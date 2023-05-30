@@ -2,7 +2,9 @@ import { useRef, useState } from 'react';
 import ProfilePicture from '../../components/profielPicture';
 import Friendship from './Friendship';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { getUserStatistics } from '../../functions/user';
 
 export default function ProfielPictureInfos({
   profile,
@@ -11,9 +13,27 @@ export default function ProfielPictureInfos({
   post,
   userPosts,
 }) {
+  const { user } = useSelector((state) => ({ ...state.user }));
   const [show, setShow] = useState(false);
   const pRef = useRef(null);
   const [totalLikes, setTotalLikes] = useState(0);
+  const [totalRecommends, setTotalRecommends] = useState(0);
+
+  useEffect(() => {
+    const fetchUserStatistics = async () => {
+      if (user && user.id && user.token) {
+        const data = await getUserStatistics(user);
+        if (data) {
+          setTotalLikes(data.receivedLikes);
+          setTotalRecommends(data.receivedRecommends);
+        }
+      } else {
+        console.log('User, user id or user token is undefined', user);
+      }
+      console.log(visitor, 'profile');
+    };
+    fetchUserStatistics();
+  }, [user]);
 
   useEffect(() => {
     if (userPosts) {
@@ -24,6 +44,7 @@ export default function ProfielPictureInfos({
       setTotalLikes(countLikes);
     }
   }, [userPosts]);
+
   return (
     <div className='profile_img_wrap'>
       {show && <ProfilePicture setShow={setShow} pRef={pRef} photos={photos} />}
@@ -61,12 +82,12 @@ export default function ProfielPictureInfos({
         </div>
       )}
 
-      <div className='following'>
-        <div className='profile_likes_count'>
-          {totalLikes === 0 ? '0' : totalLikes === 1 ? '1' : `${totalLikes}`}
+      {user.id === profile._id && (
+        <div className='following'>
+          <div className='profile_recommend_count'>{totalLikes}</div>
+          Likes
         </div>
-        Likes
-      </div>
+      )}
 
       <div className='following'>
         {profile?.followers && (
@@ -98,21 +119,12 @@ export default function ProfielPictureInfos({
         </Link>
       </div>
 
-      <div className='following'>
-        {profile?.following && (
-          <div className='profile_recommend_count'>
-            {/* {profile?.following.length === 0
-              ? '0'
-              : profile?.following.length === 1
-              ? '1'
-              : `${profile?.following.length}`} */}
-            0
-          </div>
-        )}
-        {/* <Link to='/' className='hover1'> */}
-        Recommends
-        {/* </Link> */}
-      </div>
+      {user.id === profile._id && (
+        <div className='following'>
+          <div className='profile_recommend_count'>{totalRecommends}</div>
+          Recommends
+        </div>
+      )}
     </div>
   );
 }

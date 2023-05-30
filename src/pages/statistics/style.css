@@ -6,30 +6,48 @@
 
 .statistics_container {
   display: flex;
-  justify-content: space-around; /* align horizontal */
-  align-items: center; /* align vertical */
-  height: 100%;
-  margin-left: 550px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  margin-left: 350px;
+  padding: 0 20px;
+  background-color: rgba(46, 46, 71, 0.467);
 }
 
-.number_likes {
-  background-color: white;
-  width: 30%;
-  height: 50%;
+.statistics_section {
+  margin-bottom: 100px;
 }
 
-.number_likes p {
-  color: black;
-  font-size: 40px;
+.stat_card_row {
+  display: flex;
+  justify-content: center;
+  gap: 11px;
 }
 
-.number_recommends {
-  background-color: white;
-  width: 30%;
-  height: 50%;
+.stat_card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.1);
+  width: 180px;
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
 }
 
-.number_recommends p {
-  color: black;
+.stat_card:hover {
+  transform: scale(1.15);
+}
+
+.stat_card p:first-child {
+  color: #888;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat_card p:last-child {
+  color: #333;
   font-size: 40px;
 }
