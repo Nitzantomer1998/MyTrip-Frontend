@@ -1,9 +1,12 @@
 import { Form, Formik } from 'formik';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import LoginInput from '../../components/inputs/loginInput';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { combineReducers } from 'redux';
+import Cookies from 'js-cookie';
+
 export default function ChangePassword({
   password,
   setPassword,
@@ -20,6 +23,7 @@ export default function ChangePassword({
   const {
     user: { token },
   } = user;
+  const dispatch = useDispatch();
   console.log(`token : ${JSON.stringify(token)}`);
   const navigate = useNavigate();
   const validatePassword = Yup.object({
@@ -52,7 +56,11 @@ export default function ChangePassword({
       console.log('temp ' + JSON.stringify(temp)); //SUCESS PRINT USER
 
       setError('');
-      navigate('/');
+      Cookies.remove('user');
+      dispatch({
+        type: 'LOGOUT',
+      });
+      navigate('/login');
     } catch (error) {
       setLoading(false);
       console.log('3');

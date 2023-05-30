@@ -328,3 +328,21 @@ export const unfollowReverse = async (id, token) => {
     return error.response.data.message;
   }
 };
+
+export const getUserStatistics = async (user) => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/getUserStatistics/${user.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    console.log('Data from backend:', data);
+    return data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
