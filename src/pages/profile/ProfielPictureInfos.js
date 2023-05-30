@@ -115,7 +115,9 @@ export default function ProfielPictureInfos({
       {user.id === profile._id && (
         <div className='following'>
           <div className='profile_recommend_count'>{totalRecommends}</div>
-          Recommends
+          <Link to='/statistics' state={{ user: profile }} className='hover1'>
+            Recommends
+          </Link>
         </div>
       )}
     </div>
