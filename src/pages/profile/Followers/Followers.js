@@ -23,10 +23,12 @@ export default function Followers(props) {
   }, []);
 
   const handleFollow = async (followerId) => {
+    console.log(followerId, user.token, 'followerssssss');
     await follow(followerId, user.token);
     await fetchFriends();
   };
   const handleUnfollow = async (followerId) => {
+    console.log(followerId, user.token, 'followerssssss');
     await unfollow(followerId, user.token);
     await fetchFriends();
   };
@@ -45,6 +47,7 @@ export default function Followers(props) {
     );
     if (response && response.data) {
       followers = response.data.followers;
+      console.log(followers, 'iam a followersssssssssss')
     } else {
     }
     // }
@@ -53,58 +56,61 @@ export default function Followers(props) {
 
   const showFollowers = () => {
     return (
-      <div className='followersContainer'>
-        {followers?.map((follower, index) => {
-          const followBtn =
-            location.state.user._id === user.id ? (
-              follower.following ? (
-                <button
-                  className='followBtn'
-                  onClick={() => handleUnfollow(follower._id)}
-                >
-                  Unfollow
-                </button>
-              ) : (
-                <button
-                  className='followBtn'
-                  // onClick={() => handleFollow(follower._id)}
-                >
-                  Follow
-                </button>
-              )
-            ) : null;
-
-          return (
-            <div className='followerRow' key={index}>
-              <img
-                className='followerInfo'
-                id='profileImg'
-                src={follower.picture}
-              />
-              <button
-                className='followerInfo'
-                id='nameBtn'
-                onClick={() =>
-                  (window.location.href = `/profile/${follower.username}`)
-                }
-              >
-                {follower.username}
-              </button>
-              {followBtn}
-              <div className='remove'>
-                {location.state.user._id === user.id && (
+      console.log(JSON.stringify(followers), 'followers'),
+      (
+        <div className='followersContainer'>
+          {followers?.map((follower, index) => {
+            const followBtn =
+              location.state.user._id === user.id ? (
+                follower.following ? (
                   <button
-                    className='removeBtn'
-                    // onClick={() => setSelectedUser(follower)}
+                    className='followBtn'
+                    onClick={() => handleUnfollow(follower._id)}
                   >
-                    Remove
+                    Unfollow
                   </button>
-                )}
+                ) : (
+                  <button
+                    className='followBtn'
+                    onClick={() => handleFollow(follower._id)}
+                  >
+                    Follow
+                  </button>
+                )
+              ) : null;
+
+            return (
+              <div className='followerRow' key={index}>
+                <img
+                  className='followerInfo'
+                  id='profileImg'
+                  src={follower.picture}
+                />
+                <button
+                  className='followerInfo'
+                  id='nameBtn'
+                  onClick={() =>
+                    (window.location.href = `/profile/${follower.username}`)
+                  }
+                >
+                  {follower.username}
+                </button>
+                {followBtn}
+                <div className='remove'>
+                  {location.state.user._id === user.id && (
+                    <button
+                      className='removeBtn'
+                      onClick={() => setSelectedUser(follower)}
+                    >
+                      Remove
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )
     );
   };
 
