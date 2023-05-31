@@ -1,13 +1,13 @@
 export const left = [
   {
     text: 'Home',
-    img: 'friends',
+    img: 'marketplace',
     path: '/',
   },
 
   {
     text: 'Profile',
-    img: 'marketplace',
+    img: 'friends',
     path: '/profile',
   },
 
