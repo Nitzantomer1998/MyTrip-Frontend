@@ -6,7 +6,8 @@ import ImagePreview from '../createPostPopup/ImagePreview';
 
 export default function EditPost({ 
   postId, 
-  token,  // Images du post
+  token,
+    handleSubmit,
 }) {
   const [content, setContent] = useState('');
   const [showPrev, setShowPrev] = useState(false);
@@ -14,61 +15,53 @@ export default function EditPost({
   const [selectedImages, setSelectedImages] = useState([]);
 
 
-
   const handleInputChange = (event) => {
     setContent(event.target.value);
-
-    };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    // ...
   };
 
-  const handleImageUpload = (event) => {
-    const selectedImages = Array.from(event.target.files);
-    setSelectedImages(selectedImages);
+  const handleSubmits = async (event) => {
+    event.preventDefault();
+    const updatedImages = [...selectedImages, ...post.images];
+    console.log('UpdatesImages : '+ updatedImages);
+    console.log('content : '+ content);
+  };
+
+  const handleImageAdd = (event) => {
+    const file = event.target.files[0];
+    setSelectedImages((prevImages) => [...prevImages, file]);
   };
   
 
-
   useEffect(() => {
-    
     const fetchPost = async () => {
       try {
         const response = await axios.get(
-            `${process.env.REACT_APP_BACKEND_URL}/getPostbyId/${postId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        console.log(`response = ${JSON.stringify(response.data)}`);
-
+          `${process.env.REACT_APP_BACKEND_URL}/getPostbyId/${postId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (response) {
-            setPost(response.data);
-            setContent(response.data.text);
-            console.log(`post = ${JSON.stringify(post)}`);
+          setPost(response.data);
+          setContent(response.data.text);
         } else {
           console.log('1');
         }
       } catch (error) {
         console.log('2');
-        
       }
     };
 
     fetchPost();
   }, [postId, token]);
 
-
-  const handleImageDelete = (imageIndex) => { //cette fonction cest pour la croix de suppression a linterieur des images
+  const handleImageDelete = (imageIndex) => {
     const updatedImages = [...post.images];
     updatedImages.splice(imageIndex, 1);
     setPost({ ...post, images: updatedImages });
   };
-
-  
-  
 
   return (
     <div className='blur'>
@@ -77,7 +70,7 @@ export default function EditPost({
           <div
             className='small_circle'
             onClick={() => {
-              // Gérer la fermeture du composant ici
+                handleSubmit();
             }}
           >
             <i className='exit_icon'></i>
@@ -86,62 +79,97 @@ export default function EditPost({
         </div>
         <div className='box_profile'>
           <div className='box_col'>
-
             <div className='post_text'>
-                <textarea
-                    className='post_textarea'
-                    value={content}
-                    onChange={handleInputChange}
-                    rows={5}
-                    cols={50}
-                    maxLength={2000}
-                />
-                    <div className='char-count'>{content.length}/{2000}</div> {/* Affichage du compteur de caractères */}
-
+              <textarea
+                className='post_textarea'
+                value={content}
+                onChange={handleInputChange}
+                rows={5}
+                cols={50}
+                maxLength={2000}
+              />
+              <div className='char-count'>{content.length}/{2000}</div>
             </div>
             <div className='post_imgs'>
-            {post.images && post.images.length ? (
-  <div
-    className={
-      post.images.length === 1
-        ? 'grid_1'
-        : post.images.length === 2
-        ? 'grid_2'
-        : post.images.length === 3
-        ? 'grid_3'
-        : post.images.length === 4
-        ? 'grid_4'
-        : post.images.length >= 5
-        ? 'grid_5'
-        : ''
-    }
-  >
-    {post.images.slice(0, 5).map((image, i) => (
+  {post.images && post.images.length ? (
+    <div
+      className={
+        post.images.length === 1
+          ? 'grid_1'
+          : post.images.length === 2
+          ? 'grid_2'
+          : post.images.length === 3
+          ? 'grid_3'
+          : post.images.length === 4
+          ? 'grid_4'
+          : post.images.length >= 5
+          ? 'grid_5'
+          : ''
+      }
+    >
+      {post.images.slice(0, 5).map((image, i) => (
+        <div key={i} className='image-container'>
+          <img src={image.url} key={i} alt='' className={`img-${i}`} />
+          <div className='delete-icon' onClick={() => handleImageDelete(i)}>
+            X
+          </div>
+        </div>
+      ))}
+      {post.images.length > 5 && (
+        <div className='more-pics-shadow'>+{post.images.length - 5}</div>
+      )}
+    </div>
+  ) : (
+    <div className='no-picture'>No more picture</div>
+  )}
+  <div className='image-grid'>
+    {selectedImages.map((image, i) => (
       <div key={i} className='image-container'>
-        <img src={image.url} key={i} alt='' className={`img-${i}`} />
-        <div className='delete-icon' onClick={() => handleImageDelete(i)}>
+        <img src={URL.createObjectURL(image)} alt='' className={`img-${i}`} />
+        <div
+          className='delete-icon'
+          onClick={() =>
+            setSelectedImages((prevImages) =>
+              prevImages.filter((_, index) => index !== i)
+            )
+          }
+        >
           X
         </div>
       </div>
     ))}
-    {post.images.length > 5 && (
-      <div className='more-pics-shadow'>+{post.images.length - 5}</div>
+    {selectedImages.length < 5 && (
+      <div className='add-image'>
+        <label htmlFor='image-upload' className='add-image-button'>
+          +
+          <input
+            id='image-upload'
+            type='file'
+            accept='image/*'
+            onChange={handleImageAdd}
+          />
+        </label>
+      </div>
     )}
   </div>
-) : (
-  <div className='no-picture'>No more picture</div>
-)}
+</div>
 
-
-            </div>
           </div>
         </div>
-        <form onSubmit={handleSubmit}>
-          
-          
-          <button type="submit">Save Changes</button>
+        <form onSubmit={handleSubmits}>
+          <input
+            type='file'
+            accept='image/*'
+            multiple
+            onChange={handleImageAdd}
+          />
+          <button type='submit'>Save Changes</button>
         </form>
       </div>
+      
     </div>
   );
+
 }
+
+
