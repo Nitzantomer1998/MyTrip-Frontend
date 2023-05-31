@@ -140,14 +140,16 @@ export default function EditPost({
     ))}
     {selectedImages.length < 5 && (
       <div className='add-image'>
-        <label htmlFor='image-upload' className='add-image-button'>
-          +
+        <label htmlFor='image-upload' className='add-image-button' > 
           <input
-            id='image-upload'
-            type='file'
-            accept='image/*'
-            onChange={handleImageAdd}
+          id='image-upload'
+          type='file'
+          accept='image/*'
+          onChange={handleImageAdd}
+          
+          
           />
+          
         </label>
       </div>
     )}
@@ -157,13 +159,7 @@ export default function EditPost({
           </div>
         </div>
         <form onSubmit={handleSubmits}>
-          <input
-            type='file'
-            accept='image/*'
-            multiple
-            onChange={handleImageAdd}
-          />
-          <button type='submit'>Save Changes</button>
+          <button className='submit-btn' type='submit'>Save Changes</button>
         </form>
       </div>
       
