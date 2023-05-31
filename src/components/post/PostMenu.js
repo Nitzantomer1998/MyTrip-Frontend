@@ -36,6 +36,7 @@ export default function PostMenu({
     const res = await deletePost(postId, token);
     if (res.message === 'Post deleted successfully') {
       postRef.current.remove();
+      window.location.reload();
     }
   };
   return (
