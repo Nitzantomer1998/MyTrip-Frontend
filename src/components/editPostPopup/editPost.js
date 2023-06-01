@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './style.css';
 import axios from 'axios';
 import AddToYourPost from '../createPostPopup/AddToYourPost';
@@ -13,6 +13,10 @@ export default function EditPost({
   const [showPrev, setShowPrev] = useState(false);
   const [post, setPost] = useState({});
   const [selectedImages, setSelectedImages] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
+  const imageInputRef = useRef(null);
+
+
 
 
   const handleInputChange = (event) => {
@@ -21,14 +25,74 @@ export default function EditPost({
 
   const handleSubmits = async (event) => {
     event.preventDefault();
-    const updatedImages = [...selectedImages, ...post.images];
-    console.log('UpdatesImages : '+ updatedImages);
-    console.log('content : '+ content);
+    const updateImages = [...post.images, ...selectedImages];
+    
+    console.log('UpdatesImages : '+ JSON.stringify(updateImages));
+    console.log('selectedIImages : '+ JSON.stringify(selectedImages));
+    
+    
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/updatePost/${postId}`,
+        {
+          content: content,
+          selectedImages: updateImages,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          
+        }
+        
+      ); 
+          // Faire quelque chose avec la réponse (redirection, mise à jour de l'état, etc.)
+    } catch (error) {
+      console.error('Error updating post:', error);
+      // Gérer les erreurs de requête
+    }
+    
+
+
+
   };
 
-  const handleImageAdd = (event) => {
-    const file = event.target.files[0];
-    setSelectedImages((prevImages) => [...prevImages, file]);
+
+  const handleImageAdd = (e) => {
+    
+      let files = Array.from(e.target.files);
+      files.forEach((img) => {
+      console.log(img);
+      if (
+        img.type !== 'image/jpeg' &&
+        img.type !== 'image/png' &&
+        img.type !== 'image/webp' &&
+        img.type !== 'image/gif'
+      ) {
+        //setError(
+         // `${img.name} format is unsupported ! only Jpeg, Png, Webp, Gif are allowed.`
+        //);
+        files = files.filter((item) => item.name !== img.name);
+        return;
+      } else if (img.size > 1024 * 1024 * 5) {
+        //setError(`${img.name} size is too large max 5mb allowed.`);
+        files = files.filter((item) => item.name !== img.name);
+        return;
+      } else {
+        const reader = new FileReader();
+        reader.readAsDataURL(img);
+        reader.onload = (readerEvent) => {
+          setSelectedImages((images) => [...images, readerEvent.target.result]);
+        };
+      }
+    });
+
+
+
+    // const file = event.target.files[0];
+    // console.log('file : '+ JSON.stringify(file));
+    // console.log("target : "+ JSON.stringify(event.target.files));
+    // setSelectedImages((prevImages) => [...prevImages, file]);
   };
   
 
@@ -125,7 +189,7 @@ export default function EditPost({
   <div className='image-grid'>
     {selectedImages.map((image, i) => (
       <div key={i} className='image-container'>
-        <img src={URL.createObjectURL(image)} alt='' className={`img-${i}`} />
+        <img src={image.url} alt='' className={`img-${i}`} />
         <div
           className='delete-icon'
           onClick={() =>
@@ -144,6 +208,7 @@ export default function EditPost({
           <input
           id='image-upload'
           type='file'
+          ref={imageInputRef}
           accept='image/*'
           onChange={handleImageAdd}
           
