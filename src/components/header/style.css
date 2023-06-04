@@ -28,14 +28,37 @@ header {
   border-radius: 50px;
   cursor: text;
   width: 230px;
+  transition: all 0.3s ease-in-out; /* Add transition property */
 }
+
+.search:hover {
+  background: var(--bg-primary); /* Change background color on hover */
+  width: 300px; /* Increase the width on hover */
+}
+
 .search input {
   outline: none;
   border: none;
   background: transparent;
   font-size: 15px;
   font-family: inherit;
+  transition: all 0.3s ease-in-out; /* Add transition property */
+  color: var(--color-primary);
+  width: 100%; /* Set the initial width to 100% */
 }
+
+.search:hover input {
+  color: var(--color-secondary); /* Change text color on hover */
+}
+
+.search svg {
+  transition: all 0.3s ease-in-out; /* Add transition property */
+}
+
+.search:hover svg {
+  transform: scale(1.1); /* Scale up the SVG icon on hover */
+}
+
 
 /*---Header left-----*/
 
