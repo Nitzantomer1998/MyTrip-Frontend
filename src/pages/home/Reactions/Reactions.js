@@ -87,7 +87,7 @@ export default function Reactions(props) {
               <img
                 className='followerInfo'
                 id='profileImg'
-                src={recommend.recommend.picture}
+                src={recommend.recommend?.picture}
               ></img>
               <button
                 className='followerInfo'
@@ -100,7 +100,7 @@ export default function Reactions(props) {
                   }
                 }}
               >
-                {recommend.recommend.username}
+                {recommend.recommend?.username}
               </button>
             </div>
           );

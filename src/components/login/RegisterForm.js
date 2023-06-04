@@ -1,4 +1,4 @@
-import { Form, Formik } from 'formik';
+import { Form, Formik, Field, ErrorMessage } from 'formik';
 import { useState } from 'react';
 import RegisterInput from '../inputs/registerInput';
 import * as Yup from 'yup';
@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
+
 export default function RegisterForm({ setVisible }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,14 +18,19 @@ export default function RegisterForm({ setVisible }) {
     email: '',
     password: '',
     gender: '',
+    acceptedTerms: false,
   };
   const [user, setUser] = useState(userInfos);
   const [showTerms, setShowTerms] = useState(false);
 
-  const { username, email, password, gender } = user;
+  const { username, email, password, gender, acceptedTerms } = user;
   const handleRegisterChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    if (name === 'acceptedTerms') {
+      setUser({ ...user, [name]: e.target.checked });
+    } else {
+      setUser({ ...user, [name]: value });
+    }
   };
 
   const handleTermsClick = () => {
@@ -46,6 +52,9 @@ export default function RegisterForm({ setVisible }) {
       )
       .min(6, 'Password must be atleast 6 characters.')
       .max(36, "Password can't be more than 36 characters"),
+    acceptedTerms: Yup.boolean()
+      .oneOf([true], 'You must accept the terms and conditions.')
+      .required('You must accept the terms and conditions.'),
   });
   const [genderError, setGenderError] = useState('');
 
@@ -54,7 +63,6 @@ export default function RegisterForm({ setVisible }) {
   const [loading, setLoading] = useState(false);
 
   const registerSubmit = async () => {
-    console.log('registerSubmit');
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/registerUser`,
@@ -95,6 +103,7 @@ export default function RegisterForm({ setVisible }) {
             email,
             password,
             gender,
+            acceptedTerms,
           }}
           validationSchema={registerValidation}
           onSubmit={() => {
@@ -102,6 +111,8 @@ export default function RegisterForm({ setVisible }) {
               setGenderError(
                 'Please choose a gender. You can change who can see this later.'
               );
+            } else if (acceptedTerms === false) {
+              setError('You must accept the terms and conditions.');
             } else {
               setGenderError('');
               registerSubmit();
@@ -156,14 +167,14 @@ export default function RegisterForm({ setVisible }) {
                 {showTerms && (
                   <div className='terms-popup'>
                     <p>
-                      <p>Terms & conditions</p>
-                      General Conditions of Use of the "MyTrip" Social Network
-                      Introduction Welcome to MyTrip. By using our social
-                      network, you agree to these terms of use. Please read them
-                      carefully. Registration To use MyTrip, you must create an
-                      account. You agree to provide accurate and complete
-                      information when registering and to update such
-                      information as necessary. Privacy Your privacy is
+                      {' '}
+                      <p>Terms & conditions</p> General Conditions of Use of the
+                      "MyTrip" Social Network Introduction Welcome to MyTrip. By
+                      using our social network, you agree to these terms of use.
+                      Please read them carefully. Registration To use MyTrip,
+                      you must create an account. You agree to provide accurate
+                      and complete information when registering and to update
+                      such information as necessary. Privacy Your privacy is
                       important to us. Our Privacy Policy explains how we
                       collect, use and protect your information. Using MyTrip
                       You are responsible for all activity on your MyTrip
@@ -183,9 +194,10 @@ export default function RegisterForm({ setVisible }) {
                       of use at any time. The modifications will come into force
                       as soon as they are published on MyTrip. Applicable Law
                       These terms of use are governed by French law and any
-                      dispute will be settled by the French courts.
-                      <p>Cookie Policy</p>
+                      dispute will be settled by the French courts.{' '}
+                      <p>Cookie Policy</p>{' '}
                       <p>
+                        {' '}
                         What is a cookie ? A cookie is a small text file stored
                         on your computer, tablet or smartphone when you visit a
                         website. Use of Cookies by MyTrip We use cookies to
@@ -205,8 +217,8 @@ export default function RegisterForm({ setVisible }) {
                         when a cookie is installed. Amendments We reserve the
                         right to modify this cookie policy at any time. The
                         modifications will come into force as soon as they are
-                        published on MyTrip.
-                      </p>
+                        published on MyTrip.{' '}
+                      </p>{' '}
                     </p>
                     <button
                       className='close_popup'
@@ -217,6 +229,21 @@ export default function RegisterForm({ setVisible }) {
                   </div>
                 )}
                 and <span onClick={handleTermsClick}>Cookie Policy.</span>
+                <div>
+                  <Field
+                    type='checkbox'
+                    name='acceptedTerms'
+                    onChange={handleRegisterChange}
+                  />
+                  <label htmlFor='acceptedTerms'>
+                    I accept the terms and conditions
+                  </label>
+                  <ErrorMessage
+                    name='acceptedTerms'
+                    component='div'
+                    className='error_text_terms'
+                  />
+                </div>
               </div>
 
               <div className='reg_btn_wrapper'>
