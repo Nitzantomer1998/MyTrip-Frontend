@@ -53,3 +53,10 @@
   border-radius: 10px;
   font-size: 14px;
 }
+.singleLineHeading {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: black;
+}
+
