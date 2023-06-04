@@ -13,8 +13,13 @@ export default function ImagePreview({
   setLocation,
 }) {
   const imageInputRef = useRef(null);
+
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
+    if (files.length + images.length > 5) {
+      setError('You can only select up to 5 images.');
+      return;
+    }
     files.forEach((img) => {
       console.log(img);
       if (
@@ -24,12 +29,12 @@ export default function ImagePreview({
         img.type !== 'image/gif'
       ) {
         setError(
-          `${img.name} format is unsupported ! only Jpeg, Png, Webp, Gif are allowed.`
+          `${img.name} format is unsupported! Only Jpeg, Png, Webp, and Gif formats are allowed.`
         );
         files = files.filter((item) => item.name !== img.name);
         return;
       } else if (img.size > 1024 * 1024 * 5) {
-        setError(`${img.name} size is too large max 5mb allowed.`);
+        setError(`${img.name} size is too large. Maximum 5MB allowed.`);
         files = files.filter((item) => item.name !== img.name);
         return;
       } else {
@@ -41,6 +46,7 @@ export default function ImagePreview({
       }
     });
   };
+
   return (
     <div className='overflow_a scrollbar'>
       <EmojiPickerBackgrounds
