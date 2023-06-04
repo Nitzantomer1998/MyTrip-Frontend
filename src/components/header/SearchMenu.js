@@ -105,6 +105,7 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
           onChange={(e) => {
             setResults([]);
             setLocationResults([]);
+            setSearchTerm('');
             if (e.target.value === 'user') {
               setSearchByUser(true);
               setSearchByLocation(false);
