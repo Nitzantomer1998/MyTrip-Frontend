@@ -164,7 +164,7 @@ export default function Friendship({ friendshipp, profileid }) {
         {friendship?.following ? (
           <button className='gray_btn' onClick={() => unfollowHandler()}>
             <img src='../../../icons/follow.png' alt='' />
-            <span>Following</span>
+            <span>Unfollow</span>
           </button>
         ) : (
           <button className='blue_btn' onClick={() => followHandler()}>
