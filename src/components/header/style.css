@@ -47,6 +47,16 @@ header {
   width: 100%; /* Set the initial width to 100% */
 }
 
+.search_resultss {
+  /* Styles for the search results container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: red;
+  margin-left: 150px;
+}
+
 .search:hover input {
   color: var(--color-secondary); /* Change text color on hover */
 }
@@ -58,7 +68,6 @@ header {
 .search:hover svg {
   transform: scale(1.1); /* Scale up the SVG icon on hover */
 }
-
 
 /*---Header left-----*/
 
