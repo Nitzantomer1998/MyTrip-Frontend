@@ -145,45 +145,12 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
           />
         </div>
       </div>
-      {results == '' && (
-        <div className='search_history_header'>
-          <span>Recent searches</span>
-          <a>Edit</a>
-        </div>
+      {results.length === 0 && locationResults.length === 0 && (
+        <div className='search_resultss'>No results Found.</div>
       )}
-      <div className='search_history scrollbar'>
-        {searchByUser &&
-          searchHistory &&
-          results == '' &&
-          searchHistory
-            .sort((a, b) => {
-              return new Date(b.createdAt) - new Date(a.createdAt);
-            })
-            .map((user) => (
-              <div className='search_user_item hover1' key={user._id}>
-                <Link
-                  className='flex'
-                  to={`/profile/${user?.user?.username}`}
-                  onClick={() => {
-                    addToSearchHistoryHandler(user.user._id);
-                    handleResultClick(); // Close search menu
-                  }}
-                >
-                  <img src={user.user?.picture} alt='' />
-                  <span>{user?.user?.username}</span>
-                </Link>
-                <i
-                  className='exit_icon'
-                  onClick={() => {
-                    handleRemove(user?.user?._id);
-                  }}
-                ></i>
-              </div>
-            ))}
-      </div>
-      <div className='search_results scrollbar'>
-        {results &&
-          results.map((user) => (
+      {results.length > 0 && (
+        <div className='search_results scrollbar'>
+          {results.map((user) => (
             <Link
               to={`/profile/${user?.username}`}
               className='search_user_item hover1'
@@ -197,8 +164,11 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
               <span>{user?.username}</span>
             </Link>
           ))}
-        {locationResults &&
-          locationResults.map((location) => (
+        </div>
+      )}
+      {locationResults.length > 0 && (
+        <div className='search_results scrollbar'>
+          {locationResults.map((location) => (
             <Link
               to={`/location/${location}`}
               className='search_location_item hover1'
@@ -208,7 +178,38 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
               {location}
             </Link>
           ))}
-      </div>
+        </div>
+      )}
+      {searchByUser && (
+        <div className='search_history scrollbar'>
+          {searchHistory &&
+            searchHistory
+              .sort((a, b) => {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+              })
+              .map((user) => (
+                <div className='search_user_item hover1' key={user._id}>
+                  <Link
+                    className='flex'
+                    to={`/profile/${user?.user?.username}`}
+                    onClick={() => {
+                      addToSearchHistoryHandler(user.user._id);
+                      handleResultClick(); // Close search menu
+                    }}
+                  >
+                    <img src={user.user?.picture} alt='' />
+                    <span>{user?.user?.username}</span>
+                  </Link>
+                  <i
+                    className='exit_icon'
+                    onClick={() => {
+                      handleRemove(user?.user?._id);
+                    }}
+                  ></i>
+                </div>
+              ))}
+        </div>
+      )}
     </div>
   );
 }
