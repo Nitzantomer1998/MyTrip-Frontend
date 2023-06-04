@@ -28,14 +28,37 @@ header {
   border-radius: 50px;
   cursor: text;
   width: 230px;
+  transition: all 0.3s ease-in-out; /* Add transition property */
 }
+
+.search:hover {
+  background: var(--bg-primary); /* Change background color on hover */
+  width: 300px; /* Increase the width on hover */
+}
+
 .search input {
   outline: none;
   border: none;
   background: transparent;
   font-size: 15px;
   font-family: inherit;
+  transition: all 0.3s ease-in-out; /* Add transition property */
+  color: var(--color-primary);
+  width: 100%; /* Set the initial width to 100% */
 }
+
+.search:hover input {
+  color: var(--color-secondary); /* Change text color on hover */
+}
+
+.search svg {
+  transition: all 0.3s ease-in-out; /* Add transition property */
+}
+
+.search:hover svg {
+  transform: scale(1.1); /* Scale up the SVG icon on hover */
+}
+
 
 /*---Header left-----*/
 
@@ -71,7 +94,70 @@ header {
   padding-left: 4px;
 }
 
+.search_filter {
+  appearance: none;
+  outline: none;
+  background-color: #2f363f;
+  border: 1px solid #57606f;
+  border-radius: 15px;
+  padding: 5px 10px;
+  color: #fff;
+  font-size: 0.9rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  font-family: 'Helvetica', sans-serif;
+}
 
+.search_filter:hover {
+  background-color: #57606f;
+}
+
+.search_filter:focus {
+  border-color: #1e90ff;
+}
+
+.search_filter option {
+  background-color: #2f363f;
+  color: #fff;
+}
+
+.search {
+  border: none;
+  outline: none;
+  background-color: #d3d3d3;
+  border-radius: 15px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.search input {
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.search input {
+  border: none;
+  margin-left: 0.5rem;
+  width: 100%;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.search input::placeholder {
+  color: #999;
+}
+
+.search svg {
+  transition: all 0.3s ease;
+}
+
+.search:hover svg {
+  transform: scale(1.1);
+}
 
 .search_area .search svg {
   transform: translateY(1px);
@@ -422,10 +508,6 @@ header {
 .search_location_item span {
   flex-grow: 1;
 }
-
-
-
-
 
 /*---responsive----------*/
 @media (max-width: 1295px) {

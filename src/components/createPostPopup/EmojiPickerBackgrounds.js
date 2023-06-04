@@ -61,7 +61,7 @@ export default function EmojiPickerBackgrounds({
           ref={locationRef}
           maxLength='20'
           value={location}
-          placeholder={`Location`}
+          placeholder={`Add Your Location`}
           className={`post_input ${type2 ? 'input2' : ''} ${
             sm && !background && 'l0'
           }`}

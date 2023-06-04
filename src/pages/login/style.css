@@ -185,6 +185,14 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.error_text_terms
+{
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 .reg_grid label {
   width: 90px;
   display: flex;
