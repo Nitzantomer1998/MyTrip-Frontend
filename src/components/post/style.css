@@ -474,6 +474,11 @@
   color: #ff0000;
 }
 
+.edit_icon
+{
+  margin-left: 3.7px;
+}
+
 
 /*-----create comment-----*/
 .comments_wrap {
