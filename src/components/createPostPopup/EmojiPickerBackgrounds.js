@@ -79,7 +79,7 @@ export default function EmojiPickerBackgrounds({
         ></textarea>
       </div>
 
-      <div className={!type2 ? 'post_emojis_wrap' : ''}>
+      {/* <div className={!type2 ? 'post_emojis_wrap' : ''}>
         {picker && (
           <div
             className={`comment_emoji_picker ${
@@ -125,7 +125,7 @@ export default function EmojiPickerBackgrounds({
             setPicker((prev) => !prev);
           }}
         ></i>
-      </div>
+      </div> */}
     </div>
   );
 }
