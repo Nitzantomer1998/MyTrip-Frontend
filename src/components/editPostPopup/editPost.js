@@ -4,6 +4,8 @@ import axios from 'axios';
 import { uploadImages } from '../../functions/uploadImages';
 import dataURItoBlob from '../../helpers/dataURItoBlob';
 import { useSelector } from 'react-redux';
+import PulseLoader from 'react-spinners/PulseLoader';
+
 
 export default function EditPost({ 
   postId, 
@@ -18,6 +20,8 @@ export default function EditPost({
   const [errorMessage, setErrorMessage] = useState('');
   const imageInputRef = useRef(null);
   const { user } = useSelector((state) => ({ ...state.user }));
+  const [loading, setLoading] = useState(false);
+
 
 
 
@@ -33,6 +37,7 @@ export default function EditPost({
 
   const handleSubmits = async (event) => {
     event.preventDefault();
+    setLoading(true);
     //test de conversion des images pour uploadImages
     const postImages = selectedImages.map((img) => {
       return dataURItoBlob(img);
@@ -62,10 +67,8 @@ export default function EditPost({
         updateImages = responseUploadImages;
       }
     } catch (error) {
-      console.error('Error in try block:', error);
+      console.error('Error: ', error);
     }
-
-    console.log('updateImages after try-catch:', updateImages);
 
 
     
@@ -92,7 +95,9 @@ export default function EditPost({
       console.error('Error updating post:', error);
       // Gérer les erreurs de requête
     }
-    //handleSubmit(false);
+    setLoading(false);
+    handleSubmit(false);
+    window.location.reload();
     //window.location.reload();
     
 
@@ -236,9 +241,7 @@ export default function EditPost({
           </div>
         </div>
       ))}
-      {post.images.length > 5 && (
-        <div className='more-pics-shadow'>+{post.images.length - 5}</div>
-      )}
+      
     </div>
   ) : (
     <div className='no-picture'>No more picture</div>
@@ -282,7 +285,9 @@ export default function EditPost({
         </div>
         <form onSubmit={handleSubmits}>
 
-          <button className='submit-btn' type='submit'>Save Changes</button>
+          <button className='submit-btn' type='submit' disable={loading}>
+          {loading ? <PulseLoader color='#fff' size={5} /> : 'Save Changes'}
+          </button>
         </form>
       </div>
       
