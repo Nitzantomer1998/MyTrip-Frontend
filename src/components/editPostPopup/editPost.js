@@ -7,7 +7,7 @@ import ImagePreview from '../createPostPopup/ImagePreview';
 export default function EditPost({ 
   postId, 
   token,
-    handleSubmit,
+  handleSubmit,
 }) {
   const [content, setContent] = useState('');
   const [showPrev, setShowPrev] = useState(false);
@@ -62,7 +62,7 @@ export default function EditPost({
     
       let files = Array.from(e.target.files);
       files.forEach((img) => {
-      console.log(img);
+      console.log("img from handleImageAdd"+img);
       if (
         img.type !== 'image/jpeg' &&
         img.type !== 'image/png' &&
@@ -84,6 +84,7 @@ export default function EditPost({
         reader.onload = (readerEvent) => {
           setSelectedImages((images) => [...images, readerEvent.target.result]);
         };
+        console.log('selectedImages from habdleAddImages : '+ JSON.stringify(selectedImages));
       }
     });
 
@@ -189,7 +190,7 @@ export default function EditPost({
   <div className='image-grid'>
     {selectedImages.map((image, i) => (
       <div key={i} className='image-container'>
-        <img src={image.url} alt='' className={`img-${i}`} />
+        <img src={image} alt='' className={`img-${i}`} />
         <div
           className='delete-icon'
           onClick={() =>
@@ -224,6 +225,7 @@ export default function EditPost({
           </div>
         </div>
         <form onSubmit={handleSubmits}>
+        
           <button className='submit-btn' type='submit'>Save Changes</button>
         </form>
       </div>
