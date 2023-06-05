@@ -5,6 +5,8 @@ import { uploadImages } from '../../functions/uploadImages';
 import dataURItoBlob from '../../helpers/dataURItoBlob';
 import { useSelector } from 'react-redux';
 import PulseLoader from 'react-spinners/PulseLoader';
+import useClickOutside from '../../helpers/clickOutside';
+
 
 
 export default function EditPost({ 
@@ -21,6 +23,10 @@ export default function EditPost({
   const imageInputRef = useRef(null);
   const { user } = useSelector((state) => ({ ...state.user }));
   const [loading, setLoading] = useState(false);
+  const popup = useRef(null);
+  useClickOutside(popup, () => {
+    handleSubmit(false);
+  }); 
 
 
 
@@ -180,7 +186,7 @@ export default function EditPost({
 
   return (
     <div className='blur'>
-      <div className='postBox'>
+      <div className='postBox' ref={popup}>
         <div className='box_header'>
           <div
             className='small_circle'
