@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import './style.css';
 import axios from 'axios';
-import AddToYourPost from '../createPostPopup/AddToYourPost';
-import ImagePreview from '../createPostPopup/ImagePreview';
+import { uploadImages } from '../../functions/uploadImages';
+import dataURItoBlob from '../../helpers/dataURItoBlob';
+import { useSelector } from 'react-redux';
 
 export default function EditPost({ 
   postId, 
@@ -15,6 +16,8 @@ export default function EditPost({
   const [selectedImages, setSelectedImages] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
   const imageInputRef = useRef(null);
+  const { user } = useSelector((state) => ({ ...state.user }));
+
 
 
 
@@ -25,10 +28,42 @@ export default function EditPost({
 
   const handleSubmits = async (event) => {
     event.preventDefault();
-    const updateImages = [...post.images, ...selectedImages];
+    //test de conversion des images pour uploadImages
+    const postImages = selectedImages.map((img) => {
+      return dataURItoBlob(img);
+    });
+    const path = `${user.username}/post_images`;
+    let formData = new FormData();
+    formData.append('path', path);
+    postImages.forEach((selectedImages) => {
+     formData.append('files', selectedImages);
+    });
+
+    const responseUploadImages = selectedImages.length > 0 ? await uploadImages(formData, path, token) : [];
+    console.log('response from uploadImages : '+ JSON.stringify(responseUploadImages));
+    //fin de lessai
+
+
+
+    console.log('post.images au dessus de updateImages : '+ JSON.stringify(post.images));
+    let updateImages = [];
+    try {
+      console.log('post.images:', post.images);
+      console.log('responseUploadImages:', responseUploadImages);
+
+      if (post.images && post.images.length > 0) {
+        updateImages = [...post.images, ...responseUploadImages];
+      } else {
+        updateImages = responseUploadImages;
+      }
+    } catch (error) {
+      console.error('Error in try block:', error);
+    }
+
+    console.log('updateImages after try-catch:', updateImages);
+
+
     
-    console.log('UpdatesImages : '+ JSON.stringify(updateImages));
-    console.log('selectedIImages : '+ JSON.stringify(selectedImages));
     
     
     try {
@@ -45,12 +80,14 @@ export default function EditPost({
           
         }
         
-      ); 
-          // Faire quelque chose avec la réponse (redirection, mise à jour de l'état, etc.)
+      );
+      // Faire quelque chose avec la réponse (redirection, mise à jour de l'état, etc.)
     } catch (error) {
       console.error('Error updating post:', error);
       // Gérer les erreurs de requête
     }
+    //handleSubmit(false);
+    //window.location.reload();
     
 
 
@@ -84,7 +121,7 @@ export default function EditPost({
         reader.onload = (readerEvent) => {
           setSelectedImages((images) => [...images, readerEvent.target.result]);
         };
-        console.log('selectedImages from habdleAddImages : '+ JSON.stringify(selectedImages));
+        console.log('selectedImages from habdleAddImages : '+ selectedImages);
       }
     });
 
@@ -125,7 +162,8 @@ export default function EditPost({
   const handleImageDelete = (imageIndex) => {
     const updatedImages = [...post.images];
     updatedImages.splice(imageIndex, 1);
-    setPost({ ...post, images: updatedImages });
+    post.images.splice(imageIndex, 1);
+    setPost({ ...post.images, images: updatedImages });
   };
 
   return (
@@ -209,8 +247,8 @@ export default function EditPost({
           <input
           id='image-upload'
           type='file'
+          accept='image/jpeg,image/png,image/webp,image/gif'
           ref={imageInputRef}
-          accept='image/*'
           onChange={handleImageAdd}
           
           
@@ -225,7 +263,7 @@ export default function EditPost({
           </div>
         </div>
         <form onSubmit={handleSubmits}>
-        
+
           <button className='submit-btn' type='submit'>Save Changes</button>
         </form>
       </div>
