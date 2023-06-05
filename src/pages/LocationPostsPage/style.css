@@ -3,6 +3,12 @@
     justify-content: center;
     padding-top: 60px;
   }
+
+  .myposts
+  {
+    margin-left: 550px !important;
+
+  }
   
   .posts-container-location > div {
     max-width: 800px;
