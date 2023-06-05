@@ -11,6 +11,7 @@ export default function EditPost({
   handleSubmit,
 }) {
   const [content, setContent] = useState('');
+  const [location, setLocation] = useState('');
   const [showPrev, setShowPrev] = useState(false);
   const [post, setPost] = useState({});
   const [selectedImages, setSelectedImages] = useState([]);
@@ -24,6 +25,10 @@ export default function EditPost({
 
   const handleInputChange = (event) => {
     setContent(event.target.value);
+  };
+
+  const handleInputChangeLocation = (event) => {
+    setLocation(event.target.value);
   };
 
   const handleSubmits = async (event) => {
@@ -72,6 +77,7 @@ export default function EditPost({
         {
           content: content,
           selectedImages: updateImages,
+          location: location,
         },
         {
           headers: {
@@ -148,6 +154,7 @@ export default function EditPost({
         if (response) {
           setPost(response.data);
           setContent(response.data.text);
+          setLocation(response.data.location);
         } else {
           console.log('1');
         }
@@ -182,6 +189,17 @@ export default function EditPost({
         </div>
         <div className='box_profile'>
           <div className='box_col'>
+          <div className='post_text'>
+              <textarea
+                className='post_textarea'
+                value={location}
+                onChange={handleInputChangeLocation}
+                rows={5}
+                cols={50}
+                maxLength={2000}
+              />
+              <div className='char-count'>{location.length}/{2000}</div>
+            </div>
             <div className='post_text'>
               <textarea
                 className='post_textarea'
