@@ -76,20 +76,23 @@
   }
   
   .post_textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: none;
+    position: relative;
     outline: none;
-    transition: border-color 0.3s ease-in-out;
+    border: none;
+    resize: none;
+    padding: 5px 15px;
+    margin-bottom: 10px;
+    width: 470px;
+    margin-left: 1px;
     font-family: inherit;
-    font-size: inherit;
+    font-size: 24px;
+    background: var(--bg-primary);
+    color: var(--color-primary);
+    flex-direction: column;
+  
   }
 
-  .post_textarea:focus {
-    border-color: #4c9aff;
-  }
+  
   
   .char-count {
     margin-top: 5px;
