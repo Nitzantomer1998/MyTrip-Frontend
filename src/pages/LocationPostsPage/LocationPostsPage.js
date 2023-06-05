@@ -12,8 +12,9 @@ export default function LocationPostsPage() {
   return (
     <div className='posts-container-location'>
       <Header />
-
-      <LocationPosts location={location} user={user} />
+      <div className='myposts'>
+        <LocationPosts location={location} user={user} />
+      </div>
     </div>
   );
 }
