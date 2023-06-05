@@ -41,7 +41,6 @@ export default function Post({ post, user, profile }) {
   const [isPressed, setIsPressed] = useState(['like', 'unlike']);
   const [reactionsPopUp, setReactionsPopUp] = useState(null);
 
- 
   useEffect(() => {
     setComments(post?.comments);
   }, [post]);
@@ -75,8 +74,7 @@ export default function Post({ post, user, profile }) {
       while (i < recommends.data.recommends.length && !found) {
         if (
           recommends.data.recommends[i].recommend &&
-          recommends.data.recommends[i].recommend._id ===
-            user.id
+          recommends.data.recommends[i].recommend._id === user.id
         ) {
           setIsRecommend(true);
         }
@@ -110,17 +108,16 @@ export default function Post({ post, user, profile }) {
     }
   };
 
- 
-
   const handleShareSuccess = () => {
     alert('Post shared successfully!');
+    window.location.reload();
   };
 
   const handleShareFailure = () => {
     alert('Post shared successfully!');
+    window.location.reload();
   };
 
- 
   const showMore = () => {
     setCount((prev) => prev + 3);
   };

@@ -147,7 +147,7 @@ function App() {
           />
 
           <Route
-            path='/'
+            path='/*'
             element={
               <Home
                 setVisible={setVisible}

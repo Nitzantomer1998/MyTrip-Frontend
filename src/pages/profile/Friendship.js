@@ -33,10 +33,12 @@ export default function Friendship({ friendshipp, profileid }) {
   const followHandler = async () => {
     setFriendship({ ...friendship, following: true });
     await follow(profileid, user.token);
+
   };
   const unfollowHandler = async () => {
     setFriendship({ ...friendship, following: false });
     await unfollow(profileid, user.token);
+
   };
   const acceptRequestHanlder = async () => {
     setFriendship({
@@ -162,7 +164,7 @@ export default function Friendship({ friendshipp, profileid }) {
         {friendship?.following ? (
           <button className='gray_btn' onClick={() => unfollowHandler()}>
             <img src='../../../icons/follow.png' alt='' />
-            <span>Following</span>
+            <span>Unfollow</span>
           </button>
         ) : (
           <button className='blue_btn' onClick={() => followHandler()}>

@@ -10,6 +10,7 @@ import {
   search,
 } from '../../functions/user';
 import { Link } from 'react-router-dom';
+
 export default function SearchMenu({ color, setShowSearchMenu, user }) {
   const [iconVisible, setIconVisible] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,21 +19,27 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
   const menu = useRef(null);
   const input = useRef(null);
   const [posts, setPosts] = useState([]);
-
+  const [searchByUser, setSearchByUser] = useState(true);
+  const [searchByLocation, setSearchByLocation] = useState(false);
   const [locationResults, setLocationResults] = useState([]); // New state variable for location search results
+
   useClickOutside(menu, () => {
     setShowSearchMenu(false);
   });
+
   useEffect(() => {
     getHistory();
   }, []);
+
   const getHistory = async () => {
     const res = await getSearchHistory(user.token);
     setSearchHistory(res);
   };
+
   useEffect(() => {
     input.current.focus();
   }, []);
+
   const searchHandler = async () => {
     if (searchTerm.length < 3) {
       // Si moins de trois lettres ont été entrées, effacer les résultats de recherche
@@ -45,22 +52,27 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
       setResults('');
       setLocationResults([]);
     } else {
-      const res = await search(searchTerm, user.token);
-      setResults(res);
-    }
+      if (searchByUser) {
+        const res = await search(searchTerm, user.token);
+        setResults(res);
+      }
 
-    getUniqueLocations(user.token).then((locations) => {
-      const matchedLocations = locations.filter((location) =>
-        location?.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setLocationResults(matchedLocations);
-    });
+      if (searchByLocation) {
+        getUniqueLocations(user.token).then((locations) => {
+          const matchedLocations = locations.filter((location) =>
+            location?.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+          setLocationResults(matchedLocations);
+        });
+      }
+    }
   };
 
   const addToSearchHistoryHandler = async (searchUser) => {
     const res = await addToSearchHistory(searchUser, user.token);
     getHistory();
   };
+
   const handleRemove = async (searchUser) => {
     removeFromSearch(searchUser, user.token);
     getHistory();
@@ -69,6 +81,10 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
   const locationSearchHandler = async (location) => {
     const fetchedPosts = await getPostsByLocation(location, user.token);
     setPosts(fetchedPosts);
+  };
+
+  const handleResultClick = () => {
+    setShowSearchMenu(false);
   };
 
   return (
@@ -84,6 +100,25 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
             <Return color={color} />
           </div>
         </div>
+        <select
+          className='search_filter'
+          onChange={(e) => {
+            setResults([]);
+            setLocationResults([]);
+            setSearchTerm('');
+            if (e.target.value === 'user') {
+              setSearchByUser(true);
+              setSearchByLocation(false);
+            } else if (e.target.value === 'location') {
+              setSearchByUser(false);
+              setSearchByLocation(true);
+            }
+          }}
+        >
+          <option value='user'>Search by User</option>
+          <option value='location'>Search by Location</option>
+        </select>
+
         <div
           className='search'
           onClick={() => {
@@ -97,7 +132,7 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
           )}
           <input
             type='text'
-            placeholder='Search Users'
+            placeholder={searchByUser ? 'Search Users' : 'Search Location'}
             ref={input}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -111,53 +146,30 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
           />
         </div>
       </div>
-      {results == '' && (
-        <div className='search_history_header'>
-          <span>Recent searches</span>
-          <a>Edit</a>
-        </div>
+      {results.length === 0 && locationResults.length === 0 && (
+        <div className='search_resultss'>No results Found.</div>
       )}
-      <div className='search_history scrollbar'>
-        {searchHistory &&
-          results == '' &&
-          searchHistory
-            .sort((a, b) => {
-              return new Date(b.createdAt) - new Date(a.createdAt);
-            })
-            .map((user) => (
-              <div className='search_user_item hover1' key={user._id}>
-                <Link
-                  className='flex'
-                  to={`/profile/${user?.user?.username}`}
-                  onClick={() => addToSearchHistoryHandler(user.user._id)}
-                >
-                  <img src={user.user?.picture} alt='' />
-                  <span>{user?.user?.username}</span>
-                </Link>
-                <i
-                  className='exit_icon'
-                  onClick={() => {
-                    handleRemove(user.user._id);
-                  }}
-                ></i>
-              </div>
-            ))}
-      </div>
-      <div className='search_results scrollbar'>
-        {results &&
-          results.map((user) => (
+      {results.length > 0 && (
+        <div className='search_results scrollbar'>
+          {results.map((user) => (
             <Link
               to={`/profile/${user?.username}`}
               className='search_user_item hover1'
-              onClick={() => addToSearchHistoryHandler(user._id)}
+              onClick={() => {
+                addToSearchHistoryHandler(user._id);
+                handleResultClick(); // Close search menu
+              }}
               key={user._id}
             >
               <img src={user.picture} alt='' />
               <span>{user?.username}</span>
             </Link>
           ))}
-        {locationResults &&
-          locationResults.map((location) => (
+        </div>
+      )}
+      {locationResults.length > 0 && (
+        <div className='search_results scrollbar'>
+          {locationResults.map((location) => (
             <Link
               to={`/location/${location}`}
               className='search_location_item hover1'
@@ -167,7 +179,38 @@ export default function SearchMenu({ color, setShowSearchMenu, user }) {
               {location}
             </Link>
           ))}
-      </div>
+        </div>
+      )}
+      {searchByUser && (
+        <div className='search_history scrollbar'>
+          {searchHistory &&
+            searchHistory
+              .sort((a, b) => {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+              })
+              .map((user) => (
+                <div className='search_user_item hover1' key={user._id}>
+                  <Link
+                    className='flex'
+                    to={`/profile/${user?.user?.username}`}
+                    onClick={() => {
+                      addToSearchHistoryHandler(user.user._id);
+                      handleResultClick(); // Close search menu
+                    }}
+                  >
+                    <img src={user.user?.picture} alt='' />
+                    <span>{user?.user?.username}</span>
+                  </Link>
+                  <i
+                    className='exit_icon'
+                    onClick={() => {
+                      handleRemove(user?.user?._id);
+                    }}
+                  ></i>
+                </div>
+              ))}
+        </div>
+      )}
     </div>
   );
 }
