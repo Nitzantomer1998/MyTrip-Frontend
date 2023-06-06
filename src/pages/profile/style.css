@@ -64,7 +64,6 @@
   border-radius: 10px;
   box-shadow: 0 12px 28px 0 var(--shadow-1), 0 2px 4px 0 var(--shadow-2),
     inset 0 0 0 px var(--shadow-inset);
-  z-index: 99999;
 }
 .open_cover_menu_item {
   display: flex;
@@ -91,7 +90,6 @@
 }
 .profile_w_img {
   position: relative;
-  z-index: 9999;
 }
 .profile_w_bg {
   width: 180px;
@@ -376,7 +374,6 @@
   border-bottom-left-radius: 8px;
 }
 .save_changes_cover {
-  z-index: 999999999;
   position: fixed;
   left: 0;
   display: flex;
@@ -620,6 +617,8 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+
 
 .input_username {
   background-color: #f2f2f2;

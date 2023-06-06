@@ -89,7 +89,7 @@ export default function EditProfile() {
         <br />
         <br />
         <br />
-        <h1>Edit Profile</h1>
+        <h1 className='edit_profile'>Edit Profile</h1>
         <div>
           <ChangePassword
             password={password}

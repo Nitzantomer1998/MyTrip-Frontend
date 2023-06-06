@@ -6,6 +6,9 @@ import ReactsPopup from './ReactsPopup';
 import { useEffect, useRef, useState } from 'react';
 import CreateComment from './CreateComment';
 import PostMenu from './PostMenu';
+import Modal from 'react-modal';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
 import {
   comment,
   getReacts,
@@ -21,6 +24,8 @@ import icon from '../../images/location.png';
 import Reactions from '../../pages/home/Reactions/Reactions';
 import { getPostLikes, getPostRecommends } from '../../functions/post';
 import { useSelector } from 'react-redux';
+
+Modal.setAppElement('#root'); // Définit l'élément racine de l'application pour l'accessibilité
 
 export default function Post({ post, user, profile }) {
   const [visible, setVisible] = useState(false);
@@ -40,6 +45,8 @@ export default function Post({ post, user, profile }) {
   let [recommendsCount, setRecommendsCount] = useState(0);
   const [isPressed, setIsPressed] = useState(['like', 'unlike']);
   const [reactionsPopUp, setReactionsPopUp] = useState(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     setComments(post?.comments);
@@ -122,13 +129,36 @@ export default function Post({ post, user, profile }) {
     setCount((prev) => prev + 3);
   };
   const postRef = useRef(null);
+
+  const handleImageClick = (image) => {
+    setSelectedImage(image);
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    setSelectedImage(null);
+  };
+
+  const handleNextImage = () => {
+    const currentIndex = post.images.findIndex(
+      (image) => image.url === selectedImage
+    );
+    const nextIndex = (currentIndex + 1) % post.images.length;
+    setSelectedImage(post.images[nextIndex].url);
+  };
+
+  const handlePreviousImage = () => {
+    const currentIndex = post.images.findIndex(
+      (image) => image.url === selectedImage
+    );
+    const previousIndex =
+      (currentIndex - 1 + post.images.length) % post.images.length;
+    setSelectedImage(post.images[previousIndex].url);
+  };
+
   return (
-    <div
-      className='post'
-      style={{ width: `${profile && '100%'}` }}
-      ref={postRef}
-    >
-      {/* Message de partage */}
+    <div className='post' style={{ width: `${profile && '100%'}` }}>
       {post.sharedFrom != null && (
         <div className='shared_by'>
           {user.id === post.sharingUser._id
@@ -204,7 +234,13 @@ export default function Post({ post, user, profile }) {
               }
             >
               {post.images.slice(0, 5).map((image, i) => (
-                <img src={image.url} key={i} alt='' className={`img-${i}`} />
+                <img
+                  src={image.url}
+                  key={i}
+                  alt=''
+                  className={`img-${i}`}
+                  onClick={() => handleImageClick(image.url)}
+                />
               ))}
               {post.images.length > 5 && (
                 <div className='more-pics-shadow'>
@@ -254,7 +290,6 @@ export default function Post({ post, user, profile }) {
         </div>
         <div className='to_right'>
           <div className='comments_count'>{comments.length} comments</div>
-          {/* <div className='share_count'>0 share</div> */}
         </div>
       </div>
       <div className='post_actions'>
@@ -333,6 +368,24 @@ export default function Post({ post, user, profile }) {
       ) : (
         <></>
       )}
+      <Modal
+        isOpen={isPopupOpen}
+        onRequestClose={closePopup}
+        contentLabel='Image Popup'
+        className='image_popupp'
+      >
+        <button className='close-buttonn' onClick={closePopup}>
+          &times;
+        </button>
+        <div className='image_popup_container'>
+          <FaChevronLeft
+            className='previous_image'
+            onClick={handlePreviousImage}
+          />
+          <img src={selectedImage} alt='' className='images_popups' />
+          <FaChevronRight className='next_image' onClick={handleNextImage} />
+        </div>
+      </Modal>
     </div>
   );
 }

@@ -93,7 +93,7 @@ export default function PostMenu({
           <MenuItem
             icon='trash_icon'
             title='Move to trash'
-            subtitle='Items in your trash are deleted after 30 days.'
+            subtitle='Remove this post from your feed.'
           />
         </div>
       )}

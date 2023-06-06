@@ -1,10 +1,16 @@
 .posts-container-location {
-    display: flex;
-    justify-content: center;
-    padding-top: 60px;
-  }
-  
-  .posts-container-location > div {
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  display: flex;
+  justify-content: center;
+  padding-top: 60px;
+}
+
+.myposts
+{
+  margin-left: 550px !important;
+
+}
+
+.posts-container-location > div {
+  max-width: 800px;
+  margin: 0 auto;
+}

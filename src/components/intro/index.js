@@ -83,7 +83,7 @@ export default function Intro({ detailss, visitor, setOthername }) {
           handleChange={handleChange}
           setShowBio={setShowBio}
           updateDetails={updateDetails}
-          placeholder='Add Bio'
+          placeholder='Tell us about yourself...'
           name='bio'
         />
       )}
