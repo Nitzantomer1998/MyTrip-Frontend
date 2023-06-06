@@ -1,5 +1,28 @@
 import './style.css';
+import React, { useEffect, useState } from 'react';
+import { getFollowingPageInfosId } from '../../functions/user';
 export default function CreatePost({ user, setVisible }) {
+
+  useEffect(() => {
+    fetchFollowing();
+  }, []);
+
+  const [following, setFollowing] = useState([]);
+
+  const fetchFollowing = async () => {
+    let following = [];
+    const response = await getFollowingPageInfosId(
+    user.id,
+    user.token
+    );
+    if (response && response.data) {
+        following = response.data.following;     }  
+    setFollowing(following);
+    console.log(following);
+    console.log(response.data);
+
+  };
+
   return (
     <div className='createPost'>
       <div className='createPost_header'>
@@ -13,6 +36,8 @@ export default function CreatePost({ user, setVisible }) {
           Tell us more about your trip, {user?.username}
         </div>
       </div>
-    </div>
+      {following.length===0 && <p className='singleLineHeading'>We encourage you to find users to follow!</p>}
+      </div>
+    
   );
 }
