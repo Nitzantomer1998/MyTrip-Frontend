@@ -424,10 +424,11 @@
   cursor: pointer;
   color: #fff;
   z-index: 9999;
+  color: red;
 }
 
 .close-buttonn:hover {
-  color: #ff0000;
+  color: black;
 }
 
 .image_popup_image {
@@ -455,6 +456,7 @@
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 25px;
+  color: red;
 }
 
 .next_image {
@@ -464,21 +466,20 @@
   transform: translateY(-50%);
   cursor: pointer;
   font-size: 25px;
+  color: red;
 }
 
 .next_image:hover {
-  color: #ff0000;
+  color: black;
 }
 
 .previous_image:hover {
-  color: #ff0000;
+  color: black;
 }
 
-.edit_icon
-{
+.edit_icon {
   margin-left: 3.7px;
 }
-
 
 /*-----create comment-----*/
 .comments_wrap {
