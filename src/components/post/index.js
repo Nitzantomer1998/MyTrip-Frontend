@@ -355,6 +355,7 @@ export default function Post({ post, user, profile }) {
           setCheckSaved={setCheckSaved}
           images={post.images}
           postRef={postRef}
+          post={post}
         />
       )}
       {selectedPost ? (

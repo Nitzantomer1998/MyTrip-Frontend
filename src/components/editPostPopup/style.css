@@ -1,166 +1,166 @@
 .editPostForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  
-  .editPostForm textarea {
-    width: 100%;
-    height: 200px;
-    resize: none;
-    padding: 10px;
-    font-family: inherit;
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  .editPostForm button {
-    padding: 10px 20px;
-    background-color: var(--blue-color);
-    color: #fff;
-    font-weight: 600;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .editPostForm button:hover {
-    background-color: var(--dark-blue-color);
-  }
-  
-  .editPostForm button:disabled {
-    background-color: var(--light-gray-color);
-    cursor: not-allowed;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
 
-  .post_imgs {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+.editPostForm textarea {
+  width: 100%;
+  height: 200px;
+  resize: none;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
 
-  }
-  
-  .post_imgs .image-container {
-    position: relative;
-    margin-right: 0px;
-    margin-bottom: 0px;
-  }
-  
-  .post_imgs .image-container img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .post_imgs .image-container .delete-icon {
-    width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid var(--bg-third);
-  background: var(--bg-primary);
-  display: grid;
-  place-items: center;
-  position: absolute;
-  right: 10px;
-  top: 10px;
+.editPostForm button {
+  padding: 10px 20px;
+  background-color: var(--blue-color);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  z-index: 99;
-  }
+}
 
-  .post_text {
-    margin-bottom: 20px;
-  }
-  
-  .post_textarea {
-    position: relative;
-    outline: none;
-    border: none;
-    resize: none;
-    padding: 5px 15px;
-    margin-bottom: 10px;
-    width: 470px;
-    margin-left: 1px;
-    font-family: inherit;
-    font-size: 24px;
-    background: var(--bg-primary);
-    color: var(--color-primary);
-    flex-direction: column;
-  
-  }
+.editPostForm button:hover {
+  background-color: var(--dark-blue-color);
+}
 
-  
-  
-  .char-count {
-    margin-top: 5px;
-    font-size: 12px;
-    color: #888;
-  }
-  
-  .postBox {
-    max-height: 90vh;
-    overflow-y: auto;
-  }
+.editPostForm button:disabled {
+  background-color: var(--light-gray-color);
+  cursor: not-allowed;
+}
 
-  .add-image-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f2f2f2;
-    color: #333;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 10px;
-    margin-top: 15px;
-  }
-  
-  .add-image-button:hover {
-    width: calc(100% - 18px);
-    margin: 5px 10px;
-    padding: 10px;
-    outline: none;
-    border: none;
-    background: var(--blue-color);
-    color: #fff;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .add-image-button input[type="file"] {
-    display: none;
-  }
-  
-  .add-image-button::before {
-    content: "Choose a file";
-  }
-  
-  .add-image-button.file-selected::before {
-    content: "File selected";
-  }
+.post_imgs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 
-  .submit-btn{
-    width: calc(100% - 18px);
-    margin: 5px 10px;
-    padding: 10px;
-    outline: none;
-    border: none;
-    background: var(--blue-color);
-    color: #fff;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+}
 
-  .submit-btn:hover {
-    background-color: rgba(46, 46, 71, 1);
-    color: white;
-    align-items: center;
-    justify-content: center;
-  }
+.post_imgs .image-container {
+  position: relative;
+  margin-right: 0px;
+  margin-bottom: 0px;
+}
+
+.post_imgs .image-container img {
+  width: 100%;
+  height: auto;
+}
+
+.post_imgs .image-container .delete-icon {
+  width: 30px;
+height: 30px;
+border-radius: 50%;
+border: 1px solid var(--bg-third);
+background: var(--bg-primary);
+display: grid;
+place-items: center;
+position: absolute;
+right: 10px;
+top: 10px;
+cursor: pointer;
+z-index: 99;
+}
+
+.post_text {
+  margin-bottom: 20px;
+}
+
+.post_textarea {
+  position: relative;
+  outline: none;
+  border: none;
+  resize: none;
+  padding: 5px 15px;
+  margin-bottom: 10px;
+  width: 470px;
+  margin-left: 1px;
+  font-family: inherit;
+  font-size: 24px;
+  background: var(--bg-primary);
+  color: var(--color-primary);
+  flex-direction: column;
+
+}
+
+
+
+.char-count {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #888;
+}
+
+.postBox {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.add-image-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f2f2;
+  color: #333;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.add-image-button:hover {
+  width: calc(100% - 18px);
+  margin: 5px 10px;
+  padding: 10px;
+  outline: none;
+  border: none;
+  background: var(--blue-color);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-image-button input[type="file"] {
+  display: none;
+}
+
+.add-image-button::before {
+  content: "Choose a file";
+}
+
+.add-image-button.file-selected::before {
+  content: "File selected";
+}
+
+.submit-btn{
+  width: calc(100% - 18px);
+  margin: 5px 10px;
+  padding: 10px;
+  outline: none;
+  border: none;
+  background: var(--blue-color);
+  color: #fff;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: rgba(46, 46, 71, 1);
+  color: white;
+  align-items: center;
+  justify-content: center;
+}

@@ -16,13 +16,14 @@ export default function PostMenu({
   setCheckSaved,
   images,
   postRef,
+  post,
 }) {
   const [test, setTest] = useState(postUserId === userId ? true : false);
   const [editing, setEditing] = useState(false);
 
   const menu = useRef(null);
   useOnClickOutside(menu, () => setShowMenu(false));
-  
+
   const saveHandler = async () => {
     savePost(postId, token);
     if (checkSaved) {
@@ -31,13 +32,13 @@ export default function PostMenu({
       setCheckSaved(true);
     }
   };
-  
+
   const downloadImages = async () => {
     images.map((img) => {
       saveAs(img.url, 'image.jpg');
     });
   };
-  
+
   const deleteHandler = async () => {
     const res = await deletePost(postId, token);
     if (res.message === 'Post deleted successfully') {
@@ -45,22 +46,22 @@ export default function PostMenu({
       window.location.reload();
     }
   };
-  
+
   const editHandler = () => {
     setEditing(true);
   };
-  
+
   const handleEditSubmit = () => {
     // Effectuer des actions supplémentaires si nécessaire après la modification du post
     setEditing(false); // Désactiver le mode d'édition après la soumission du formulaire
   };
-  
+
   if (editing) {
     return (
       <EditPost postId={postId} token={token} handleSubmit={handleEditSubmit} />
     );
   }
-  
+
   return (
     <ul className='post_menu' ref={menu}>
       <div onClick={() => saveHandler()}>
@@ -79,15 +80,12 @@ export default function PostMenu({
         )}
       </div>
       <div className='line'></div>
-      {test && (
+      {test && post.type !== 'profilePicture' && (
         <div onClick={editHandler}>
-          <MenuItem
-            icon='edit_icon'
-            title='Edit Post'
-          />
+          <MenuItem icon='edit_icon' title='Edit Post' />
         </div>
       )}
-  
+
       {test && (
         <div onClick={() => deleteHandler()}>
           <MenuItem

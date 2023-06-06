@@ -16,10 +16,6 @@ export default function ImagePreview({
 
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
-    if (files.length + images.length > 5) {
-      setError('You can only select up to 5 images.');
-      return; 
-    }
     files.forEach((img) => {
       console.log(img);
       if (
