@@ -47,6 +47,19 @@ export default function Post({ post, user, profile }) {
   const [reactionsPopUp, setReactionsPopUp] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  
+  const closeModal = () => {
+    setIsModalOpen(false);
+    window.location.reload();
+  };
+  
+
 
   useEffect(() => {
     setComments(post?.comments);
@@ -116,13 +129,11 @@ export default function Post({ post, user, profile }) {
   };
 
   const handleShareSuccess = () => {
-    alert('Post shared successfully!');
-    window.location.reload();
+    openModal();
   };
 
   const handleShareFailure = () => {
-    alert('Post shared successfully!');
-    window.location.reload();
+    openModal();
   };
 
   const showMore = () => {
@@ -166,6 +177,15 @@ export default function Post({ post, user, profile }) {
             : `${post?.sharingUser?.username} shared the post of ${post?.originalUser?.username}`}
         </div>
       )}
+
+      <Modal isOpen={isModalOpen} 
+      onRequestClose={closeModal} 
+      contentLabel="Share Success Modal"
+      className= "share-modal"
+      shouldCloseOnOverlayClick={closeModal}
+      >
+      <h3>Post shared successfully!</h3>
+    </Modal>
 
       <div className='post_header'>
         <Link
@@ -374,6 +394,7 @@ export default function Post({ post, user, profile }) {
         onRequestClose={closePopup}
         contentLabel='Image Popup'
         className='image_popupp'
+        shouldCloseOnOverlayClick={true}
       >
         <button className='close-buttonn' onClick={closePopup}>
           &times;
