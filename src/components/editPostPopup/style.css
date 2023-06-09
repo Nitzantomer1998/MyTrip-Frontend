@@ -103,6 +103,8 @@ z-index: 99;
 .postBox {
   max-height: 90vh;
   overflow-y: auto;
+  overflow-x: hidden;
+
 }
 
 .add-image-button {
