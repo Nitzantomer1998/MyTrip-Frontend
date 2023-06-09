@@ -22,5 +22,5 @@
   flex-direction: column;
   margin-top: 60px;
   margin-left: 35vh;
-  z-index: 2; /* Ajoutez cette ligne */
+  z-index: 2;
 }
