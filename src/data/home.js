@@ -6,9 +6,9 @@ export const left = [
   },
 
   {
-    text: 'Profile',
+    text: 'Edit Profile',
     img: 'friends',
-    path: '/profile',
+    path: '/editprofile',
   },
 
   {

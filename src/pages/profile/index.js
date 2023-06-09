@@ -12,6 +12,7 @@ import GridPosts from './GridPosts';
 import Post from '../../components/post';
 import Intro from '../../components/intro';
 import Friends from './Friends';
+import Loading from '../../functions/loading';
 
 import { useMediaQuery } from 'react-responsive';
 import CreatePostPopup from '../../components/createPostPopup';
@@ -28,9 +29,9 @@ export default function Profile({ getAllPosts }) {
   const [photos, setPhotos] = useState({});
   var userName = username === undefined ? user.username : username;
   const [activeTab, setActiveTab] = useState('about');
-  const [savedPosts, setSavedPosts] = useState([]); // ajout d'une nouvelle variable d'état pour les posts sauvegardés
-  const [likedPosts, setLikedPosts] = useState([]); // ajout d'une nouvelle variable d'état pour les posts likés
-  const [recommendedPosts, setRecommendedPosts] = useState([]); // ajout d'une nouvelle variable d'état pour les posts recommandés
+  const [savedPosts, setSavedPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
+  const [recommendedPosts, setRecommendedPosts] = useState([]);
 
   const [{ loading, error, profile }, dispatch] = useReducer(profileReducer, {
     loading: false,
@@ -101,19 +102,25 @@ export default function Profile({ getAllPosts }) {
   const [leftHeight, setLeftHeight] = useState();
   const [scrollHeight, setScrollHeight] = useState();
   useEffect(() => {
-    setHeight(profileTop.current.clientHeight + 300);
-    setLeftHeight(leftSide.current.clientHeight);
+    if (profileTop.current && leftSide.current) {
+      setHeight(profileTop.current.clientHeight + 300);
+      setLeftHeight(leftSide.current.clientHeight);
+    }
     window.addEventListener('scroll', getScroll, { passive: true });
     return () => {
-      window.addEventListener('scroll', getScroll, { passive: true });
+      window.removeEventListener('scroll', getScroll);
     };
   }, [loading, scrollHeight]);
+  
   const check = useMediaQuery({
     query: '(min-width:901px)',
   });
   const getScroll = () => {
     setScrollHeight(window.pageYOffset);
   };
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className='profile'>
       {visible && (

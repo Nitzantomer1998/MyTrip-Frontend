@@ -10,7 +10,11 @@ import {
   unfollow,
   unfriend,
 } from '../../functions/user';
-export default function Friendship({ friendshipp, profileid }) {
+export default function Friendship({
+  friendshipp,
+  profileid,
+  updateFollowersCount,
+}) {
   const [friendship, setFriendship] = useState(friendshipp);
   useEffect(() => {
     setFriendship(friendshipp);
@@ -35,13 +39,15 @@ export default function Friendship({ friendshipp, profileid }) {
   const followHandler = async () => {
     setFriendship({ ...friendship, following: true });
     await follow(profileid, user.token);
-    window.location.reload();
+    updateFollowersCount(1);
+    //window.location.reload();
   };
 
   const unfollowHandler = async () => {
     setFriendship({ ...friendship, following: false });
     await unfollow(profileid, user.token);
-    window.location.reload();
+    updateFollowersCount(-1);
+    //window.location.reload();
   };
   const acceptRequestHanlder = async () => {
     setFriendship({

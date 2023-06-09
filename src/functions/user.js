@@ -241,7 +241,6 @@ export const getFriendsPageInfos = async (token) => {
 
 export const getFollowingPageInfos = async (token) => {
   try {
-    console.log(`token ${token}`);
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getFollowingPageInfos`,
 
@@ -276,7 +275,6 @@ export const getFollowersPageInfos = async (token) => {
 
 export const getFollowersPageInfosId = async (id, token) => {
   try {
-    console.log(`token ${token}`);
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getFollowersPageInfosId/${id}`,
 
@@ -295,7 +293,6 @@ export const getFollowersPageInfosId = async (id, token) => {
 
 export const getFollowingPageInfosId = async (id, token) => {
   try {
-    console.log(`token ${token}`);
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getUserFollowingPage/${id}`,
       {
@@ -329,7 +326,6 @@ export const unfollowReverse = async (id, token) => {
   }
 };
 
-
 export const getUserStatistics = async (user) => {
   try {
     const { data } = await axios.get(
@@ -348,3 +344,22 @@ export const getUserStatistics = async (user) => {
   }
 };
 
+export const getUserFollowersCount = async (profile, user) => {
+  try {
+    console.log(profile, 'profile in getUserFollowersCount');
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/getUserFollowersCount/${profile._id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    console.log('Followers count from backend:', data);
+    return data;
+  } catch (error) {
+    console.log('Error getting followers count from backend:');
+    console.error(error);
+    return null;
+  }
+};

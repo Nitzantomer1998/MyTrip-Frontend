@@ -4,7 +4,7 @@ import Friendship from './Friendship';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getUserStatistics } from '../../functions/user';
+import { getUserStatistics, getUserFollowersCount } from '../../functions/user';
 
 export default function ProfielPictureInfos({
   profile,
@@ -18,6 +18,11 @@ export default function ProfielPictureInfos({
   const pRef = useRef(null);
   const [totalLikes, setTotalLikes] = useState(0);
   const [totalRecommends, setTotalRecommends] = useState(0);
+  const [followersCount, setFollowersCount] = useState(0);
+
+  const updateFollowersCount = (delta) => {
+    setFollowersCount(followersCount + delta);
+  };
 
   useEffect(() => {
     const fetchUserStatistics = async () => {
@@ -30,7 +35,6 @@ export default function ProfielPictureInfos({
       } else {
         console.log('User, user id or user token is undefined', user);
       }
-      console.log(visitor, 'profile');
     };
     fetchUserStatistics();
   }, [user]);
@@ -44,6 +48,17 @@ export default function ProfielPictureInfos({
       setTotalLikes(countLikes);
     }
   }, [userPosts]);
+
+  useEffect(() => {
+    const fetchFollowersCount = async () => {
+      if (profile && profile._id) {
+        console.log(profile, 'profile in useEffect');
+        const count = await getUserFollowersCount(profile, user);
+        setFollowersCount(count);
+      }
+    };
+    fetchFollowersCount();
+  }, [profile, user]); // observe both profile and user
 
   return (
     <div className='profile_img_wrap'>
@@ -72,7 +87,11 @@ export default function ProfielPictureInfos({
         </div>
       </div>
       {visitor ? (
-        <Friendship friendshipp={profile?.friendship} profileid={profile._id} />
+        <Friendship
+          friendshipp={profile?.friendship}
+          profileid={profile._id}
+          updateFollowersCount={updateFollowersCount}
+        />
       ) : (
         <div className='profile_w_right'>
           <div className='gray_btn'>
@@ -90,15 +109,13 @@ export default function ProfielPictureInfos({
       )}
 
       <div className='following'>
-        {profile?.followers && (
-          <div className='profile_followers_count'>
-            {profile?.followers.length === 0
-              ? '0'
-              : profile?.followers.length === 1
-              ? '1'
-              : `${profile?.followers.length}`}
-          </div>
-        )}
+        <div className='profile_followers_count'>
+          {followersCount === 0
+            ? '0'
+            : followersCount === 1
+            ? '1'
+            : `${followersCount}`}
+        </div>
         <Link to='/followers' state={{ user: profile }} className='hover1'>
           Followers
         </Link>

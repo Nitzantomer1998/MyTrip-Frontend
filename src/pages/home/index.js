@@ -5,17 +5,27 @@ import Header from '../../components/header';
 import LeftHome from '../../components/home/left';
 import Post from '../../components/post';
 import './style.css';
+import Loading from '../../functions/loading';
+
 export default function Home({ setVisible, posts, loading, getAllPosts }) {
   const { user } = useSelector((state) => ({ ...state.user }));
   const middle = useRef(null);
   const [height, setHeight] = useState();
+
   useEffect(() => {
-    setHeight(middle.current.clientHeight);
+    if (middle.current) {
+      // Ajouter une vérification ici
+      setHeight(middle.current.clientHeight);
+    }
   }, [loading, height]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className='home' style={{ height: `${height + 150}px` }}>
       <LeftHome user={user} />
-
       <Header page='home' getAllPosts={getAllPosts} />
       <LeftHome user={user} />
       <div className='home_middle' ref={middle}>

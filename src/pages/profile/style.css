@@ -552,7 +552,7 @@
   margin-left: 113px;
 }
 
-.btn_delete_account {
+.btn_delete_account, .btn_edit_password {
   background-color: #f02849;
   color: #fff;
   border: none;
@@ -562,6 +562,8 @@
   font-weight: 600;
   cursor: pointer;
   margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+  
 }
 
 .delete-confirmation-container {

@@ -99,7 +99,7 @@ export default function ChangePassword({
             />
             {error && <div className='error_text'>{error}</div>}
             <div className='reset_form_btns'>
-              <Link to='/login' className='gray_btn'>
+              <Link to='/profile' className='gray_btn'>
                 Cancel
               </Link>
               <button type='submit' className='blue_btn'>
