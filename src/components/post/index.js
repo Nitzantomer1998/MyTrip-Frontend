@@ -48,18 +48,16 @@ export default function Post({ post, user, profile }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
   };
-  
+
   const closeModal = () => {
     setIsModalOpen(false);
     window.location.reload();
   };
-  
-
 
   useEffect(() => {
     setComments(post?.comments);
@@ -104,6 +102,8 @@ export default function Post({ post, user, profile }) {
     fetchPostRecommends();
   }, [post._id, user.token]);
 
+  
+
   const handleAddLike = async () => {
     if (!isLiked) {
       await addLike(post._id, user.token);
@@ -130,11 +130,35 @@ export default function Post({ post, user, profile }) {
 
   const handleShareSuccess = () => {
     openModal();
+    setShowSuccessMessage(true);
+    setTimeout(closeModal, 2000);
   };
+
+  
+  useEffect(() => {
+    if (showSuccessMessage) {
+      const timer = setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessMessage]);
 
   const handleShareFailure = () => {
     openModal();
+    setShowSuccessMessage(true);
+    setTimeout(closeModal, 1000);
   };
+  
+  useEffect(() => {
+    if (showSuccessMessage) {
+      const timer = setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSuccessMessage]);
+
 
   const showMore = () => {
     setCount((prev) => prev + 3);
@@ -178,14 +202,19 @@ export default function Post({ post, user, profile }) {
         </div>
       )}
 
-      <Modal isOpen={isModalOpen} 
-      onRequestClose={closeModal} 
-      contentLabel="Share Success Modal"
-      className= "share-modal"
-      shouldCloseOnOverlayClick={closeModal}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel='Share Success Modal'
+        className='share-modal'
+        shouldCloseOnOverlayClick={closeModal}
       >
-      <h3>Post shared successfully!</h3>
-    </Modal>
+        <h3>Post shared successfully!</h3>
+      </Modal>
+
+      {showSuccessMessage && (
+        <div className='success_message'>Post shared successfully!</div>
+      )}
 
       <div className='post_header'>
         <Link
