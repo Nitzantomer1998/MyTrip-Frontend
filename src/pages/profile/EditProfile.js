@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 import Header from '../../components/header/index';
 import ChangePassword from '../reset/ChangePassword';
@@ -23,21 +23,6 @@ export default function EditProfile() {
   } = user;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   setUserInfos({ email: user ? user.email : '' });
-  // }, [user]);
-
-  // useEffect(() => {
-  //   console.log("the userInfos is " + JSON.stringify(userInfos));
-  // }, [userInfos]);
-
-  // useEffect(() => {
-  //   updateUserInfo();
-  // }, [user]);
-
-  // const updateUserInfo = () => {
-  //   setUserInfos({ email: user ? user.email : '' });
-  // }
 
   const handleDeleteConfirmation = () => {
     setShowDeleteConfirmation(true);
@@ -71,15 +56,13 @@ export default function EditProfile() {
     setShowDeleteConfirmation(false);
   };
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const handleEditPassword = () => {
+    setEditPassword(!editPassword);
   };
 
-  const handleSavePassword = () => {
-    console.log('Saving password... ' + password);
-    //ta grand mere la reine de chauve ca ne marche pas
-    setPassword('password');
-    setConf_password('password');
+  const handleCancelEdit = () => {
+    setEditPassword(false);
+    navigate('/profile');
   };
 
   return (
@@ -91,17 +74,23 @@ export default function EditProfile() {
         <br />
         <h1 className='edit_profile'>Edit Profile</h1>
         <div>
-          <ChangePassword
-            password={password}
-            setPassword={setPassword}
-            conf_password={conf_password}
-            setConf_password={setConf_password}
-            error={error}
-            loading={loading}
-            setLoading={setLoading}
-            user={userInfos.user}
-            setError={setError}
-          />
+          <button className='btn_edit_password' onClick={handleEditPassword}>
+            Edit Password
+          </button>
+          {editPassword && (
+            <ChangePassword
+              password={password}
+              setPassword={setPassword}
+              conf_password={conf_password}
+              setConf_password={setConf_password}
+              error={error}
+              loading={loading}
+              setLoading={setLoading}
+              user={userInfos.user}
+              setError={setError}
+            />
+            
+          )}
           <br />
           <br />
           <button
@@ -128,14 +117,6 @@ export default function EditProfile() {
               </button>
             </div>
           )}
-        </div>
-
-        <div>
-          {/*
-          <label htmlFor="username">New Password:  </label>
-          <input type="text" id="password" value={password} onChange={handlePasswordChange} />
-          <button className="btn_save" onClick={handleSavePassword}>Save</button>
-          */}
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import Header from '../../components/header/index';
 import { useSelector } from 'react-redux';
 import './style.css';
 import { getUserStatistics } from '../../functions/user';
+import Loading from '../../functions/loading';
 
 export default function Statistics() {
   const { user } = useSelector((state) => ({ ...state.user }));
@@ -17,9 +18,11 @@ export default function Statistics() {
   const [totalGivenRecommends, setTotalGivenRecommends] = useState(0);
   const [totalGivenShares, setTotalGivenShares] = useState(0);
   const [totalGivenComments, setTotalGivenComments] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchUserStatistics = async () => {
+      setLoading(true); // Déclenchez le chargement
       if (user && user.id && user.token) {
         const data = await getUserStatistics(user);
         if (data) {
@@ -36,65 +39,72 @@ export default function Statistics() {
       } else {
         console.log('User, user id or user token is undefined', user);
       }
+      setLoading(false); // Arrêtez le chargement après le fetch
     };
     fetchUserStatistics();
   }, [user]);
 
   return (
     <div>
-      <Header page='profile' />
-      <div className='statistics_container'>
-        <div className='statistics_section'>
-          <div className='stat_section_title'>
-            <h2>Received Score</h2>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header page='profile' />
+          <div className='statistics_container'>
+            <div className='statistics_section'>
+              <div className='stat_section_title'>
+                <h2>Received Score</h2>
+              </div>
+              <div className='stat_card_row'>
+                <div className='stat_card'>
+                  <p>Likes</p>
+                  <p>{totalReceivedLikes}</p>
+                </div>
+                <div className='stat_card'>
+                  <p>Recommends</p>
+                  <p>{totalReceivedRecommends}</p>
+                </div>
+                <div className='stat_card'>
+                  <p>Shares</p>
+                  <p>{totalReceivedShares}</p>
+                </div>
+                <div className='stat_card'>
+                  <p>Comments</p>
+                  <p>{totalReceivedComments}</p>
+                </div>
+                <div className='stat_card'>
+                  <p>Posts</p>
+                  <p>{totalReceivedPosts}</p>
+                </div>
+              </div>
+            </div>
+            <div className='statistics_section'>
+              <div className='stat_section_title'>
+                <h2 className='given_title'>Given Score</h2>
+              </div>
+              <div className='stat_card_row given_row'>
+                <div className='stat_card'>
+                  <p>Likes</p>
+                  <p>{totalGivenLikes}</p>
+                </div>
+                <div className='stat_card'>
+                  <p>Recommends</p>
+                  <p>{totalGivenRecommends}</p>
+                </div>
+                <div className='stat_card'>
+                  <p>Shares</p>
+                  <p>{totalGivenShares}</p>
+                </div>
+                <div className='stat_card'>
+                  <p>Comments</p>
+                  <p>{totalGivenComments}</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className='stat_card_row'>
-            <div className='stat_card'>
-              <p>Likes</p>
-              <p>{totalReceivedLikes}</p>
-            </div>
-            <div className='stat_card'>
-              <p>Recommends</p>
-              <p>{totalReceivedRecommends}</p>
-            </div>
-            <div className='stat_card'>
-              <p>Shares</p>
-              <p>{totalReceivedShares}</p>
-            </div>
-            <div className='stat_card'>
-              <p>Comments</p>
-              <p>{totalReceivedComments}</p>
-            </div>
-            <div className='stat_card'>
-              <p>Posts</p>
-              <p>{totalReceivedPosts}</p>
-            </div>
-          </div>
-        </div>
-        <div className='statistics_section'>
-          <div className='stat_section_title'>
-            <h2 className='given_title'>Given Score</h2>
-          </div>
-          <div className='stat_card_row given_row'>
-            <div className='stat_card'>
-              <p>Likes</p>
-              <p>{totalGivenLikes}</p>
-            </div>
-            <div className='stat_card'>
-              <p>Recommends</p>
-              <p>{totalGivenRecommends}</p>
-            </div>
-            <div className='stat_card'>
-              <p>Shares</p>
-              <p>{totalGivenShares}</p>
-            </div>
-            <div className='stat_card'>
-              <p>Comments</p>
-              <p>{totalGivenComments}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }

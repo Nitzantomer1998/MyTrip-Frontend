@@ -110,6 +110,7 @@ export default function UpdateProfilePicture({
           setError(new_post);
           console.log(`7`);
         }
+        window.location.reload();
       } else {
         console.log(`8`);
 
@@ -131,7 +132,6 @@ export default function UpdateProfilePicture({
         </div>
         <span className='Update_profile_picture'>Update profile picture</span>
       </div>
-
 
       <div className='update_center'>
         <div className='crooper'>
@@ -169,7 +169,6 @@ export default function UpdateProfilePicture({
         <div className='gray_btn' onClick={() => getCroppedImage('show')}>
           <i className='crop_icon'></i>Crop photo
         </div>
-
       </div>
       <div className='flex_p_t'>
         <i className='public_icon'></i>

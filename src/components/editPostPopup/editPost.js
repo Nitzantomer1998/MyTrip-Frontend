@@ -92,7 +92,6 @@ export default function EditPost({ postId, token, handleSubmit }) {
     setLoading(false);
     handleSubmit(false);
     window.location.reload();
-    //window.location.reload();
   };
 
   const handleImageAdd = (e) => {

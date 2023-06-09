@@ -277,7 +277,6 @@ export const removeRecommend = async (id, token) => {
 };
 export const getPostLikes = async (id, token) => {
   try {
-    console.log(`token ${token}`);
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getPostLikes/${id}`,
       {
@@ -294,7 +293,6 @@ export const getPostLikes = async (id, token) => {
 };
 export const getPostRecommends = async (id, token) => {
   try {
-    console.log(`token ${token}`);
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getPostRecommends/${id}`,
       {

@@ -1,10 +1,11 @@
 import './style.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Logo, Search } from '../../svg';
 import { useSelector } from 'react-redux';
 import SearchMenu from './SearchMenu';
 import { useRef, useState } from 'react';
 import useClickOutside from '../../helpers/clickOutside';
+
 export default function Header({ page, getAllPosts }) {
   const { user } = useSelector((state) => ({ ...state.user }));
   const color = '#65676b';
@@ -13,6 +14,7 @@ export default function Header({ page, getAllPosts }) {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const allmenu = useRef(null);
   const usermenu = useRef(null);
+  const navigate = useNavigate();
   useClickOutside(allmenu, () => {
     setShowAllMenu(false);
   });
@@ -20,14 +22,18 @@ export default function Header({ page, getAllPosts }) {
     setShowUserMenu(false);
   });
 
+  const handleLogoClick = () => {
+    navigate('/');
+  };
+
   return (
     <header>
       <div className='header_left'>
-        <Link to='/' className='header_logo'>
+        <div className='header_logo' onClick={handleLogoClick}>
           <div className='circle'>
             <Logo />
           </div>
-        </Link>
+        </div>
         <div
           className='search search1'
           onClick={() => {

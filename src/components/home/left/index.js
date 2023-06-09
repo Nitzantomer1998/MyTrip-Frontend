@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
 
 export default function LeftHome({ user }) {
+  
   const dispatch = useDispatch();
   const [activeLink, setActiveLink] = useState(null);
   const navigate = useNavigate();
