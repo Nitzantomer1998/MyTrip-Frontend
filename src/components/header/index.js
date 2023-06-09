@@ -24,7 +24,6 @@ export default function Header({ page, getAllPosts }) {
 
   const handleLogoClick = () => {
     navigate('/');
-    window.location.reload();
   };
 
   return (

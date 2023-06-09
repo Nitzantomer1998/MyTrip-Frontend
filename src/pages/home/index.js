@@ -13,11 +13,31 @@ export default function Home({ setVisible, posts, loading, getAllPosts }) {
   const [height, setHeight] = useState();
 
   useEffect(() => {
+    const isPageReloaded = localStorage.getItem('isPageReloaded');
+
+    if (!isPageReloaded) {
+      localStorage.setItem('isPageReloaded', true);
+      window.location.reload();
+    } else {
+      localStorage.removeItem('isPageReloaded');
+    }
+  }, []);
+
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    const homePath = '/home';
+
+    if (currentPath === homePath) {
+      window.location.reload();
+    }
+  }, []);
+
+  useEffect(() => {
     if (middle.current) {
       // Ajouter une vérification ici
       setHeight(middle.current.clientHeight);
     }
-  }, [loading]);
+  }, [loading, height]);
 
   if (loading) {
     return <Loading />;
