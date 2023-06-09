@@ -17,7 +17,7 @@ export default function Home({ setVisible, posts, loading, getAllPosts }) {
       // Ajouter une vérification ici
       setHeight(middle.current.clientHeight);
     }
-  }, [loading, height]);
+  }, [loading]);
 
   if (loading) {
     return <Loading />;
