@@ -161,20 +161,19 @@ export default function RegisterForm({ setVisible }) {
 
               <div className='reg_infos'>
                 By clicking Sign Up, you agree to our{' '}
-                <span onClick={handleTermsClick}>
-                  Terms & conditions &nbsp;
-                </span>
+                <span onClick={handleTermsClick}>Terms & conditions&nbsp;</span>
                 {showTerms && (
                   <div className='terms-popup'>
                     <p>
                       {' '}
-                      <p>Terms & conditions</p> General Conditions of Use of the
-                      "MyTrip" Social Network Introduction Welcome to MyTrip. By
-                      using our social network, you agree to these terms of use.
-                      Please read them carefully. Registration To use MyTrip,
-                      you must create an account. You agree to provide accurate
-                      and complete information when registering and to update
-                      such information as necessary. Privacy Your privacy is
+                      <p style={{ color: 'red' }}>Terms & conditions</p> General
+                      Conditions of Use of the "MyTrip" Social Network
+                      Introduction Welcome to MyTrip. By using our social
+                      network, you agree to these terms of use. Please read them
+                      carefully. Registration To use MyTrip, you must create an
+                      account. You agree to provide accurate and complete
+                      information when registering and to update such
+                      information as necessary. Privacy Your privacy is
                       important to us. Our Privacy Policy explains how we
                       collect, use and protect your information. Using MyTrip
                       You are responsible for all activity on your MyTrip
@@ -195,7 +194,7 @@ export default function RegisterForm({ setVisible }) {
                       as soon as they are published on MyTrip. Applicable Law
                       These terms of use are governed by French law and any
                       dispute will be settled by the French courts.{' '}
-                      <p>Cookie Policy</p>{' '}
+                      <p style={{ color: 'red' }}>Cookie Policy</p>{' '}
                       <p>
                         {' '}
                         What is a cookie ? A cookie is a small text file stored
@@ -228,7 +227,7 @@ export default function RegisterForm({ setVisible }) {
                     </button>
                   </div>
                 )}
-                and <span onClick={handleTermsClick}>Cookie Policy.</span>
+                <span onClick={handleTermsClick}>& Cookie Policy.</span>
                 <div>
                   <Field
                     type='checkbox'
