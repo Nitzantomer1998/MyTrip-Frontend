@@ -23,14 +23,14 @@ export default function Home({ setVisible, posts, loading, getAllPosts }) {
     }
   }, []);
 
-  useEffect(() => {
-    const currentPath = window.location.pathname;
-    const homePath = '/home';
+  // useEffect(() => {
+  //   const currentPath = window.location.pathname;
+  //   const homePath = '/home';
 
-    if (currentPath === homePath) {
-      window.location.reload();
-    }
-  }, []);
+  //   if (currentPath === homePath) {
+  //     window.location.reload();
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (middle.current) {

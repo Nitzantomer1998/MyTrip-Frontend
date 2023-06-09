@@ -107,7 +107,7 @@ function App() {
             exact
           />
           <Route
-            path='/home'
+            path='/'
             element={
               <Home
                 setVisible={setVisible}
