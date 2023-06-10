@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 import Header from '../../components/header/index';
@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import { useDispatch } from 'react-redux';
+import { changeUsername } from '../../functions/user';
 
 export default function EditProfile() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -17,12 +18,19 @@ export default function EditProfile() {
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => state);
   const [userInfos, setUserInfos] = useState({ user });
+  const [showChangeUsername, setShowChangeUsername] = useState(false);
+  const [newUsername, setNewUsername] = useState('');
 
   const {
     user: { token },
   } = user;
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const handleEditUsername = () => {
+    setShowChangeUsername(prevState => !prevState);
+    setNewUsername(''); // Clear the input field when showing the popup
+  };
+  
 
   const handleDeleteConfirmation = () => {
     setShowDeleteConfirmation(true);
@@ -65,6 +73,30 @@ export default function EditProfile() {
     navigate('/profile');
   };
 
+  const handleChangeUsername = async () => {
+    if (newUsername.trim() === '') {
+      setError('Please enter a valid username');
+      return;
+    }
+    const response = await changeUsername(newUsername, token);
+
+    const userCookie = Cookies.get('user');
+    const user = userCookie ? JSON.parse(userCookie) : {};
+    user.username = newUsername;
+    Cookies.set('user', JSON.stringify(user));
+
+    setShowChangeUsername(false);
+    setRefreshPage(true);
+  };
+
+  const [refreshPage, setRefreshPage] = useState(false);
+
+  useEffect(() => {
+    if (refreshPage) {
+      window.location.reload();
+    }
+  }, [refreshPage]);
+
   return (
     <div className='head'>
       <Header page='profile' />
@@ -74,9 +106,40 @@ export default function EditProfile() {
         <br />
         <h1 className='edit_profile'>Edit Profile</h1>
         <div>
+        <div>
+        <button className='btn_edit_password' onClick={handleEditUsername}>
+
+            Edit Username
+          </button>
+          </div>
+          {showChangeUsername && (
+            <div className='username-popup'>
+              <h2 className='text-title'>Change Username</h2>
+              <div className="input-row">
+                <h3 className='text-input'>Enter new username:</h3>
+                <input
+                  type='text'
+                  value={newUsername}
+                  onChange={(e) => setNewUsername(e.target.value)}
+                />
+              </div>
+              {error && <div className="error-message">{error}</div>}
+
+              <div className="button-container">
+                <button className="gray_btn" onClick={() => setShowChangeUsername(false)}>
+                  Cancel
+                </button>
+                <button className="blue_btn" onClick={handleChangeUsername}>
+                  Save
+                </button>
+                
+              </div>
+                          </div>
+          )}
           <button className='btn_edit_password' onClick={handleEditPassword}>
             Edit Password
           </button>
+          
           {editPassword && (
             <ChangePassword
               password={password}
@@ -89,7 +152,6 @@ export default function EditProfile() {
               user={userInfos.user}
               setError={setError}
             />
-            
           )}
           <br />
           <br />
@@ -117,6 +179,8 @@ export default function EditProfile() {
               </button>
             </div>
           )}
+
+         
         </div>
       </div>
     </div>

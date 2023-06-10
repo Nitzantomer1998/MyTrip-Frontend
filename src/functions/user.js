@@ -363,3 +363,26 @@ export const getUserFollowersCount = async (profile, user) => {
     return null;
   }
 };
+
+export const changeUsername = async (username, token) => {
+  try {
+    console.log("im here");
+    console.log(token);
+
+
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/changeUsername/${username}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("im here again");
+
+    return { status: 'ok', data };
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
