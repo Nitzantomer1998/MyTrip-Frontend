@@ -346,7 +346,6 @@ export const getUserStatistics = async (user) => {
 
 export const getUserFollowersCount = async (profile, user) => {
   try {
-    console.log(profile, 'profile in getUserFollowersCount');
     const { data } = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/getUserFollowersCount/${profile._id}`,
       {
@@ -366,10 +365,6 @@ export const getUserFollowersCount = async (profile, user) => {
 
 export const changeUsername = async (username, token) => {
   try {
-    console.log("im here");
-    console.log(token);
-
-
     const { data } = await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/changeUsername/${username}`,
       {},
@@ -379,10 +374,9 @@ export const changeUsername = async (username, token) => {
         },
       }
     );
-    console.log("im here again");
-
     return { status: 'ok', data };
   } catch (error) {
-    return error.response.data.message;
+    // Return the entire error response
+    throw error.response;
   }
 };

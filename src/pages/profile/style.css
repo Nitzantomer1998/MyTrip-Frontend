@@ -570,9 +570,11 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 50px;
   transition: background-color 0.3s ease;
 }
+
 
 .delete-confirmation-container {
   position: fixed;
@@ -646,7 +648,7 @@
   text-align: center;
 }
 
-.blue_btn {
+/* .blue_btn {
   border: none;
   outline: none;
   background: purple;
@@ -662,14 +664,9 @@
   gap: 20px;
   cursor: pointer;
   margin-bottom: 20px;
+} */
 
- 
-
-
-
-}
-
-.gray_btn {
+/* .gray_btn {
   border: none;
   outline: none;
   background: var(--bg-secondary);
@@ -684,11 +681,8 @@
   justify-content: center;
   gap: 20px;
   cursor: pointer;
-  margin-bottom: 20px;
-  
-
-  
-}
+  margin-bottom: 20px;  
+} */
 
 .button-container {
   display: flex;

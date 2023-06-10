@@ -27,13 +27,12 @@ export default function EditProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleEditUsername = () => {
-    setShowChangeUsername(prevState => !prevState);
+    setShowChangeUsername((prevState) => !prevState);
     setNewUsername(''); // Clear the input field when showing the popup
   };
-  
 
   const handleDeleteConfirmation = () => {
-    setShowDeleteConfirmation(true);
+    setShowDeleteConfirmation((prevShow) => !prevShow);
   };
 
   const handleDeleteAccount = async () => {
@@ -78,15 +77,25 @@ export default function EditProfile() {
       setError('Please enter a valid username');
       return;
     }
-    const response = await changeUsername(newUsername, token);
 
-    const userCookie = Cookies.get('user');
-    const user = userCookie ? JSON.parse(userCookie) : {};
-    user.username = newUsername;
-    Cookies.set('user', JSON.stringify(user));
+    if (newUsername.length < 5 || newUsername.length > 16) {
+      setError('Username must be between 5 and 16 letters');
+      return;
+    }
 
-    setShowChangeUsername(false);
-    setRefreshPage(true);
+    try {
+      const response = await changeUsername(newUsername, token);
+
+      const userCookie = Cookies.get('user');
+      const user = userCookie ? JSON.parse(userCookie) : {};
+      user.username = newUsername;
+      Cookies.set('user', JSON.stringify(user));
+
+      setShowChangeUsername(false);
+      setRefreshPage(true);
+    } catch (error) {
+      setError(error.data.message);
+    }
   };
 
   const [refreshPage, setRefreshPage] = useState(false);
@@ -106,16 +115,15 @@ export default function EditProfile() {
         <br />
         <h1 className='edit_profile'>Edit Profile</h1>
         <div>
-        <div>
-        <button className='btn_edit_password' onClick={handleEditUsername}>
-
-            Edit Username
-          </button>
+          <div>
+            <button className='btn_edit_password' onClick={handleEditUsername}>
+              Edit Username
+            </button>
           </div>
           {showChangeUsername && (
             <div className='username-popup'>
               <h2 className='text-title'>Change Username</h2>
-              <div className="input-row">
+              <div className='input-row'>
                 <h3 className='text-input'>Enter new username:</h3>
                 <input
                   type='text'
@@ -123,23 +131,25 @@ export default function EditProfile() {
                   onChange={(e) => setNewUsername(e.target.value)}
                 />
               </div>
-              {error && <div className="error-message">{error}</div>}
+              {error && <div className='error-message'>{error}</div>}
 
-              <div className="button-container">
-                <button className="gray_btn" onClick={() => setShowChangeUsername(false)}>
+              <div className='button-container'>
+                <button
+                  className='gray_btn'
+                  onClick={() => setShowChangeUsername(false)}
+                >
                   Cancel
                 </button>
-                <button className="blue_btn" onClick={handleChangeUsername}>
+                <button className='blue_btn' onClick={handleChangeUsername}>
                   Save
                 </button>
-                
               </div>
-                          </div>
+            </div>
           )}
           <button className='btn_edit_password' onClick={handleEditPassword}>
             Edit Password
           </button>
-          
+
           {editPassword && (
             <ChangePassword
               password={password}
@@ -179,8 +189,6 @@ export default function EditProfile() {
               </button>
             </div>
           )}
-
-         
         </div>
       </div>
     </div>

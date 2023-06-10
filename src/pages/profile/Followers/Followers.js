@@ -23,12 +23,10 @@ export default function Followers(props) {
   }, []);
 
   const handleFollow = async (followerId) => {
-    console.log(followerId, user.token, 'followerssssss');
     await follow(followerId, user.token);
     await fetchFriends();
   };
   const handleUnfollow = async (followerId) => {
-    console.log(followerId, user.token, 'followerssssss');
     await unfollow(followerId, user.token);
     await fetchFriends();
   };
