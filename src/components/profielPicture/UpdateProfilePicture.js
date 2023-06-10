@@ -172,7 +172,7 @@ export default function UpdateProfilePicture({
       </div>
       <div className='flex_p_t'>
         <i className='public_icon'></i>
-        Your profile picture is public
+        Add your best picture
       </div>
       <div className='update_submit_wrap'>
         <div className='blue_link' onClick={() => setImage('')}>

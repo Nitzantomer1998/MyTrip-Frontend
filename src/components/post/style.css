@@ -326,11 +326,7 @@
   color: var(--color-secondary);
   font-size: 15px;
 }
-.comments_count:hover,
-.share_count:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
+
 .post_actions {
   position: relative;
   display: grid;
