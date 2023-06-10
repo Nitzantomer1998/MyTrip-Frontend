@@ -342,16 +342,16 @@ export default function Post({ post, user, profile }) {
         </div>
       </div>
       <div className='post_actions'>
-        <div className='post_action hover1'>
-          <div className='likeRow' onClick={handleAddLike}>
+        <div className='post_action hover1' onClick={handleAddLike}>
+          <div className='likeRow' >
             <span style={{ color: isLiked ? '#1877F2' : 'gray' }}>
               {isLiked && <img src='../../../reacts/like.svg' alt='' />}
               Like{' '}
             </span>
           </div>
         </div>
-        <div className='post_action hover1'>
-          <div className='recommendRow' onClick={handleAddRecommend}>
+        <div className='post_action hover1' onClick={handleAddRecommend}>
+          <div className='recommendRow' >
             <span style={{ color: isRecommend ? '#F36B7E' : 'gray' }}>
               {isRecommend && <img src='../../../reacts/love.svg' alt='' />}
               Recommend{' '}
@@ -362,14 +362,14 @@ export default function Post({ post, user, profile }) {
           <i className='comment_icon'></i>
           <span>Comment</span>
         </div>
-        <div className='post_action hover1'>
+        
           <SharePost
             post={post}
             user={user}
             onSuccess={handleShareSuccess}
             onFailure={handleShareFailure}
           />
-        </div>
+        
       </div>
       <div className='comments_wrap'>
         <div className='comments_order'></div>
