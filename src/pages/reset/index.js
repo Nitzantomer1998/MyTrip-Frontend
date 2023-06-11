@@ -19,8 +19,8 @@ export default function Reset() {
   const [conf_password, setConf_password] = useState('');
   const [error, setError] = useState('');
   const [userInfos, setUserInfos] = useState('');
-  console.log(`userInfos ${JSON.stringify(userInfos)}`);
-  console.log(`user : ${JSON.stringify(user)}`);
+  //console.log(`userInfos ${JSON.stringify(userInfos)}`);
+  //console.log(`user : ${JSON.stringify(user)}`);
   const logout = () => {
     Cookies.set('user', '');
     dispatch({

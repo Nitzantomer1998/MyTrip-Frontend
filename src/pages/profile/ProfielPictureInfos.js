@@ -33,7 +33,7 @@ export default function ProfielPictureInfos({
           setTotalRecommends(data.receivedRecommends);
         }
       } else {
-        console.log('User, user id or user token is undefined', user);
+        //console.log('User, user id or user token is undefined', user);
       }
     };
     fetchUserStatistics();
@@ -52,7 +52,7 @@ export default function ProfielPictureInfos({
   useEffect(() => {
     const fetchFollowersCount = async () => {
       if (profile && profile._id) {
-        console.log(profile, 'profile in useEffect');
+        //console.log(profile, 'profile in useEffect');
         const count = await getUserFollowersCount(profile, user);
         setFollowersCount(count);
       }

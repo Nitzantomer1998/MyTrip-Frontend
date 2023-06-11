@@ -37,7 +37,7 @@ export default function Statistics() {
           setTotalGivenComments(data.iCommented);
         }
       } else {
-        console.log('User, user id or user token is undefined', user);
+        //console.log('User, user id or user token is undefined', user);
       }
       setLoading(false); // Arrêtez le chargement après le fetch
     };

@@ -45,7 +45,6 @@ export default function UpdateProfilePicture({
           return img;
         }
       } catch (error) {
-        console.log(error);
       }
     },
     [croppedAreaPixels]
@@ -59,7 +58,6 @@ export default function UpdateProfilePicture({
       let formData = new FormData();
       formData.append('file', blob);
       formData.append('path', path);
-      console.log(`user.token updateProfilePicture = ${user.token}`);
       const res = await uploadImages(formData, path, user.token);
       const updated_picture = await updateprofilePicture(
         res[0].url,
@@ -76,14 +74,11 @@ export default function UpdateProfilePicture({
           user.token
         );
 
-        console.log(`new_post ${JSON.stringify(new_post)}`);
         if (new_post) {
           setLoading(false);
           setImage('');
-          console.log(`1`);
 
           pRef.current.style.backgroundImage = `url(${res[0].url})`;
-          console.log(`2`);
 
           Cookies.set(
             'user',
@@ -92,34 +87,26 @@ export default function UpdateProfilePicture({
               picture: res[0].url,
             })
           );
-          console.log(`3`);
 
           dispatch({
             type: 'UPDATEPICTURE',
             payload: res[0].url,
           });
-          console.log(`4`);
 
           setShow(false);
         } else {
-          console.log(`5`);
 
           setLoading(false);
-          console.log(`6`);
 
           setError(new_post);
-          console.log(`7`);
         }
         window.location.reload();
       } else {
-        console.log(`8`);
 
         setLoading(false);
-        console.log(`9`);
         setError(updated_picture);
       }
     } catch (error) {
-      console.log(`10`);
       setLoading(false);
       setError(error.response?.data.message);
     }

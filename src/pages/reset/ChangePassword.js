@@ -19,12 +19,12 @@ export default function ChangePassword({
   setError,
   user,
 }) {
-  console.log(`user : ${JSON.stringify(user)}`);
+  //console.log(`user : ${JSON.stringify(user)}`);
   const {
     user: { token },
   } = user;
   const dispatch = useDispatch();
-  console.log(`token : ${JSON.stringify(token)}`);
+  //console.log(`token : ${JSON.stringify(token)}`);
   const navigate = useNavigate();
   const validatePassword = Yup.object({
     password: Yup.string()
@@ -52,8 +52,8 @@ export default function ChangePassword({
           },
         }
       );
-      console.log('1');
-      console.log('temp ' + JSON.stringify(temp)); //SUCESS PRINT USER
+      //console.log('1');
+      //console.log('temp ' + JSON.stringify(temp)); //SUCESS PRINT USER
 
       setError('');
       Cookies.remove('user');
@@ -63,7 +63,7 @@ export default function ChangePassword({
       navigate('/login');
     } catch (error) {
       setLoading(false);
-      console.log('3');
+      //console.log('3');
       setError(error.response.data.message);
     }
   };

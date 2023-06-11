@@ -28,7 +28,7 @@ export default function Intro({ detailss, visitor, setOthername }) {
 
   const updateDetails = async () => {
     try {
-      console.log('sent');
+      //console.log('sent');
       const { data } = await axios.put(
         `${process.env.REACT_APP_BACKEND_URL}/updateDetails`,
         {
@@ -44,7 +44,7 @@ export default function Intro({ detailss, visitor, setOthername }) {
       setDetails(data);
       setOthername(data.otherName);
     } catch (error) {
-      console.log(error.response.data.message);
+      //console.log(error.response.data.message);
     }
   };
   const handleChange = (e) => {

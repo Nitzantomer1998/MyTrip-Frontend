@@ -37,7 +37,7 @@ export default function EditProfile() {
 
   const handleDeleteAccount = async () => {
     try {
-      console.log('user ' + JSON.stringify(user));
+      //console.log('user ' + JSON.stringify(user));
       await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/deleteUser`, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -47,14 +47,14 @@ export default function EditProfile() {
       setConf_password('');
       setError('');
       setShowDeleteConfirmation(false);
-      console.log('Account deleted!');
+      //console.log('Account deleted!');
       Cookies.remove('user');
       dispatch({
         type: 'LOGOUT',
       });
       navigate('/login');
     } catch (error) {
-      console.log('1');
+      //console.log('1');
       setError(error.response.data.message);
     }
   };

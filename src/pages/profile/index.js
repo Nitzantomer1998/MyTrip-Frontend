@@ -81,7 +81,7 @@ export default function Profile({ getAllPosts }) {
           );
           setPhotos(images.data);
         } catch (error) {
-          console.log(error);
+          //console.log(error);
         }
         dispatch({
           type: 'PROFILE_SUCCESS',

@@ -18,8 +18,6 @@ export default function CreatePost({ user, setVisible }) {
     if (response && response.data) {
         following = response.data.following;     }  
     setFollowing(following);
-    console.log(following);
-    console.log(response.data);
 
   };
 

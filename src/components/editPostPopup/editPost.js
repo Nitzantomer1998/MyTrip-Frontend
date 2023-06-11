@@ -48,18 +48,13 @@ export default function EditPost({ postId, token, handleSubmit }) {
       selectedImages.length > 0
         ? await uploadImages(formData, path, token)
         : [];
-    console.log(
-      'response from uploadImages : ' + JSON.stringify(responseUploadImages)
-    );
+    
     //fin de lessai
 
-    console.log(
-      'post.images au dessus de updateImages : ' + JSON.stringify(post.images)
-    );
+    
     let updateImages = [];
     try {
-      console.log('post.images:', post.images);
-      console.log('responseUploadImages:', responseUploadImages);
+     
 
       if (post.images && post.images.length > 0) {
         updateImages = [...post.images, ...responseUploadImages];
@@ -97,7 +92,6 @@ export default function EditPost({ postId, token, handleSubmit }) {
   const handleImageAdd = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img) => {
-      console.log('img from handleImageAdd' + img);
       if (
         img.type !== 'image/jpeg' &&
         img.type !== 'image/png' &&
@@ -119,14 +113,10 @@ export default function EditPost({ postId, token, handleSubmit }) {
         reader.onload = (readerEvent) => {
           setSelectedImages((images) => [...images, readerEvent.target.result]);
         };
-        console.log('selectedImages from habdleAddImages : ' + selectedImages);
       }
     });
 
-    // const file = event.target.files[0];
-    // console.log('file : '+ JSON.stringify(file));
-    // console.log("target : "+ JSON.stringify(event.target.files));
-    // setSelectedImages((prevImages) => [...prevImages, file]);
+   
   };
 
   useEffect(() => {
@@ -145,10 +135,8 @@ export default function EditPost({ postId, token, handleSubmit }) {
           setContent(response.data.text);
           setLocation(response.data.location);
         } else {
-          console.log('1');
         }
       } catch (error) {
-        console.log('2');
       }
     };
 

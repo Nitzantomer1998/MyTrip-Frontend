@@ -11,12 +11,9 @@ export default function LocationPosts({ location, user }) {
 
   const fetchPostsByLocation = async () => {
     const res = await getPostsByLocation(location, user.token); // Utiliser le résultat de la recherche des emplacements
-    console.log('Response:', res);
     if (Array.isArray(res)) {
-      console.log('Setting posts:', res);
       setPosts(res);
     } else {
-      console.log('No posts found');
       setPosts([]);
     }
   };

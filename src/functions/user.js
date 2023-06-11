@@ -83,7 +83,7 @@ export const follow = async (id, token) => {
     );
     return 'ok';
   } catch (error) {
-    console.log(error.response.data.message);
+    //console.log(error.response.data.message);
     return error.response.data.message;
   }
 };
@@ -336,7 +336,7 @@ export const getUserStatistics = async (user) => {
         },
       }
     );
-    console.log('Data from backend:', data);
+    //console.log('Data from backend:', data);
     return data;
   } catch (error) {
     console.error(error);
@@ -354,10 +354,10 @@ export const getUserFollowersCount = async (profile, user) => {
         },
       }
     );
-    console.log('Followers count from backend:', data);
+    //console.log('Followers count from backend:', data);
     return data;
   } catch (error) {
-    console.log('Error getting followers count from backend:');
+    //console.log('Error getting followers count from backend:');
     console.error(error);
     return null;
   }

@@ -216,7 +216,7 @@ export const addLike = async (id, token) => {
     );
     return 'ok';
   } catch (error) {
-    console.log(error.response.data.message);
+    //console.log(error.response.data.message);
     return error.response.data.message;
   }
 };
@@ -234,7 +234,7 @@ export const removeLike = async (id, token) => {
     );
     return 'ok';
   } catch (error) {
-    console.log(error.response.data.message);
+    //console.log(error.response.data.message);
     return error.response.data.message;
   }
 };
@@ -253,7 +253,7 @@ export const addRecommend = async (id, token) => {
     );
     return 'ok';
   } catch (error) {
-    console.log(error.response.data.message);
+    //console.log(error.response.data.message);
     return error.response.data.message;
   }
 };
@@ -271,7 +271,7 @@ export const removeRecommend = async (id, token) => {
     );
     return 'ok';
   } catch (error) {
-    console.log(error.response.data.message);
+    //console.log(error.response.data.message);
     return error.response.data.message;
   }
 };

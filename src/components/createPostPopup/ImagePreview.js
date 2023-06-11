@@ -17,7 +17,6 @@ export default function ImagePreview({
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img) => {
-      console.log(img);
       if (
         img.type !== 'image/jpeg' &&
         img.type !== 'image/png' &&
