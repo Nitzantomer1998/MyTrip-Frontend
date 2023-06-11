@@ -29,8 +29,13 @@ export default function CreatePostPopup({
     setVisible(false);
   });
   const postSubmit = async () => {
+
+    if (!images.length && !text) {
+      setError("need to fill at least text or picture");
+    }
     if (background) {
       setLoading(true);
+
       const response = await createPost(
         null,
         background,
