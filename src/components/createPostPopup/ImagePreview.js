@@ -64,14 +64,11 @@ export default function ImagePreview({
         {images && images.length ? (
           <div className='add_pics_inside1 p0'>
             <div className='preview_actions'>
-              <button className='hover1'>
-                <i className='edit_icon'></i>
-                Edit
-              </button>
               <button
                 className='hover1'
                 onClick={() => {
-                  imageInputRef.current.click();
+                  if (images.length < 10) imageInputRef.current.click();
+                  else setError('Error: can add up to 10 pictures');
                 }}
               >
                 <i className='addPhoto_icon'></i>
