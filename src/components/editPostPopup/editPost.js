@@ -6,6 +6,7 @@ import dataURItoBlob from '../../helpers/dataURItoBlob';
 import { useSelector } from 'react-redux';
 import PulseLoader from 'react-spinners/PulseLoader';
 import useClickOutside from '../../helpers/clickOutside';
+import PostError from '../createPostPopup/PostError';
 
 export default function EditPost({ postId, token, handleSubmit }) {
   const [content, setContent] = useState('');
@@ -14,6 +15,7 @@ export default function EditPost({ postId, token, handleSubmit }) {
   const [post, setPost] = useState({});
   const [selectedImages, setSelectedImages] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState('');
   const imageInputRef = useRef(null);
   const { user } = useSelector((state) => ({ ...state.user }));
   const [loading, setLoading] = useState(false);
@@ -48,14 +50,11 @@ export default function EditPost({ postId, token, handleSubmit }) {
       selectedImages.length > 0
         ? await uploadImages(formData, path, token)
         : [];
-    
+
     //fin de lessai
 
-    
     let updateImages = [];
     try {
-     
-
       if (post.images && post.images.length > 0) {
         updateImages = [...post.images, ...responseUploadImages];
       } else {
@@ -92,19 +91,23 @@ export default function EditPost({ postId, token, handleSubmit }) {
   const handleImageAdd = (e) => {
     let files = Array.from(e.target.files);
     files.forEach((img) => {
+      if (selectedImages.length + post.images.length > 9) {
+        setError('Error: can add up to 10 pictures');
+        return;
+      }
       if (
         img.type !== 'image/jpeg' &&
         img.type !== 'image/png' &&
         img.type !== 'image/webp' &&
         img.type !== 'image/gif'
       ) {
-        //setError(
-        // `${img.name} format is unsupported ! only Jpeg, Png, Webp, Gif are allowed.`
-        //);
+        setError(
+          `${img.name} format is unsupported ! only Jpeg, Png, Webp, Gif are allowed.`
+        );
         files = files.filter((item) => item.name !== img.name);
         return;
       } else if (img.size > 1024 * 1024 * 5) {
-        //setError(`${img.name} size is too large max 5mb allowed.`);
+        setError(`${img.name} size is too large max 5mb allowed.`);
         files = files.filter((item) => item.name !== img.name);
         return;
       } else {
@@ -116,7 +119,10 @@ export default function EditPost({ postId, token, handleSubmit }) {
       }
     });
 
-   
+    // const file = event.target.files[0];
+    // console.log('file : '+ JSON.stringify(file));
+    // console.log("target : "+ JSON.stringify(event.target.files));
+    // setSelectedImages((prevImages) => [...prevImages, file]);
   };
 
   useEffect(() => {
@@ -136,8 +142,7 @@ export default function EditPost({ postId, token, handleSubmit }) {
           setLocation(response.data.location);
         } else {
         }
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchPost();
@@ -152,6 +157,7 @@ export default function EditPost({ postId, token, handleSubmit }) {
 
   return (
     <div className='blur'>
+      <div className='fix'></div>
       <div className='postBox' ref={popup}>
         <div className='box_header'>
           <div
@@ -172,8 +178,7 @@ export default function EditPost({ postId, token, handleSubmit }) {
                 value={location}
                 onChange={handleInputChangeLocation}
                 placeholder={`Add your location`}
-                rows={5}
-                cols={50}
+                rows={2}
                 maxLength={2000}
               />
               <div className='char-count'>
@@ -186,32 +191,20 @@ export default function EditPost({ postId, token, handleSubmit }) {
                 value={content}
                 onChange={handleInputChange}
                 placeholder={`What's on your mind, ${user?.username}`}
-                rows={5}
-                cols={50}
+                rows={3}
                 maxLength={2000}
               />
               <div className='char-count'>
                 {content.length}/{2000}
               </div>
             </div>
+            {post.images && post.images.length > 0 && (
+              <div className='original-pictures-text'>Original photos:</div>
+            )}
             <div className='post_imgs'>
               {post.images && post.images.length ? (
-                <div
-                  className={
-                    post.images.length === 1
-                      ? 'grid_1'
-                      : post.images.length === 2
-                      ? 'grid_2'
-                      : post.images.length === 3
-                      ? 'grid_3'
-                      : post.images.length === 4
-                      ? 'grid_4'
-                      : post.images.length >= 5
-                      ? 'grid_5'
-                      : ''
-                  }
-                >
-                  {post.images.slice(0, 5).map((image, i) => (
+                <div className='grid_4'>
+                  {post.images.slice(0, post.images.length).map((image, i) => (
                     <div key={i} className='image-container'>
                       <img
                         src={image.url}
@@ -229,9 +222,12 @@ export default function EditPost({ postId, token, handleSubmit }) {
                   ))}
                 </div>
               ) : (
-                <div className='no-picture'>No more picture</div>
+                <div className='no-picture'></div>
               )}
-              <div className='image-grid'>
+              {selectedImages && selectedImages.length > 0 && (
+                <div className='original-pictures-text'>New added photos:</div>
+              )}
+              <div className='grid_4'>
                 {selectedImages.map((image, i) => (
                   <div key={i} className='image-container'>
                     <img src={image} alt='' className={`img-${i}`} />
@@ -247,26 +243,26 @@ export default function EditPost({ postId, token, handleSubmit }) {
                     </div>
                   </div>
                 ))}
-                {selectedImages.length < 5 && (
-                  <div className='add-image'>
-                    <label htmlFor='image-upload' className='add-image-button'>
-                      <input
-                        id='image-upload'
-                        type='file'
-                        accept='image/jpeg,image/png,image/webp,image/gif'
-                        ref={imageInputRef}
-                        onChange={handleImageAdd}
-                      />
-                    </label>
-                  </div>
-                )}
+              </div>
+
+              <div className='add-image'>
+                <label htmlFor='image-upload' className='add-image-button'>
+                  <input
+                    id='image-upload'
+                    type='file'
+                    accept='image/jpeg,image/png,image/webp,image/gif'
+                    ref={imageInputRef}
+                    onChange={handleImageAdd}
+                  />
+                </label>
+                {error && <PostError error={error} setError={setError} />}
               </div>
             </div>
           </div>
         </div>
         <form onSubmit={handleSubmits}>
-          <button className='submit-btn' type='submit' disable={loading}>
-            {loading ? <PulseLoader color='#fff' size={5} /> : 'Save Changes'}
+          <button className='submit-btn' type='submit' disabled={loading}>
+            {loading ? <PulseLoader color='#fff' /> : 'Save Changes'}
           </button>
         </form>
       </div>
