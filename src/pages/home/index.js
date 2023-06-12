@@ -23,7 +23,7 @@ export default function Home({ setVisible, posts, loading, getAllPosts }) {
     if (loading) {
       const timer = setTimeout(() => {
         setShowLogoutMessage(true);
-      }, 20000); // 15000 milliseconds = 5 seconds
+      }, 20000); // 20000 milliseconds = 5 seconds
 
       setTimerId(timer);
     } else {
@@ -43,6 +43,7 @@ export default function Home({ setVisible, posts, loading, getAllPosts }) {
   }, [loading]);
 
   useEffect(() => {
+    navigate('/home');
     if (showLogoutMessage) {
       logout();
     }
