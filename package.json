@@ -3,37 +3,36 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.26.0",
-    "emoji-picker-react": "^3.5.1",
+    "axios": "^1.4.0",
+    "emoji-picker-react": "^4.4.9",
+    "eslint-config-react-app": "^7.0.1",
     "file-saver": "^2.0.5",
-    "formik": "^2.2.9",
-    "js-cookie": "^3.0.1",
+    "formik": "^2.4.1",
+    "js-cookie": "^3.0.5",
     "moment": "^2.29.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-easy-crop": "^4.1.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-easy-crop": "^4.7.4",
     "react-icons": "^4.9.0",
     "react-modal": "^3.16.1",
-    "react-moment": "^1.1.1",
-    "react-redux": "^7.2.6",
-    "react-responsive": "^9.0.0-beta.6",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
-    "react-spinners": "^0.11.0",
-    "redux": "^4.1.2",
+    "react-moment": "^1.1.3",
+    "react-redux": "^8.0.7",
+    "react-responsive": "^9.0.2",
+    "react-router-dom": "^6.12.1",
+    "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
+    "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
-    "web-vitals": "^2.1.4",
-    "yup": "^0.32.11"
+    "yup": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "linter": "eslint src/*.js --color"
+    "linter": "eslint src/*.js --color",
+    "depcheck": "npx depcheck",
+    "depupdate": "npx npm-check-updates"
   },
   "eslintConfig": {
     "extends": [
@@ -42,9 +41,9 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^8.37.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-react": "^7.32.2"
+    "depcheck": "^1.4.3",
+    "eslint": "^8.42.0",
+    "npm-check-updates": "^16.10.12"
   },
   "browserslist": {
     "production": [
