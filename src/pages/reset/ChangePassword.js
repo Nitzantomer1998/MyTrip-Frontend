@@ -12,11 +12,11 @@ export default function ChangePassword({
   setPassword,
   conf_password,
   setConf_password,
-  error,
+  errorPassword,
   loading,
   setLoading,
   userInfos,
-  setError,
+  setErrorPassword,
   user,
 }) {
   //console.log(`user : ${JSON.stringify(user)}`);
@@ -31,7 +31,7 @@ export default function ChangePassword({
       .required(
         'Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &).'
       )
-      .min(6, 'Password must be atleast 6 characters.')
+      .min(8, 'Password must be atleast 8 characters.')
       .max(36, "Password can't be more than 36 characters"),
 
     conf_password: Yup.string()
@@ -55,7 +55,7 @@ export default function ChangePassword({
       //console.log('1');
       //console.log('temp ' + JSON.stringify(temp)); //SUCESS PRINT USER
 
-      setError('');
+      setErrorPassword('');
       Cookies.remove('user');
       dispatch({
         type: 'LOGOUT',
@@ -64,7 +64,7 @@ export default function ChangePassword({
     } catch (error) {
       setLoading(false);
       //console.log('3');
-      setError(error.response.data.message);
+      setErrorPassword(error.response.data.message);
     }
   };
   return (
@@ -97,7 +97,7 @@ export default function ChangePassword({
               placeholder='Confirm new password'
               bottom
             />
-            {error && <div className='error_text'>{error}</div>}
+            {errorPassword && <div className='error_text'>{errorPassword}</div>}
             <div className='reset_form_btns'>
               <Link to='/profile' className='gray_btn'>
                 Cancel
