@@ -81,7 +81,7 @@ export default function Profile({ getAllPosts }) {
           );
           setPhotos(images.data);
         } catch (error) {
-          //console.log(error);
+          window.location.reload();
         }
         dispatch({
           type: 'PROFILE_SUCCESS',
@@ -111,7 +111,7 @@ export default function Profile({ getAllPosts }) {
       window.removeEventListener('scroll', getScroll);
     };
   }, [loading, scrollHeight]);
-  
+
   const check = useMediaQuery({
     query: '(min-width:901px)',
   });
