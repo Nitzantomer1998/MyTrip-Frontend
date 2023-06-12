@@ -29,7 +29,7 @@ export default function ChangePassword({
   const validatePassword = Yup.object({
     password: Yup.string()
       .required(
-        'Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &).'
+        'Enter a combination of at least 8 numbers,letters and punctuation marks(such as ! and &).'
       )
       .min(8, 'Password must be atleast 8 characters.')
       .max(36, "Password can't be more than 36 characters"),
