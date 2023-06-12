@@ -50,7 +50,7 @@ export default function RegisterForm({ setVisible }) {
       .required(
         'Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &).'
       )
-      .min(6, 'Password must be atleast 6 characters.')
+      .min(8, 'Password must be atleast 8 characters.')
       .max(36, "Password can't be more than 36 characters"),
     acceptedTerms: Yup.boolean()
       .oneOf([true], 'You must accept the terms and conditions.')

@@ -58,7 +58,7 @@ export default function PostMenu({
 
   if (editing) {
     return (
-      <EditPost postId={postId} token={token} handleSubmit={handleEditSubmit} />
+      <EditPost postId={postId} token={token} handleSubmit={handleEditSubmit}  />
     );
   }
 

@@ -168,14 +168,20 @@ export default function CreatePostPopup({
         )}
         <AddToYourPost setShowPrev={setShowPrev} />
         <button
-          className='post_submit'
-          onClick={() => {
-            postSubmit();
-          }}
-          disabled={loading}
-        >
-          {loading ? <PulseLoader color='#fff' size={5} /> : 'Post'}
-        </button>
+  className='post_submit'
+  onClick={() => {
+    if ( (text && text.length) || ( images && images.length) ) {
+      postSubmit();
+    } else {
+      setError('Error: need to fill at least text or picture');
+    }
+  }}
+  disabled={loading}
+>
+  {loading ? <PulseLoader color='#fff' size={5} /> : 'Post'}
+</button>
+{error && <p>{error}</p>}
+
       </div>
     </div>
   );

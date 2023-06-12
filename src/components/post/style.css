@@ -83,6 +83,8 @@
   width: 100%;
   height: 610px;
   object-fit: cover;
+  cursor: pointer;
+
 }
 .grid_1 {
   display: flex;
@@ -103,6 +105,8 @@
   grid-column-end: 2;
   height: 610px;
   object-fit: cover;
+  cursor: pointer;
+
 }
 .grid_2 img:last-of-type {
   width: 100%;
@@ -110,6 +114,8 @@
   grid-column-end: 3;
   height: 610px;
   object-fit: cover;
+  cursor: pointer;
+
 }
 .grid_3 {
   width: 100%;
@@ -123,6 +129,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: pointer;
+
 }
 .grid_3 .img-0 {
   width: 100%;
@@ -163,6 +171,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: pointer;
+
 }
 .grid_4 .img-0 {
   width: 100%;
@@ -213,6 +223,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: pointer;
+
 }
 .grid_5 .img-0 {
   width: 100%;
@@ -270,7 +282,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   color: #fff;
 }
 .post_infos {

@@ -47,8 +47,7 @@
 
 .post_imgs .image-container {
   position: relative;
-  margin-right: 0px;
-  margin-bottom: 0px;
+  margin: 5px;
 }
 
 .post_imgs .image-container img {
@@ -101,11 +100,14 @@ z-index: 99;
 }
 
 .postBox {
-  max-height: 90vh;
-  overflow-y: auto;
-  overflow-x: hidden;
+   max-height: 90vh; 
+   overflow-y: auto;
+  overflow-x: hidden; 
+  
+  
 
 }
+
 
 .add-image-button {
   display: flex;
@@ -165,4 +167,23 @@ z-index: 99;
   color: white;
   align-items: center;
   justify-content: center;
+}
+
+.original-pictures-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  color: rgba(70, 70, 103, 1);
+}
+.closeBtnPosts {
+  top: 300px;
+  right: 15;
+  color: blue;
+  font-size: 25px;
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
 }

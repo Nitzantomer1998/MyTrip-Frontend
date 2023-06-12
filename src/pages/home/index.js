@@ -6,38 +6,55 @@ import LeftHome from '../../components/home/left';
 import Post from '../../components/post';
 import './style.css';
 import Loading from '../../functions/loading';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import Cookies from 'js-cookie';
 
 export default function Home({ setVisible, posts, loading, getAllPosts }) {
   const { user } = useSelector((state) => ({ ...state.user }));
   const middle = useRef(null);
   const [height, setHeight] = useState();
+  const [showLogoutMessage, setShowLogoutMessage] = useState(false);
+  const [timerId, setTimerId] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const isPageReloaded = localStorage.getItem('isPageReloaded');
+    if (loading) {
+      const timer = setTimeout(() => {
+        setShowLogoutMessage(true);
+      }, 15000); // 15000 milliseconds = 5 seconds
 
-    if (!isPageReloaded) {
-      localStorage.setItem('isPageReloaded', true);
-      window.location.reload();
+      setTimerId(timer);
     } else {
-      localStorage.removeItem('isPageReloaded');
+      clearTimeout(timerId);
+      setShowLogoutMessage(false);
     }
-  }, []);
 
-  // useEffect(() => {
-  //   const currentPath = window.location.pathname;
-  //   const homePath = '/home';
-
-  //   if (currentPath === homePath) {
-  //     window.location.reload();
-  //   }
-  // }, []);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [loading]);
 
   useEffect(() => {
     if (middle.current) {
-      // Ajouter une vérification ici
       setHeight(middle.current.clientHeight);
     }
   }, [loading]);
+
+  useEffect(() => {
+    if (showLogoutMessage) {
+      logout();
+    }
+  }, [showLogoutMessage]);
+
+  const logout = () => {
+    Cookies.remove('user');
+    dispatch({
+      type: 'LOGOUT',
+    });
+    navigate('/login');
+  };
 
   if (loading) {
     return <Loading />;

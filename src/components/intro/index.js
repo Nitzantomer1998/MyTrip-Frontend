@@ -24,7 +24,7 @@ export default function Intro({ detailss, visitor, setOthername }) {
   };
   const [infos, setInfos] = useState(initial);
   const [showBio, setShowBio] = useState(false);
-  const [max, setMax] = useState(infos?.bio ? 100 - infos?.bio.length : 100);
+  const [max, setMax] = useState(infos?.bio ? 255 - infos?.bio.length : 255);
 
   const updateDetails = async () => {
     try {
@@ -50,7 +50,7 @@ export default function Intro({ detailss, visitor, setOthername }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInfos({ ...infos, [name]: value });
-    setMax(100 - e.target.value.length);
+    setMax(255 - e.target.value.length);
   };
   return (
     <div className='profile_card'>
