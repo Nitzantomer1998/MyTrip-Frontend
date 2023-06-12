@@ -59,7 +59,7 @@ export default function EmojiPickerBackgrounds({
       <div className='flex_center' ref={bgRef}>
         <textarea
           ref={locationRef}
-          maxLength='20'
+          maxLength='25'
           value={location}
           placeholder={`Add Your Location`}
           className={`post_input ${type2 ? 'input2' : ''} ${
