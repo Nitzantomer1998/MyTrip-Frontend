@@ -29,13 +29,8 @@ export default function CreatePostPopup({
     setVisible(false);
   });
   const postSubmit = async () => {
-
-    if (!images.length && !text) {
-      setError("need to fill at least text or picture");
-    }
     if (background) {
       setLoading(true);
-
       const response = await createPost(
         null,
         background,
@@ -56,7 +51,6 @@ export default function CreatePostPopup({
         setText('');
         setVisible(false);
       } else {
-
         setError(response);
       }
     } else if (images && images.length) {
@@ -140,7 +134,6 @@ export default function CreatePostPopup({
           <img src={user.picture} alt='' className='box_profile_img' />
           <div className='box_col'>
             <div className='box_profile_name'>{user?.username}</div>
-
           </div>
         </div>
 
@@ -175,12 +168,17 @@ export default function CreatePostPopup({
         <button
           className='post_submit'
           onClick={() => {
-            postSubmit();
+            if ((text && text.length) || (images && images.length)) {
+              postSubmit();
+            } else {
+              setError('Error: need to fill at least text or picture');
+            }
           }}
           disabled={loading}
         >
           {loading ? <PulseLoader color='#fff' size={5} /> : 'Post'}
         </button>
+        {error && <p>{error}</p>}
       </div>
     </div>
   );
