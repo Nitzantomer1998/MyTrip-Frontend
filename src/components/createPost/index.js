@@ -2,7 +2,6 @@ import './style.css';
 import React, { useEffect, useState } from 'react';
 import { getFollowingPageInfosId } from '../../functions/user';
 export default function CreatePost({ user, setVisible }) {
-
   useEffect(() => {
     fetchFollowing();
   }, []);
@@ -11,14 +10,11 @@ export default function CreatePost({ user, setVisible }) {
 
   const fetchFollowing = async () => {
     let following = [];
-    const response = await getFollowingPageInfosId(
-    user.id,
-    user.token
-    );
+    const response = await getFollowingPageInfosId(user.id, user.token);
     if (response && response.data) {
-        following = response.data.following;     }  
+      following = response.data.following;
+    }
     setFollowing(following);
-
   };
 
   return (
@@ -34,8 +30,11 @@ export default function CreatePost({ user, setVisible }) {
           Tell us more about your trip, {user?.username}
         </div>
       </div>
-      {following.length===0 && <p className='singleLineHeading'>We encourage you to find users to follow!</p>}
-      </div>
-    
+      {following.length === 0 && (
+        <p className='singleLineHeading'>
+          You're not following anyone yet, but we're sure that will change soon!
+        </p>
+      )}
+    </div>
   );
 }

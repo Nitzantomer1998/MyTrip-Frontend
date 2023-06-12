@@ -23,7 +23,7 @@ export default function Home({ setVisible, posts, loading, getAllPosts }) {
     if (loading) {
       const timer = setTimeout(() => {
         setShowLogoutMessage(true);
-      }, 10000); // 15000 milliseconds = 5 seconds
+      }, 20000); // 15000 milliseconds = 5 seconds
 
       setTimerId(timer);
     } else {

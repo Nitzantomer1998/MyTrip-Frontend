@@ -90,11 +90,15 @@ export default function EditPost({ postId, token, handleSubmit }) {
 
   const handleImageAdd = (e) => {
     let files = Array.from(e.target.files);
+
     files.forEach((img) => {
-      if (selectedImages.length + post.images.length > 9) {
+      let selectedImagesLength = selectedImages ? selectedImages.length : 0;
+      let postImagesLength = post.images ? post.images.length : 0;
+      if (selectedImagesLength + postImagesLength > 9) {
         setError('Error: can add up to 10 pictures');
         return;
       }
+
       if (
         img.type !== 'image/jpeg' &&
         img.type !== 'image/png' &&

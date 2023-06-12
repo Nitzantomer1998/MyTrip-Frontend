@@ -103,7 +103,7 @@ export default function ChangePassword({
                 Cancel
               </Link>
               <button type='submit' className='blue_btn'>
-                Continue
+                Save
               </button>
             </div>
           </Form>

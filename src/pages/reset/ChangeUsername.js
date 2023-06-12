@@ -104,7 +104,7 @@ export default function ChangeUsername({
                 Cancel
               </Link>
               <button type='submit' className='blue_btn'>
-                Continue
+                Save
               </button>
             </div>
           </Form>
