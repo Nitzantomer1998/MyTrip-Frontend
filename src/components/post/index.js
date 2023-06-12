@@ -102,8 +102,6 @@ export default function Post({ post, user, profile }) {
     fetchPostRecommends();
   }, [post._id, user.token]);
 
-  
-
   const handleAddLike = async () => {
     if (!isLiked) {
       await addLike(post._id, user.token);
@@ -134,7 +132,6 @@ export default function Post({ post, user, profile }) {
     setTimeout(closeModal, 2000);
   };
 
-  
   useEffect(() => {
     if (showSuccessMessage) {
       const timer = setTimeout(() => {
@@ -149,7 +146,7 @@ export default function Post({ post, user, profile }) {
     setShowSuccessMessage(true);
     setTimeout(closeModal, 1000);
   };
-  
+
   useEffect(() => {
     if (showSuccessMessage) {
       const timer = setTimeout(() => {
@@ -158,7 +155,6 @@ export default function Post({ post, user, profile }) {
       return () => clearTimeout(timer);
     }
   }, [showSuccessMessage]);
-
 
   const showMore = () => {
     setCount((prev) => prev + 3);
@@ -207,7 +203,7 @@ export default function Post({ post, user, profile }) {
         onRequestClose={closeModal}
         contentLabel='Share Success Modal'
         className='share-modal'
-        shouldCloseOnOverlayClick={closeModal}
+        shouldCloseOnOverlayClick={true}
       >
         <h3>Post shared successfully!</h3>
       </Modal>
@@ -343,7 +339,7 @@ export default function Post({ post, user, profile }) {
       </div>
       <div className='post_actions'>
         <div className='post_action hover1' onClick={handleAddLike}>
-          <div className='likeRow' >
+          <div className='likeRow'>
             <span style={{ color: isLiked ? '#1877F2' : 'gray' }}>
               {isLiked && <img src='../../../reacts/like.svg' alt='' />}
               Like{' '}
@@ -351,7 +347,7 @@ export default function Post({ post, user, profile }) {
           </div>
         </div>
         <div className='post_action hover1' onClick={handleAddRecommend}>
-          <div className='recommendRow' >
+          <div className='recommendRow'>
             <span style={{ color: isRecommend ? '#F36B7E' : 'gray' }}>
               {isRecommend && <img src='../../../reacts/love.svg' alt='' />}
               Recommend{' '}
@@ -362,14 +358,13 @@ export default function Post({ post, user, profile }) {
           <i className='comment_icon'></i>
           <span>Comment</span>
         </div>
-        
-          <SharePost
-            post={post}
-            user={user}
-            onSuccess={handleShareSuccess}
-            onFailure={handleShareFailure}
-          />
-        
+
+        <SharePost
+          post={post}
+          user={user}
+          onSuccess={handleShareSuccess}
+          onFailure={handleShareFailure}
+        />
       </div>
       <div className='comments_wrap'>
         <div className='comments_order'></div>
