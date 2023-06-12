@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './style.css';
 import Header from '../../components/header/index';
 import ChangePassword from '../reset/ChangePassword';
+import ChangeUsername from '../reset/ChangeUsername';
+
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
@@ -14,22 +16,24 @@ export default function EditProfile() {
   const [password, setPassword] = useState('');
   const [conf_password, setConf_password] = useState('');
   const [editPassword, setEditPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [errorPassword, setErrorPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => state);
   const [userInfos, setUserInfos] = useState({ user });
   const [showChangeUsername, setShowChangeUsername] = useState(false);
   const [newUsername, setNewUsername] = useState('');
 
+  const [username, setUsername] = useState('');
+  const [conf_username, setConf_username] = useState('');
+  const [editUsername, setEditUsername] = useState(false);
+  const [errorUsername, setErrorUsername] = useState('');
+  const [errorDelete, setErrorDelete] = useState('');
+
   const {
     user: { token },
   } = user;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleEditUsername = () => {
-    setShowChangeUsername((prevState) => !prevState);
-    setNewUsername(''); // Clear the input field when showing the popup
-  };
 
   const handleDeleteConfirmation = () => {
     setShowDeleteConfirmation((prevShow) => !prevShow);
@@ -45,7 +49,7 @@ export default function EditProfile() {
       });
       setPassword('');
       setConf_password('');
-      setError('');
+      //setError('');
       setShowDeleteConfirmation(false);
       //console.log('Account deleted!');
       Cookies.remove('user');
@@ -55,7 +59,7 @@ export default function EditProfile() {
       navigate('/login');
     } catch (error) {
       //console.log('1');
-      setError(error.response.data.message);
+      setErrorDelete(error.response.data.message);
     }
   };
 
@@ -67,35 +71,13 @@ export default function EditProfile() {
     setEditPassword(!editPassword);
   };
 
+  const handleEditUsername = () => {
+    setEditUsername(!editUsername);
+  };
+
   const handleCancelEdit = () => {
     setEditPassword(false);
     navigate('/profile');
-  };
-
-  const handleChangeUsername = async () => {
-    if (newUsername.trim() === '') {
-      setError('Please enter a valid username');
-      return;
-    }
-
-    if (newUsername.length < 5 || newUsername.length > 16) {
-      setError('Username must be between 5 and 16 letters');
-      return;
-    }
-
-    try {
-      const response = await changeUsername(newUsername, token);
-
-      const userCookie = Cookies.get('user');
-      const user = userCookie ? JSON.parse(userCookie) : {};
-      user.username = newUsername;
-      Cookies.set('user', JSON.stringify(user));
-
-      setShowChangeUsername(false);
-      setRefreshPage(true);
-    } catch (error) {
-      setError(error.data.message);
-    }
   };
 
   const [refreshPage, setRefreshPage] = useState(false);
@@ -115,37 +97,25 @@ export default function EditProfile() {
         <br />
         <h1 className='edit_profile'>Edit Profile</h1>
         <div>
-          <div>
-            <button className='btn_edit_password' onClick={handleEditUsername}>
-              Edit Username
-            </button>
-          </div>
-          {showChangeUsername && (
-            <div className='username-popup'>
-              <h2 className='text-title'>Change Username</h2>
-              <div className='input-row'>
-                <h3 className='text-input'>Enter new username:</h3>
-                <input
-                  type='text'
-                  value={newUsername}
-                  onChange={(e) => setNewUsername(e.target.value)}
-                />
-              </div>
-              {error && <div className='error-message'>{error}</div>}
-
-              <div className='button-container'>
-                <button
-                  className='gray_btn'
-                  onClick={() => setShowChangeUsername(false)}
-                >
-                  Cancel
-                </button>
-                <button className='blue_btn' onClick={handleChangeUsername}>
-                  Save
-                </button>
-              </div>
-            </div>
+          <button className='btn_edit_password' onClick={handleEditUsername}>
+            Edit Username
+          </button>
+          {editUsername && (
+            <ChangeUsername
+              username={username}
+              setUsername={setUsername}
+              conf_username={conf_username}
+              setConf_username={setConf_username}
+              errorUsername={errorUsername}
+              loading={loading}
+              setLoading={setLoading}
+              user={userInfos.user}
+              setErrorUsername={setErrorUsername}
+            />
           )}
+          <br />
+          <br />
+
           <button className='btn_edit_password' onClick={handleEditPassword}>
             Edit Password
           </button>
@@ -156,11 +126,11 @@ export default function EditProfile() {
               setPassword={setPassword}
               conf_password={conf_password}
               setConf_password={setConf_password}
-              error={error}
+              errorPassword={errorPassword}
               loading={loading}
               setLoading={setLoading}
               user={userInfos.user}
-              setError={setError}
+              setErrorPassword={setErrorPassword}
             />
           )}
           <br />
