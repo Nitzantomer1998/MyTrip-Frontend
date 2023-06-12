@@ -106,7 +106,7 @@ a {
 /*-----Hovers-----*/
 .hover1:hover {
   background: var(--bg-secondary);
-  color:white;
+  color: white;
 }
 .hover2:hover {
   background: var(--bg-third);
