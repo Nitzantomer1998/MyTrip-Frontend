@@ -40,8 +40,8 @@ export default function RegisterForm({ setVisible }) {
   const registerValidation = Yup.object({
     username: Yup.string()
       .required("What's your username ?")
-      .min(5, 'username must be between 5 and 16 characters.')
-      .max(16, 'username must be between 5 and 16 characters.')
+      .min(6, 'username must be between 6 and 16 characters.')
+      .max(16, 'username must be between 6 and 16 characters.')
       .matches(/^[A-Za-z0-9 ]+$/, 'Special characters are not allowed.'),
     email: Yup.string()
       .required("You'll need this when you log in (enter a valid email).")
@@ -50,7 +50,7 @@ export default function RegisterForm({ setVisible }) {
       .required(
         'Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &).'
       )
-      .min(6, 'Password must be atleast 6 characters.')
+      .min(8, 'Password must be atleast 8 characters.')
       .max(36, "Password can't be more than 36 characters"),
     acceptedTerms: Yup.boolean()
       .oneOf([true], 'You must accept the terms and conditions.')
