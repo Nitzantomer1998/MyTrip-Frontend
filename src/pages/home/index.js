@@ -19,35 +19,35 @@ export default function Home({ setVisible, posts, loading, getAllPosts }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (loading) {
-      const timer = setTimeout(() => {
-        setShowLogoutMessage(true);
-      }, 20000); // 20000 milliseconds = 5 seconds
+  // useEffect(() => {
+  //   if (loading) {
+  //     const timer = setTimeout(() => {
+  //       setShowLogoutMessage(true);
+  //     }, 20000); // 20000 milliseconds = 5 seconds
 
-      setTimerId(timer);
-    } else {
-      clearTimeout(timerId);
-      setShowLogoutMessage(false);
-    }
+  //     setTimerId(timer);
+  //   } else {
+  //     clearTimeout(timerId);
+  //     setShowLogoutMessage(false);
+  //   }
 
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [loading]);
+  //   return () => {
+  //     clearTimeout(timerId);
+  //   };
+  // }, [loading]);
 
-  useEffect(() => {
-    if (middle.current) {
-      setHeight(middle.current.clientHeight);
-    }
-  }, [loading]);
+  // useEffect(() => {
+  //   if (middle.current) {
+  //     setHeight(middle.current.clientHeight);
+  //   }
+  // }, [loading]);
 
-  useEffect(() => {
-    navigate('/home');
-    if (showLogoutMessage) {
-      logout();
-    }
-  }, [showLogoutMessage]);
+  // useEffect(() => {
+  //   navigate('/home');
+  //   if (showLogoutMessage) {
+  //     logout();
+  //   }
+  // }, [showLogoutMessage]);
 
   const logout = () => {
     Cookies.remove('user');
