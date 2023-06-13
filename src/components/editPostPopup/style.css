@@ -97,10 +97,12 @@
   color: #888;
 }
 
+
+
 .postBox1 {
-  position: fixed;
+  position: fixed; /* Ajoutez cette ligne pour définir la position fixe */
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -35%);
   background: var(--bg-primary);
   box-shadow: 0 12px 28px 0 var(--shadow-1), 0 2px 4px 0 var(--shadow-2),
     inset 0 0 0 1px var(--shadow-inset);
@@ -132,6 +134,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.postBox1.home-page {
+  position: fixed !important;
+  /* Reste du style... */
 }
 
 .blur2 {
