@@ -4,7 +4,7 @@ import './style.css';
 import Header from '../../components/header/index';
 import ChangePassword from '../reset/ChangePassword';
 import ChangeUsername from '../reset/ChangeUsername';
-
+import ChangeBio from '../reset/ChangeBio';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
@@ -28,6 +28,11 @@ export default function EditProfile() {
   const [editUsername, setEditUsername] = useState(false);
   const [errorUsername, setErrorUsername] = useState('');
   const [errorDelete, setErrorDelete] = useState('');
+
+  const [bio, setBio] = useState('');
+  const [conf_bio, setConf_bio] = useState('');
+  const [editBio, setEditBio] = useState(false);
+  const [errorBio, setErrorBio] = useState('');
 
   const {
     user: { token },
@@ -71,12 +76,20 @@ export default function EditProfile() {
     setEditPassword(!editPassword);
   };
 
+  const handleEditBio = () => {
+    setEditBio(!editBio);
+  };
+
   const handleEditUsername = () => {
     setEditUsername(!editUsername);
   };
 
   const handleCancelEdit = () => {
     setEditPassword(false);
+  };
+
+  const handleCancelEditBio = () => {
+    setEditBio(false);
   };
 
   const [refreshPage, setRefreshPage] = useState(false);
@@ -96,6 +109,26 @@ export default function EditProfile() {
         <br />
         <h1 className='edit_profile'>Edit Profile</h1>
         <div>
+          <button className='btn_edit_password' onClick={handleEditBio}>
+            Edit Bio
+          </button>
+          {editBio && (
+            <ChangeBio
+              bio={bio}
+              setBio={setBio}
+              conf_bio={conf_bio}
+              setConf_bio={setConf_bio}
+              errorBio={errorBio}
+              loading={loading}
+              setLoading={setLoading}
+              user={userInfos.user}
+              setErrorBio={setErrorBio}
+              handleEditBio={handleEditBio}
+            />
+          )}
+          <br />
+          <br />
+
           <button className='btn_edit_password' onClick={handleEditUsername}>
             Edit Username
           </button>
