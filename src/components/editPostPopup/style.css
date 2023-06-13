@@ -1,4 +1,7 @@
 .editPostForm {
+  position: -webkit-sticky; /* Pour le support de Safari */
+  position: sticky;
+  top: 0; /* La distance à partir de laquelle l'élément deviendra fixe lors du défilement */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,6 +10,7 @@
   max-width: 500px;
   margin: 0 auto;
 }
+
 
 .editPostForm textarea {
   width: 100%;
@@ -98,10 +102,9 @@
 }
 
 .postBox1 {
-  position: fixed;
-  /* top: 50%; */
-  /* left: 50%; */
-  transform: translate(0, -50%);
+  position: sticky;
+  top: 5%;
+  transform: translate(0, -80%);
   background: var(--bg-primary);
   box-shadow: 0 12px 28px 0 var(--shadow-1), 0 2px 4px 0 var(--shadow-2),
     inset 0 0 0 1px var(--shadow-inset);
