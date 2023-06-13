@@ -23,7 +23,10 @@ export default function EditPost({ postId, token, handleSubmit }) {
   useClickOutside(popup, () => {
     handleSubmit(false);
   });
-
+  
+  const handleErrorClick = () => {
+    setError("Error: need to fill at least text or picture");
+  };
   const handleInputChange = (event) => {
     setContent(event.target.value);
   };
@@ -33,6 +36,8 @@ export default function EditPost({ postId, token, handleSubmit }) {
   };
 
   const handleSubmits = async (event) => {
+    if ((content && content.length) || (post.images && post.images.length ) || (selectedImages && selectedImages.length)) {
+      
     event.preventDefault();
     setLoading(true);
     //test de conversion des images pour uploadImages
@@ -86,6 +91,12 @@ export default function EditPost({ postId, token, handleSubmit }) {
     setLoading(false);
     handleSubmit(false);
     window.location.reload();
+  }
+  else{
+  setError("Error: need to fill at least text or picture");
+  return null;
+  }
+    
   };
 
   const handleImageAdd = (e) => {
@@ -98,6 +109,7 @@ export default function EditPost({ postId, token, handleSubmit }) {
         setError('Error: can add up to 10 pictures');
         return;
       }
+      
 
       if (
         img.type !== 'image/jpeg' &&
@@ -160,9 +172,8 @@ export default function EditPost({ postId, token, handleSubmit }) {
   };
 
   return (
-    <div className='blur'>
-      <div className='fix'></div>
-      <div className='postBox' ref={popup}>
+    <div className={window.location.pathname === '/home' ? 'blur1' : 'blur2'}>
+    <div className={window.location.pathname === '/home' ? 'postBox1' : 'postBox2'} ref={popup}>
         <div className='box_header'>
           <div
             className='small_circle'
@@ -264,11 +275,18 @@ export default function EditPost({ postId, token, handleSubmit }) {
             </div>
           </div>
         </div>
-        <form onSubmit={handleSubmits}>
-          <button className='submit-btn' type='submit' disabled={loading}>
-            {loading ? <PulseLoader color='#fff' /> : 'Save Changes'}
+        {((content && content.length) || (post.images && post.images.length) || (selectedImages && selectedImages.length)) ? (
+          <form onSubmit={handleSubmits}>
+            <button className='submit-btn' type='submit' disabled={loading}>
+              {loading ? <PulseLoader color='#fff' /> : 'Save Changes'}
+            </button>
+          </form>
+        ) : (
+          <button className='submit-btn' onClick={handleErrorClick}>
+            Save Changes
           </button>
-        </form>
+
+        )}
       </div>
     </div>
   );
