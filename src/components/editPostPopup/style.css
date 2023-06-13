@@ -42,7 +42,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
+  overflow-y: auto;
+  max-height: 400px;
 }
 
 .post_imgs .image-container {
@@ -57,17 +58,17 @@
 
 .post_imgs .image-container .delete-icon {
   width: 30px;
-height: 30px;
-border-radius: 50%;
-border: 1px solid var(--bg-third);
-background: var(--bg-primary);
-display: grid;
-place-items: center;
-position: absolute;
-right: 10px;
-top: 10px;
-cursor: pointer;
-z-index: 99;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--bg-third);
+  background: var(--bg-primary);
+  display: grid;
+  place-items: center;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  z-index: 99;
 }
 
 .post_text {
@@ -88,10 +89,7 @@ z-index: 99;
   background: var(--bg-primary);
   color: var(--color-primary);
   flex-direction: column;
-
 }
-
-
 
 .char-count {
   margin-top: 5px;
@@ -115,7 +113,7 @@ z-index: 99;
 .postBox2 {
   position: fixed;
   left: 58.3%;
-  top:50%;
+  top: 50%;
   transform: translate(-50%, -50%);
   background: var(--bg-primary);
   box-shadow: 0 12px 28px 0 var(--shadow-1), 0 2px 4px 0 var(--shadow-2),
@@ -124,13 +122,11 @@ z-index: 99;
   width: 520px;
   border-radius: 5px;
   z-index: 9999; /* Higher value to ensure it appears on top */
-
 }
 
 .blur1 {
   position: relative;
   width: 100%;
-  height: 1800px;
   z-index: 99999;
   background-color: rgba(46, 46, 71, 0.9);
   display: flex;
@@ -145,10 +141,7 @@ z-index: 99;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
-
-
 
 .add-image-button {
   display: flex;
@@ -178,19 +171,19 @@ z-index: 99;
   cursor: pointer;
 }
 
-.add-image-button input[type="file"] {
+.add-image-button input[type='file'] {
   display: none;
 }
 
 .add-image-button::before {
-  content: "Choose a file";
+  content: 'Choose a file';
 }
 
 .add-image-button.file-selected::before {
-  content: "File selected";
+  content: 'File selected';
 }
 
-.submit-btn{
+.submit-btn {
   width: calc(100% - 18px);
   margin: 5px 10px;
   padding: 10px;
@@ -218,5 +211,3 @@ z-index: 99;
   font-weight: bold;
   color: rgba(70, 70, 103, 1);
 }
-
-
