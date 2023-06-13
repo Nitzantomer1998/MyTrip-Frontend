@@ -612,6 +612,7 @@
   height: 300px;
   width: 100%;
   background: var(--bg-third);
+  z-index: -1;
 }
 .post_updated_bg img {
   width: 100%;
@@ -619,7 +620,6 @@
   object-fit: cover;
 }
 .post_updated_picture {
-  z-index: 2;
   width: 420px;
   height: 420px;
   border-radius: 50%;
