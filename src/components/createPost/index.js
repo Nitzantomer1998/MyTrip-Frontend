@@ -32,7 +32,7 @@ export default function CreatePost({ user, setVisible }) {
       </div>
       {following.length === 0 && (
         <p className='singleLineHeading'>
-          You're not following anyone yet, but we're sure that will change soon!
+          We encourage you to find users follow!
         </p>
       )}
     </div>
