@@ -18,6 +18,7 @@ export default function ChangePassword({
   userInfos,
   setErrorPassword,
   user,
+  handleEditPassword,
 }) {
   //console.log(`user : ${JSON.stringify(user)}`);
   const {
@@ -99,9 +100,9 @@ export default function ChangePassword({
             />
             {errorPassword && <div className='error_text'>{errorPassword}</div>}
             <div className='reset_form_btns'>
-              <Link to='/profile' className='gray_btn'>
+              <button className='gray_btn' onClick={handleEditPassword}>
                 Cancel
-              </Link>
+              </button>
               <button type='submit' className='blue_btn'>
                 Save
               </button>

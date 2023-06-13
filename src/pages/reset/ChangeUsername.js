@@ -18,6 +18,7 @@ export default function ChangeUsername({
   userInfos,
   setErrorUsername,
   user,
+  handleEditUsername,
 }) {
   //console.log(`user : ${JSON.stringify(user)}`);
   const {
@@ -100,9 +101,9 @@ export default function ChangeUsername({
             />
             {errorUsername && <div className='error_text'>{errorUsername}</div>}
             <div className='reset_form_btns'>
-              <Link to='/profile' className='gray_btn'>
+              <button className='gray_btn' onClick={handleEditUsername}>
                 Cancel
-              </Link>
+              </button>
               <button type='submit' className='blue_btn'>
                 Save
               </button>

@@ -418,12 +418,11 @@ export default function Post({ post, user, profile }) {
         onRequestClose={closePopup}
         contentLabel='Image Popup'
         className='image_popupp'
-        shouldCloseOnOverlayClick={true}
       >
-        <button className='close-buttonn' onClick={closePopup}>
-          &times;
-        </button>
         <div className='image_popup_container'>
+          <button className='close-buttonn' onClick={closePopup}>
+            &times;
+          </button>
           <FaChevronLeft
             className='previous_image'
             onClick={handlePreviousImage}

@@ -77,7 +77,6 @@ export default function EditProfile() {
 
   const handleCancelEdit = () => {
     setEditPassword(false);
-    navigate('/profile');
   };
 
   const [refreshPage, setRefreshPage] = useState(false);
@@ -111,6 +110,7 @@ export default function EditProfile() {
               setLoading={setLoading}
               user={userInfos.user}
               setErrorUsername={setErrorUsername}
+              handleEditUsername={handleEditUsername}
             />
           )}
           <br />
@@ -131,6 +131,7 @@ export default function EditProfile() {
               setLoading={setLoading}
               user={userInfos.user}
               setErrorPassword={setErrorPassword}
+              handleEditPassword={handleEditPassword}
             />
           )}
           <br />

@@ -78,7 +78,6 @@
   color: rgb(210, 35, 35);
 }
 
-/*-----------------------------GRID IMAGES----------------*/
 .grid_1 img {
   width: 100%;
   height: 610px;
@@ -431,8 +430,8 @@
 
 .close-buttonn {
   position: absolute;
-  top: 203.8px;
-  right: 453px;
+  top: 0em;
+  right: 0.3em;
   font-size: 40px;
   background: transparent;
   border: none;
@@ -496,7 +495,6 @@
   margin-left: 3.7px;
 }
 
-/*-----create comment-----*/
 .comments_wrap {
   padding: 10px 15px;
 }
@@ -560,8 +558,6 @@
   right: -4px;
   transform: scale(0.8);
 }
-/*-----create comment-----*/
-/*------Post menu------*/
 .post_menu {
   background: var(--bg-primary);
   width: 300px;
@@ -636,7 +632,6 @@
   height: 100%;
   object-fit: cover;
 }
-/*----Comment-----------*/
 .comment {
   display: flex;
   gap: 5px;
@@ -680,8 +675,6 @@
 .view_comments:hover {
   text-decoration: underline;
 }
-/*----Comment-----------*/
-/*------Post menu------*/
 @media (max-width: 435px) {
   .post .grid_2 img,
   .post .grid_3 img,
