@@ -19,7 +19,6 @@
   font-weight: 700;
   padding: 14px 15px 17px 15px;
   border-bottom: 1px solid var(--bg-third);
-  
 }
 .postBox .small_circle {
   position: absolute;
@@ -69,7 +68,6 @@
   background: var(--bg-primary);
   color: var(--color-primary);
   flex-direction: column;
-
 }
 
 .flex_center textarea {
@@ -161,17 +159,19 @@
   display: flex;
 }
 .add_pics_wrap {
+  overflow-y: scroll;
   margin: 10px 15px;
   padding: 10px;
   border: 1px solid var(--bg-third);
   border-radius: 10px;
+  max-height: 200px;
 }
 .add_pics_inside1 {
   position: relative;
   background: var(--bg-secondary);
   border-radius: 10px;
   padding: 10px;
-  height: 250px;
+  height: 100px;
   display: grid;
   place-items: center;
   cursor: pointer;

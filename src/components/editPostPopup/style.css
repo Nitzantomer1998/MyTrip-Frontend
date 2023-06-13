@@ -42,8 +42,8 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  overflow-y: auto;
-  max-height: 400px;
+  overflow-y: scroll;
+  max-height: 200px;
 }
 
 .post_imgs .image-container {
@@ -52,8 +52,7 @@
 }
 
 .post_imgs .image-container img {
-  width: 100%;
-  height: auto;
+  max-height: 200px;
 }
 
 .post_imgs .image-container .delete-icon {
@@ -69,6 +68,7 @@
   top: 10px;
   cursor: pointer;
   z-index: 99;
+  max-height: 200px;
 }
 
 .post_text {
@@ -97,43 +97,50 @@
   color: #888;
 }
 
-
-
 .postBox1 {
-  position: fixed; /* Ajoutez cette ligne pour définir la position fixe */
-  left: 50%;
-  transform: translate(-50%, -35%);
+  position: fixed;
+  /* top: 50%; */
+  /* left: 50%; */
+  transform: translate(0, -50%);
   background: var(--bg-primary);
   box-shadow: 0 12px 28px 0 var(--shadow-1), 0 2px 4px 0 var(--shadow-2),
     inset 0 0 0 1px var(--shadow-inset);
   min-height: 228px;
+  max-height: calc(100% - 40px);
   width: 520px;
   border-radius: 5px;
-  z-index: 9999; /* Higher value to ensure it appears on top */
+  z-index: 9999;
+  overflow: auto;
+  padding-bottom: 56px;
+  max-height: 30em;
 }
 
 .postBox2 {
   position: fixed;
-  left: 58.3%;
   top: 50%;
   transform: translate(-50%, -50%);
   background: var(--bg-primary);
   box-shadow: 0 12px 28px 0 var(--shadow-1), 0 2px 4px 0 var(--shadow-2),
     inset 0 0 0 1px var(--shadow-inset);
   min-height: 228px;
+  max-height: 100%;
   width: 520px;
+  height: 100%;
   border-radius: 5px;
   z-index: 9999; /* Higher value to ensure it appears on top */
+  overflow: auto;
+  padding-bottom: 56px; /* Add padding at the bottom as needed */
+  max-height: 30em;
 }
 
 .blur1 {
-  position: relative;
-  width: 100%;
-  z-index: 99999;
-  background-color: rgba(46, 46, 71, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative !important;
+  width: auto !important;
+  z-index: 99999 !important;
+  background-color: rgba(46, 46, 71, 0.9) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .postBox1.home-page {
@@ -217,4 +224,15 @@
   font-size: 25px;
   font-weight: bold;
   color: rgba(70, 70, 103, 1);
+}
+
+.grid_4 {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  grid-template-rows: 1fr 1fr !important;
+  background: #fff !important;
+  gap: 1px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 5px !important;
+  margin-bottom: 10px !important;
 }
