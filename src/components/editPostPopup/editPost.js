@@ -23,9 +23,9 @@ export default function EditPost({ postId, token, handleSubmit }) {
   useClickOutside(popup, () => {
     handleSubmit(false);
   });
-  
+
   const handleErrorClick = () => {
-    setError("Error: need to fill at least text or picture");
+    setError('Error: need to fill at least text or picture');
   };
   const handleInputChange = (event) => {
     setContent(event.target.value);
@@ -36,67 +36,68 @@ export default function EditPost({ postId, token, handleSubmit }) {
   };
 
   const handleSubmits = async (event) => {
-    if ((content && content.length) || (post.images && post.images.length ) || (selectedImages && selectedImages.length)) {
-      
-    event.preventDefault();
-    setLoading(true);
-    //test de conversion des images pour uploadImages
-    const postImages = selectedImages.map((img) => {
-      return dataURItoBlob(img);
-    });
-    const path = `${user.username}/post_images`;
-    let formData = new FormData();
-    formData.append('path', path);
-    postImages.forEach((selectedImages) => {
-      formData.append('files', selectedImages);
-    });
+    if (
+      (content && content.length) ||
+      (post.images && post.images.length) ||
+      (selectedImages && selectedImages.length)
+    ) {
+      event.preventDefault();
+      setLoading(true);
+      //test de conversion des images pour uploadImages
+      const postImages = selectedImages.map((img) => {
+        return dataURItoBlob(img);
+      });
+      const path = `${user.username}/post_images`;
+      let formData = new FormData();
+      formData.append('path', path);
+      postImages.forEach((selectedImages) => {
+        formData.append('files', selectedImages);
+      });
 
-    const responseUploadImages =
-      selectedImages.length > 0
-        ? await uploadImages(formData, path, token)
-        : [];
+      const responseUploadImages =
+        selectedImages.length > 0
+          ? await uploadImages(formData, path, token)
+          : [];
 
-    //fin de lessai
+      //fin de lessai
 
-    let updateImages = [];
-    try {
-      if (post.images && post.images.length > 0) {
-        updateImages = [...post.images, ...responseUploadImages];
-      } else {
-        updateImages = responseUploadImages;
-      }
-    } catch (error) {
-      console.error('Error: ', error);
-    }
-
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/updatePost/${postId}`,
-        {
-          content: content,
-          selectedImages: updateImages,
-          location: location,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      let updateImages = [];
+      try {
+        if (post.images && post.images.length > 0) {
+          updateImages = [...post.images, ...responseUploadImages];
+        } else {
+          updateImages = responseUploadImages;
         }
-      );
-      // Faire quelque chose avec la réponse (redirection, mise à jour de l'état, etc.)
-    } catch (error) {
-      console.error('Error updating post:', error);
-      // Gérer les erreurs de requête
+      } catch (error) {
+        console.error('Error: ', error);
+      }
+
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/updatePost/${postId}`,
+          {
+            content: content,
+            selectedImages: updateImages,
+            location: location,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // Faire quelque chose avec la réponse (redirection, mise à jour de l'état, etc.)
+      } catch (error) {
+        console.error('Error updating post:', error);
+        // Gérer les erreurs de requête
+      }
+      setLoading(false);
+      handleSubmit(false);
+      window.location.reload();
+    } else {
+      setError('Error: need to fill at least text or picture');
+      return null;
     }
-    setLoading(false);
-    handleSubmit(false);
-    window.location.reload();
-  }
-  else{
-  setError("Error: need to fill at least text or picture");
-  return null;
-  }
-    
   };
 
   const handleImageAdd = (e) => {
@@ -109,7 +110,6 @@ export default function EditPost({ postId, token, handleSubmit }) {
         setError('Error: can add up to 10 pictures');
         return;
       }
-      
 
       if (
         img.type !== 'image/jpeg' &&
@@ -173,7 +173,12 @@ export default function EditPost({ postId, token, handleSubmit }) {
 
   return (
     <div className={window.location.pathname === '/home' ? 'blur1' : 'blur2'}>
-    <div className={window.location.pathname === '/home' ? 'postBox1' : 'postBox2'} ref={popup}>
+      <div
+        className={
+          window.location.pathname === '/home' ? 'postBox1' : 'postBox2'
+        }
+        ref={popup}
+      >
         <div className='box_header'>
           <div
             className='small_circle'
@@ -194,10 +199,10 @@ export default function EditPost({ postId, token, handleSubmit }) {
                 onChange={handleInputChangeLocation}
                 placeholder={`Add your location`}
                 rows={2}
-                maxLength={2000}
+                maxLength={25}
               />
               <div className='char-count'>
-                {location?.length}/{2000}
+                {location?.length}/{25}
               </div>
             </div>
             <div className='post_text'>
@@ -275,7 +280,9 @@ export default function EditPost({ postId, token, handleSubmit }) {
             </div>
           </div>
         </div>
-        {((content && content.length) || (post.images && post.images.length) || (selectedImages && selectedImages.length)) ? (
+        {(content && content.length) ||
+        (post.images && post.images.length) ||
+        (selectedImages && selectedImages.length) ? (
           <form onSubmit={handleSubmits}>
             <button className='submit-btn' type='submit' disabled={loading}>
               {loading ? <PulseLoader color='#fff' /> : 'Save Changes'}
@@ -285,7 +292,6 @@ export default function EditPost({ postId, token, handleSubmit }) {
           <button className='submit-btn' onClick={handleErrorClick}>
             Save Changes
           </button>
-
         )}
       </div>
     </div>
