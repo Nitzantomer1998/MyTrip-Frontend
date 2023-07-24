@@ -47,7 +47,7 @@
    </li>
    <li>
      Now your Frontend client is activating (Make sure the backend already activating).
-     <pre><code>https//:localhost:8000</code></pre>
+     <pre><code>https//:localhost:3000</code></pre>
    </li>
 </ol>
 
