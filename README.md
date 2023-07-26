@@ -2,6 +2,9 @@
 <p>
    MyTrip Frontend is the client-side component of the MyTrip social network website.</br>
    It provides a user-friendly interface for users to interact with the MyTrip platform, explore posts, follow other users, and manage their profiles
+
+   MyTrip is Your passport to unforgettable moments! Seamlessly share and cherish life's highlights with loved ones on this interactive platform. From stunning photo uploads to
+   captivating thoughts, connect with friends worldwide, making every memory a shared treasure. Embrace the journey with MyTrip, where your stories come to life! 🌎✨
 </p>
 
 <h2>Technology Stack</h2>
