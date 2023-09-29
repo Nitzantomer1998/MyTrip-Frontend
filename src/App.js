@@ -74,7 +74,7 @@ function App() {
     }
   };
 
-  setInterval(keepServerAlive, 2000);
+  setInterval(keepServerAlive, 600000);
   // Tricking The Hosting Website "Render" Followed By Faster Responses
 
   return (
