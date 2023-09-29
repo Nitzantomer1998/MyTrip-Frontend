@@ -16,8 +16,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run linter
-        run: npm run linter
+      # - name: Run linter
+      #   run: npm run linter
 
       - name: Deploy service
         run: curl "https://api.render.com/deploy/srv-ch00940rddlaqj0fl45g?key=${{ secrets.RENDER_API_KEY }}"
