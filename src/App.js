@@ -19,14 +19,18 @@ import About from './pages/about/index';
 import Statistics from './pages/statistics/index';
 import Followers from './pages/profile/Followers';
 import Following from './pages/profile/Following';
+import LocationPosts from './components/LocationPosts/LocationPosts';
 import LocationPostsPage from './pages/LocationPostsPage/LocationPostsPage';
 
 import EditProfile from './pages/profile/EditProfile';
+import { ChangePassword } from './pages/reset/ChangePassword';
 function App() {
-
+  const params = useParams();
+  const { location } = params;
+  
   const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => ({ ...state.user }));
-  const [{ loading, posts }, dispatch] = useReducer(postsReducer, {
+  const [{ loading, error, posts }, dispatch] = useReducer(postsReducer, {
     loading: false,
     posts: [],
     error: '',
@@ -34,7 +38,6 @@ function App() {
 
   useEffect(() => {
     getAllPosts();
-    setupInterval(); // Call the setupInterval function
   }, [user]);
 
   const getAllPosts = async () => {
@@ -62,28 +65,17 @@ function App() {
     }
   };
 
-  const setupInterval = () => {
-    const sendGetRequest = async () => {
-      try {
-        await axios.get('https://mytrip-frontend.onrender.com');
-      } catch (error) {
-        return;
-      }
-    };
-
-    // Initial call to the function
-    sendGetRequest();
-
-    // Set up the interval (every 10 minutes in this example)
-    const intervalId = setInterval(() => {
-      sendGetRequest();
-    }, 600000); // 10 minutes in milliseconds
-
-    // Clean up the interval when the component is unmounted
-    return () => clearInterval(intervalId);
+  // Tricking The Hosting Website "Render" Followed By Faster Responses
+  const keepServerAlive = async() => {
+    try {
+      await axios.get('https://mytrip-frontend.onrender.com');
+    } catch (error) {
+      return;
+    }
   };
 
-
+  setInterval(keepServerAlive, 2000);
+  // Tricking The Hosting Website "Render" Followed By Faster Responses
 
   return (
     <div>
