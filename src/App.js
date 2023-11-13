@@ -27,7 +27,7 @@ import { ChangePassword } from './pages/reset/ChangePassword';
 function App() {
   const params = useParams();
   const { location } = params;
-  
+
   const [visible, setVisible] = useState(false);
   const { user } = useSelector((state) => ({ ...state.user }));
   const [{ loading, error, posts }, dispatch] = useReducer(postsReducer, {
@@ -35,11 +35,9 @@ function App() {
     posts: [],
     error: '',
   });
-
   useEffect(() => {
     getAllPosts();
   }, [user]);
-
   const getAllPosts = async () => {
     try {
       dispatch({
@@ -64,19 +62,6 @@ function App() {
       });
     }
   };
-
-  // Tricking The Hosting Website "Render" Followed By Faster Responses
-  const keepServerAlive = async() => {
-    try {
-      await axios.get('https://mytrip-frontend.onrender.com');
-    } catch (error) {
-      return;
-    }
-  };
-
-  setInterval(keepServerAlive, 600000);
-  // Tricking The Hosting Website "Render" Followed By Faster Responses
-
   return (
     <div>
       {user.id && <LeftHome user={user} />}
@@ -183,7 +168,5 @@ function App() {
     </div>
   );
 }
-
-
 
 export default App;
